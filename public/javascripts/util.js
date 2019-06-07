@@ -4,6 +4,7 @@ var to_global = ''
 var peer
 var stunServerConfig = ''
 var anchors = document.getElementsByClassName('emoji')
+const strip = document.querySelector('.strip');
 var mom = document.getElementById('mother')
 
 function doo(stream2) {
@@ -126,15 +127,19 @@ function doo(stream2) {
         video2.id = "small"
         video2.srcObject = stream2
 
+        video2.play()
+        video1.play()
+
+
         document.getElementById('pause').addEventListener('click', function() {
-            video2.pause()
-                // video1.pause()
+            // video2.pause()
+            // video1.pause()
             peer.send("#pause")
         })
 
         document.getElementById('play').addEventListener('click', function() {
-            video2.play()
-                // video1.pause()
+            // video2.play()
+            // video1.pause()
             peer.send("#play")
         })
 
