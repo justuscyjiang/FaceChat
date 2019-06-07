@@ -26,7 +26,7 @@ var L = 0
 io.on('connection', async(socket) => {
     console.log('a user connected');
     const clients = await io.engine.clientsCount;
-    L = countUser
+    countUser()
     const socketid = socket.id;
     socketHander = new SocketHander();
     socketHander.connect();
@@ -43,7 +43,7 @@ io.on('connection', async(socket) => {
         // added by 江 ↓
         delete ID[socket.username]
         delete online[socket.username]
-        L = countUser
+        countUser()
 
         // added by 江 ↑
 
