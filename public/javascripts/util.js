@@ -4,6 +4,7 @@ var to_global = ''
 var peer
 var stunServerConfig = ''
 var anchors = document.getElementsByClassName('emoji')
+var mom = document.getElementById('mother')
 
 function doo(stream2) {
     // if (err) return console.error(err)
