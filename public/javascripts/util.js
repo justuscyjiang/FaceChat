@@ -110,14 +110,49 @@ function doo(stream2) {
     peer2.on('data', transData)
 
     function transStream(stream1) {
-        var video = document.querySelector('video');
-        video.srcObject = stream1;
-        video.play();
+        // var video = document.querySelector('video');
+        // video.srcObject = stream1;
+        // video.play();
+        var video1 = document.createElement('video')
+        mom.appendChild(video1)
+        video1.className = "bgphoto"
+        video1.id = "large"
+        video1.srcObject = stream1
+
+        var video2 = document.createElement('video')
+        mom.appendChild(video2)
+        video2.className = "player"
+        video2.id = "small"
+        video2.srcObject = stream2
     }
 
     peer1.on('stream', transStream)
 
     peer2.on('stream', transStream)
+
+
+    document.getElementById('pause').addEventListener('click', function() {
+        video2.pause()
+            // video1.pause()
+        peer.send("#pause")
+    })
+
+    document.getElementById('play').addEventListener('click', function() {
+        video2.play()
+            // video1.pause()
+        peer.send("#play")
+    })
+
+    document.getElementById('snap').addEventListener('click', function() {
+        const canvas = document.getElementById("canvasOutput");
+        const data = canvas.toDataURL('image/png', 1);
+        const link = document.createElement('a');
+        link.href = data;
+        link.setAttribute('download', 'image.png');
+        link.innerHTML = `<img src="${data}" alt="image" />`;
+        strip.insertBefore(link, strip.firstChild);
+
+    })
 
 }
 

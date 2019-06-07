@@ -98,8 +98,13 @@
                 <textarea id="rec"></textarea>收到的訊息
             </p>
             <div id="mother" style="position: relative">
-                <video class="bgphoto" id="large"></video>
+                <!-- <video class="bgphoto" id="large"></video> -->
+                <canvas id="canvasOutput" class="photo"></canvas>
             </div>
+            <button id="cam" class="control">Start WebCam</button>
+            <button id="play" class="control">Play Video</button>
+            <button id="pause" class="control">Pause Video</button>
+            <button id="snap" class="control">Snapshot 📸</button>
             <div>
                 <button class="emoji" id="circle">Circles</button>
                 <button class="emoji" id="heart">Heart</button>
@@ -112,6 +117,7 @@
                 <button class="filter" id="erosion">Erosion</button>
                 <button class="set_fg" id="b_snow">Snow</button>
             </div>
+            <div class="strip"></div>
             <!-- added by 江 ↑ -->
         </div>
         <!-- / 左側欄位 -->
