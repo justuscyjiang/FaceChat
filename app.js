@@ -17,6 +17,12 @@ var app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+// +++++++++++
+ID = {}
+online = {}
+
+// +++++++++++
+
 io.on('connection', async(socket) => {
 
     console.log('a user connected');
@@ -35,9 +41,15 @@ io.on('connection', async(socket) => {
 
     socket.on("disconnect", () => {
         console.log("a user go out");
+        // +++++++++++++++++++++++++++
+        delete ID[socket.username]
+        delete online[socket.username]
+
+        // +++++++++++++++++++++++++++
         io.emit("clients", {
             clients: clients - 1,
         });
+
     });
 
     socket.on("message", (obj) => {
@@ -51,6 +63,41 @@ io.on('connection', async(socket) => {
             user: obj,
         });
     });
+
+    // ++++++++++++++++++++++++++++++
+
+    socket.on('new', function(username) {
+        socket.username = username;
+        ID[username] = socket.id
+        online[username] = 'free'
+    });
+
+    // socket.on('disconnect', function() {
+    //     console.log(socket.username + ' has left.')
+    //     delete ID[socket.username]
+    //     delete online[socket.username]
+    // });
+
+    socket.on('reqFrom', function(mes) {
+        var from = socket.username
+        var to = mes.split("^")[0]
+        var id = mes.split("^")[1]
+        console.log(from + ' is trying to speak to ' + to + '.');
+        io.to(ID[to]).emit('reqTo', from + '^' + id)
+        online[from] = 'busy'
+    });
+
+    socket.on('backFrom', function(mes) {
+        var from = socket.username
+        var to = mes.split("^")[0]
+        id = mes.split("^")[1]
+        console.log(from + ' is replying to ' + to + '.');
+        io.to(ID[to]).emit('backTo', from + '^' + id)
+        online[from] = 'busy'
+    });
+
+
+    // ++++++++++++++++++++++++++++++
 
 });
 
@@ -103,5 +150,10 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+setInterval(function() {
+    console.log(ID)
+    console.log(online)
+}, 3000)
 
 module.exports = app;

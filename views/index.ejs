@@ -2,119 +2,237 @@
 <html>
 
 <head>
-  <title>
-    <%= title %>
-  </title>
-  <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/zh-tw.js'></script>
+    <title>
+        <%= title %>
+    </title>
+    <!-- +++++ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.1.2/simplepeer.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+    <!-- +++++ -->
+    <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/zh-tw.js'></script>
 </head>
 
 <body>
 
-  <!-- 頂部導航選單 -->
-  <div class="ts large link attached inverted info menu">
-    <div class="ts narrow container">
-      <a href="./" class="header item">FaceChat</a>
-      <a class="right item login" onclick="login()">登入</a>
-      <a class="right item logout" onclick="logout()">登出</a>
+    <!-- 頂部導航選單 -->
+    <div class="ts large link attached inverted info menu">
+        <div class="ts narrow container">
+            <a href="./" class="header item">FaceChat</a>
+            <a class="right item login" onclick="login()">登入</a>
+            <a class="right item logout" onclick="logout()">登出</a>
+        </div>
     </div>
-  </div>
-  <!-- / 頂部導航選單 -->
+    <!-- / 頂部導航選單 -->
 
-  <!-- 主要容器網格系統 -->
-  <div class="ts narrow container grid">
-    <!-- 左側欄位 -->
-    <div class="twelve wide column">
-      <br>
-      <!-- 頂部聊天室資訊欄位 -->
-      <div class="ts top attached segmented small single line items">
-        <div class="item">
-          <i class="large inverted info rounded announcement icon"></i>
-          <div class="content">
-            <div class="header">FaceChat</div>
-            <div class="ts column grid">
-              <div class="column row">
-                <div class="left floated column left aligned secondary">
-                  這裡是可以視訊的聊天室喲^//^
+
+
+    <!-- 主要容器網格系統 -->
+    <div class="ts narrow container grid">
+        <!-- 左側欄位 -->
+        <div class="twelve wide column">
+            <br>
+            <!-- 頂部聊天室資訊欄位 -->
+            <div class="ts top attached segmented small single line items">
+                <div class="item">
+                    <i class="large inverted info rounded announcement icon"></i>
+                    <div class="content">
+                        <div class="header">FaceChat</div>
+                        <div class="ts column grid">
+                            <div class="column row">
+                                <div class="left floated column left aligned secondary">
+                                    這裡是可以視訊的聊天室喲^//^
+                                </div>
+                                <div class="right floated column right aligned">
+                                    <i class="icon user positive" aria-hidden="true" alt="線上人數" title="線上人數"></i>
+                                    <span class="online">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="right floated column right aligned">
-                  <i class="icon user positive" aria-hidden="true" alt="線上人數" title="線上人數"></i>
-                  <span class="online">0</span>
+            </div>
+            <!-- / 頂部聊天室資訊欄位 -->
+
+            <!-- 中部主要聊天訊息 -->
+            <div class="ts attached secondary segment">
+                <!-- 對話氣泡 -->
+                <div class="ts speeches">
+                    <!-- appendChild from app.js -->
                 </div>
-              </div>
+                <!-- / 對話氣泡 -->
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- / 頂部聊天室資訊欄位 -->
+            <!-- / 中部主要聊天訊息 -->
 
-      <!-- 中部主要聊天訊息 -->
-      <div class="ts attached secondary segment">
-        <!-- 對話氣泡 -->
-        <div class="ts speeches">
-          <!-- appendChild from app.js -->
-        </div>
-        <!-- / 對話氣泡 -->
-      </div>
-      <!-- / 中部主要聊天訊息 -->
-
-      <!-- 底部輸入欄位 -->
-      <div class="ts bottom attached segment">
-        <div class="ts grid">
-          <div class="stretched column">
-            <div class="ts fluid input">
-              <input placeholder="在此輸入文字⋯⋯" />
+            <!-- 底部輸入欄位 -->
+            <div class="ts bottom attached segment">
+                <div class="ts grid">
+                    <div class="stretched column">
+                        <div class="ts fluid input">
+                            <input placeholder="在此輸入文字⋯⋯" />
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div id="btnAddMsg" class="ts button info">
+                            <i class="icon chat"></i>送出</div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="column">
-            <div id="btnAddMsg" class="ts button info">
-              <i class="icon chat"></i>送出</div>
-          </div>
+            <!-- / 底部輸入欄位 -->
+            <h1>Modified Version</h1>
+
+            <p><input type="button" value="Find someone" id="poke" />
+                <input type="text" id="to" value=""><br>
+            </p>
+            <input type="text" id="p1id1" value="">
+            <input type="text" id="p2id1" value="">這個不用管它<br>
+            <input type="text" id="p1id2" value="">
+            <input type="text" id="p2id2" value="">這個不用管它<br><br>
+            <p>
+                <input type='text' id='send' value="">要傳送的訊息<br>
+                <input type="button" value="Send" id="bsend" /><br>
+                <textarea id="rec"></textarea>收到的訊息
+            </p>
+            <div>
+                <video class="bgphoto" id="large"></video>
+            </div>
         </div>
-      </div>
-      <!-- / 底部輸入欄位 -->
+        <!-- / 左側欄位 -->
+
+        <!-- 右側欄位 -->
+        <div class="four wide column">
+            <br>
+            <div class="ts tiny segmented single line items">
+                <div class="item">
+                    <div class="ts mini image">
+                        <img src="./images/pikachu.png">
+                    </div>
+                    <div class="content">
+                        <div class="header">皮卡丘</div>
+                        <div class="meta">
+                            <div>@pikachu520</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ts mini image">
+                        <img src="./images/DoReMi.png">
+                    </div>
+                    <div class="content">
+                        <div class="header">小魔女</div>
+                        <div class="meta">
+                            <div>@DoReMi_yo</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- / 右側欄位 -->
     </div>
-    <!-- / 左側欄位 -->
-
-    <!-- 右側欄位 -->
-    <div class="four wide column">
-      <br>
-      <div class="ts tiny segmented single line items">
-        <div class="item">
-          <div class="ts mini image">
-            <img src="./images/pikachu.png">
-          </div>
-          <div class="content">
-            <div class="header">皮卡丘</div>
-            <div class="meta">
-              <div>@pikachu520</div>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="ts mini image">
-            <img src="./images/DoReMi.png">
-          </div>
-          <div class="content">
-            <div class="header">小魔女</div>
-            <div class="meta">
-              <div>@DoReMi_yo</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- / 右側欄位 -->
-  </div>
-  <!-- / 主要容器網格系統 -->
+    <!-- / 主要容器網格系統 -->
 </body>
 <script src='./javascripts/sign.js'></script>
 <script src='./javascripts/app.js'></script>
+
+<script>
+    var Peer = window.SimplePeer;
+    var socket = io.connect();
+    var to_global = ''
+    var peer
+    var stunServerConfig = ''
+
+    function doo(stream2) {
+        // if (err) return console.error(err)
+        var username = prompt('What\'s your username?');
+        socket.emit('new', username);
+
+        socket.on('reqTo', function(mes) {
+            var from = mes.split("^")[0]
+            var id = mes.split("^")[1]
+            alert(from + ' wants to speak to you!')
+            document.getElementById('p2id2').value = id
+            to_global = from
+            peer2.signal(JSON.parse(id))
+        })
+
+        socket.on('backTo', function(mes) {
+            var from = mes.split("^")[0]
+            var id = mes.split("^")[1]
+            document.getElementById('p1id2').value = id
+            peer1.signal(JSON.parse(id))
+        })
+
+        document.getElementById('poke').addEventListener('click', function() {
+            var to = $('#to').val()
+            var id = document.getElementById('p1id1').value
+            socket.emit('reqFrom', to + "^" + id);
+            peer = peer1
+        })
+
+        const peer1 = new Peer({
+            initiator: true,
+            stream: stream2,
+            trickle: false,
+            config: stunServerConfig
+        });
+        const peer2 = new Peer({
+            initiator: false,
+            stream: stream2,
+            trickle: false,
+            config: stunServerConfig
+        });
+
+        peer1.on('signal', function(data) {
+            document.getElementById('p1id1').value = JSON.stringify(data)
+        })
+
+        peer2.on('signal', function(data) {
+            if (JSON.stringify(data) == "{\"renegotiate\":true}") {
+                return
+            }
+            peer = peer2
+            document.getElementById('p2id1').value = JSON.stringify(data)
+            id = document.getElementById('p2id1').value
+            socket.emit('backFrom', to_global + '^' + id)
+        })
+
+        document.getElementById('bsend').addEventListener('click', function() {
+            var yourMessage = document.getElementById('send').value
+            peer.send(yourMessage)
+            document.getElementById('send').value = ""
+        })
+
+        peer1.on('data', function(data) {
+            document.getElementById('rec').textContent += data + '\n'
+        })
+
+        peer2.on('data', function(data) {
+            document.getElementById('rec').textContent += data + '\n'
+        })
+
+        peer1.on('stream', function(stream1) {
+            var video = document.querySelector('video');
+            video.srcObject = stream1;
+            video.play();
+        })
+
+        peer2.on('stream', function(stream1) {
+            var video = document.querySelector('video');
+            video.srcObject = stream1;
+            video.play();
+        })
+    }
+
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+    }).then(doo);
+</script>
 
 </html>
