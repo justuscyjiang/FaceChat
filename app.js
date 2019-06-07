@@ -154,7 +154,7 @@ function countUser() {
             count++;
         }
     }
-    return count
+    L = count
 }
 
 setInterval(function() {
