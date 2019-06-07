@@ -24,10 +24,9 @@ var L = 0
     // added by 江 ↑
 
 io.on('connection', async(socket) => {
-    L = L + 1
     console.log('a user connected');
     const clients = await io.engine.clientsCount;
-
+    L = countUser
     const socketid = socket.id;
     socketHander = new SocketHander();
     socketHander.connect();
@@ -41,10 +40,10 @@ io.on('connection', async(socket) => {
 
     socket.on("disconnect", () => {
         console.log("a user go out");
-        L = L - 1
-            // added by 江 ↓
+        // added by 江 ↓
         delete ID[socket.username]
         delete online[socket.username]
+        L = countUser
 
         // added by 江 ↑
 
@@ -147,6 +146,16 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
+function countUser() {
+    var count = 0;
+    var item;
+    for (item in ID) {
+        if (ID.hasOwnProperty(i)) {
+            count++;
+        }
+    }
+    return count
+}
 
 setInterval(function() {
     console.log(ID)
