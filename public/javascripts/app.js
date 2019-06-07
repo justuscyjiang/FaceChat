@@ -153,5 +153,3 @@ function broadcast(obj) {
     scrollWindow();
 
 }
-
-module.exports = account;
