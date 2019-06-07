@@ -17,11 +17,11 @@ var app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-// +++++++++++
+// added by 江 ↓
 ID = {}
 online = {}
 
-// +++++++++++
+// added by 江 ↑
 
 io.on('connection', async(socket) => {
 
@@ -41,11 +41,13 @@ io.on('connection', async(socket) => {
 
     socket.on("disconnect", () => {
         console.log("a user go out");
-        // +++++++++++++++++++++++++++
+
+        // added by 江 ↓
         delete ID[socket.username]
         delete online[socket.username]
 
-        // +++++++++++++++++++++++++++
+        // added by 江 ↑
+
         io.emit("clients", {
             clients: clients - 1,
         });
@@ -64,19 +66,13 @@ io.on('connection', async(socket) => {
         });
     });
 
-    // ++++++++++++++++++++++++++++++
+    // added by 江 ↓
 
     socket.on('new', function(username) {
         socket.username = username;
         ID[username] = socket.id
         online[username] = 'free'
     });
-
-    // socket.on('disconnect', function() {
-    //     console.log(socket.username + ' has left.')
-    //     delete ID[socket.username]
-    //     delete online[socket.username]
-    // });
 
     socket.on('reqFrom', function(mes) {
         var from = socket.username
@@ -97,7 +93,7 @@ io.on('connection', async(socket) => {
     });
 
 
-    // ++++++++++++++++++++++++++++++
+    // added by 江 ↑
 
 });
 
