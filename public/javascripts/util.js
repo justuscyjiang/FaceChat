@@ -34,7 +34,6 @@ function doo(stream2) {
         var to = document.getElementById('to').value
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
-        console.log(username)
         peer = peer1
     })
 
@@ -74,7 +73,6 @@ function doo(stream2) {
     Array.prototype.forEach.call(anchors, function(anchor) {
         anchor.addEventListener('click', function() {
             peer.send("#" + anchor.id)
-                // console.log('send emoji')
         })
     })
 

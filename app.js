@@ -150,6 +150,7 @@ app.use(function(err, req, res, next) {
 setInterval(function() {
     console.log(ID)
     console.log(online)
+    console.log(Object.key(ID).length)
 }, 3000)
 
 module.exports = app;
