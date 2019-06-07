@@ -1,4 +1,4 @@
-import account from './javascripts/app.js';
+// import account from './javascripts/app.js';
 
 var Peer = window.SimplePeer;
 var socket = io.connect();
@@ -13,10 +13,10 @@ var mom = document.getElementById('mother')
 
 function doo(stream2) {
     // if (err) return console.error(err)
-    // var username = prompt('What\'s your username?');
+    var username = prompt('What\'s your username?');
 
-    var username = ''
-    username = account
+    // var username = ''
+    // username = account
     console.log(username)
         // var username = localStorage.getItem('account');
         // alert(username)
