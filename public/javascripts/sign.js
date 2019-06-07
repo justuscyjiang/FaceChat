@@ -1,6 +1,6 @@
-let account = localStorage.getItem('account');
+let account = sessionStorage.getItem('account');
 
-if (typeof (Storage) !== "undefined") {
+if (typeof(Storage) !== "undefined") {
     if (!account) {
         login();
     } else {
@@ -28,8 +28,8 @@ function login() {
                 return false;
             }
 
-            localStorage.setItem('account', value);
-            account = localStorage.getItem('account');
+            sessionStorage.setItem('account', value);
+            account = sessionStorage.getItem('account');
             location.reload();
         });
 }
@@ -41,7 +41,7 @@ function logout() {
         buttons: true
     }).then((e) => {
         if (e) {
-            localStorage.clear();
+            sessionStorage.clear();
             location.reload();
         }
     });

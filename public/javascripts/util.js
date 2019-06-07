@@ -138,14 +138,14 @@ function doo(stream2) {
 
 
         document.getElementById('pause').addEventListener('click', function() {
-            // video2.pause()
             // video1.pause()
+            video2.pause()
             peer.send("#pause")
         })
 
         document.getElementById('play').addEventListener('click', function() {
-            // video2.play()
-            // video1.pause()
+            // video1.play()
+            video2.play()
             peer.send("#play")
         })
 
