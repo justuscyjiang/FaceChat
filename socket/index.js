@@ -9,6 +9,7 @@ class SocketHander {
     connect() {
         this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
         this.db.Promise = global.Promise;
+        console.log('???')
     }
 
     getMessages() {
