@@ -3,10 +3,14 @@ var socket = io.connect();
 var to_global = ''
 var peer
 var stunServerConfig = ''
+var anchors = document.getElementsByClassName('emoji')
 
 function doo(stream2) {
     // if (err) return console.error(err)
-    var username = prompt('What\'s your username?');
+    // var username = prompt('What\'s your username?');
+
+    var username = localStorage.getItem('account');
+    alert(username)
     socket.emit('new', username);
 
     socket.on('reqTo', function(mes) {
@@ -65,6 +69,13 @@ function doo(stream2) {
         document.getElementById('send').value = ""
     })
 
+    Array.prototype.forEach.call(anchors, function(anchor) {
+        anchor.addEventListener('click', function() {
+            peer.send("#" + anchor.id)
+                // console.log('send emoji')
+        })
+    })
+
     function transData(data) {
         switch (data.toString()) {
             case '#circle':
@@ -98,17 +109,16 @@ function doo(stream2) {
 
     peer2.on('data', transData)
 
-    peer1.on('stream', function(stream1) {
+    function transStream(data) {
         var video = document.querySelector('video');
         video.srcObject = stream1;
         video.play();
-    })
+    }
 
-    peer2.on('stream', function(stream1) {
-        var video = document.querySelector('video');
-        video.srcObject = stream1;
-        video.play();
-    })
+    peer1.on('stream', transStream)
+
+    peer2.on('stream', transStream)
+
 }
 
 navigator.mediaDevices.getUserMedia({
