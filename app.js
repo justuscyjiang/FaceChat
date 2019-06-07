@@ -49,7 +49,7 @@ io.on('connection', async(socket) => {
         // added by 江 ↑
 
         io.emit("clients", {
-            clients: clients - 1,
+            clients: L,
         });
 
     });
@@ -61,7 +61,7 @@ io.on('connection', async(socket) => {
 
     socket.on('clients', (obj) => {
         io.emit("clients", {
-            clients: clients,
+            clients: L,
             user: obj,
         });
     });
