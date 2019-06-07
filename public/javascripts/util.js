@@ -125,6 +125,29 @@ function doo(stream2) {
         video2.className = "player"
         video2.id = "small"
         video2.srcObject = stream2
+
+        document.getElementById('pause').addEventListener('click', function() {
+            video2.pause()
+                // video1.pause()
+            peer.send("#pause")
+        })
+
+        document.getElementById('play').addEventListener('click', function() {
+            video2.play()
+                // video1.pause()
+            peer.send("#play")
+        })
+
+        document.getElementById('snap').addEventListener('click', function() {
+            const canvas = document.getElementById("canvasOutput");
+            const data = canvas.toDataURL('image/png', 1);
+            const link = document.createElement('a');
+            link.href = data;
+            link.setAttribute('download', 'image.png');
+            link.innerHTML = `<img src="${data}" alt="image" />`;
+            strip.insertBefore(link, strip.firstChild);
+
+        })
     }
 
     peer1.on('stream', transStream)
@@ -132,28 +155,7 @@ function doo(stream2) {
     peer2.on('stream', transStream)
 
 
-    document.getElementById('pause').addEventListener('click', function() {
-        video2.pause()
-            // video1.pause()
-        peer.send("#pause")
-    })
 
-    document.getElementById('play').addEventListener('click', function() {
-        video2.play()
-            // video1.pause()
-        peer.send("#play")
-    })
-
-    document.getElementById('snap').addEventListener('click', function() {
-        const canvas = document.getElementById("canvasOutput");
-        const data = canvas.toDataURL('image/png', 1);
-        const link = document.createElement('a');
-        link.href = data;
-        link.setAttribute('download', 'image.png');
-        link.innerHTML = `<img src="${data}" alt="image" />`;
-        strip.insertBefore(link, strip.firstChild);
-
-    })
 
 }
 
