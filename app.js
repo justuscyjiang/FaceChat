@@ -18,13 +18,13 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 // added by 江 ↓
-ID = {}
-online = {}
-
-// added by 江 ↑
+var ID = {}
+var online = {}
+var L = 0
+    // added by 江 ↑
 
 io.on('connection', async(socket) => {
-
+    L = L + 1
     console.log('a user connected');
     const clients = await io.engine.clientsCount;
 
@@ -41,8 +41,8 @@ io.on('connection', async(socket) => {
 
     socket.on("disconnect", () => {
         console.log("a user go out");
-
-        // added by 江 ↓
+        L = L - 1
+            // added by 江 ↓
         delete ID[socket.username]
         delete online[socket.username]
 
@@ -147,10 +147,11 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
+
 setInterval(function() {
     console.log(ID)
     console.log(online)
-    console.log(Object.key(ID).length)
+    console.log(L)
 }, 3000)
 
 module.exports = app;
