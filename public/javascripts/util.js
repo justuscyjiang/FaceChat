@@ -7,10 +7,10 @@ var anchors = document.getElementsByClassName('emoji')
 
 function doo(stream2) {
     // if (err) return console.error(err)
-    // var username = prompt('What\'s your username?');
+    var username = prompt('What\'s your username?');
 
-    var username = localStorage.getItem('account');
-    alert(username)
+    // var username = localStorage.getItem('account');
+    // alert(username)
     socket.emit('new', username);
 
     socket.on('reqTo', function(mes) {
