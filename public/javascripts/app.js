@@ -18,8 +18,7 @@ if (account) {
 
     socket.on('clients', (obj) => {
         console.log(obj);
-        document.querySelector('.online').innerHTML = L;
-        // document.querySelector('.online').value = L;
+        document.querySelector('.online').innerHTML = obj.clients;
         if (obj.user !== undefined) broadcast(obj.user);
     });
 

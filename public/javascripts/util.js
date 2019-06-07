@@ -7,8 +7,6 @@ var anchors = document.getElementsByClassName('emoji')
 const strip = document.querySelector('.strip');
 var mom = document.getElementById('mother')
 
-// var username = require('./javascripts/sign.js');
-
 function doo(stream2) {
     // if (err) return console.error(err)
     var username = account

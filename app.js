@@ -25,17 +25,18 @@ var L = 0
 
 io.on('connection', async(socket) => {
     console.log('a user connected');
-    const clients = await io.engine.clientsCount;
-    countUser()
+    // const clients = await io.engine.clientsCount;
+
     const socketid = socket.id;
     socketHander = new SocketHander();
     socketHander.connect();
 
     const history = await socketHander.getMessages();
 
+    countUser()
     io.to(socketid).emit('history', history);
     io.to(socketid).emit('clients', {
-        clients: clients,
+        clients: L,
     });
 
     socket.on("disconnect", () => {
