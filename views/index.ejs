@@ -86,7 +86,7 @@
             <!-- / 底部輸入欄位 -->
             <h1>Modified Version</h1>
 
-            <p><input type="button" value="Find someone" id="poke" />
+            <p><button type="button" id="poke">Find someone</button>
                 <input type="text" id="to" value=""><br>
             </p>
             <input type="text" id="p1id1" value="">
@@ -95,7 +95,7 @@
             <input type="text" id="p2id2" value="">這個不用管它<br><br>
             <p>
                 <input type='text' id='send' value="">要傳送的訊息<br>
-                <input type="button" value="Send" id="bsend" /><br>
+                <button type="button" id="bsend">Send</button><br>
                 <textarea id="rec"></textarea>收到的訊息
             </p>
             <div>
@@ -169,7 +169,7 @@
         })
 
         document.getElementById('poke').addEventListener('click', function() {
-            var to = $('#to').val()
+            var to = document.getElementById('to').value
             var id = document.getElementById('p1id1').value
             socket.emit('reqFrom', to + "^" + id);
             peer = peer1
