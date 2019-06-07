@@ -33,7 +33,6 @@ io.on('connection', async(socket) => {
 
     const history = await socketHander.getMessages();
 
-    countUser()
     io.to(socketid).emit('history', history);
     io.to(socketid).emit('clients', {
         clients: L,
@@ -60,6 +59,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on('clients', (obj) => {
+        countUser()
         io.emit("clients", {
             clients: L,
             user: obj,
