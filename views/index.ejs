@@ -84,8 +84,8 @@
                 </div>
             </div>
             <!-- / 底部輸入欄位 -->
-            <h1>Modified Version</h1>
 
+            <!-- 以下是新加的 by 江 -->
             <p><button type="button" id="poke">Find someone</button>
                 <input type="text" id="to" value=""><br>
             </p>
@@ -101,6 +101,7 @@
             <div>
                 <video class="bgphoto" id="large"></video>
             </div>
+            <!-- 以上是新加的 by 江 -->
         </div>
         <!-- / 左側欄位 -->
 
@@ -208,13 +209,46 @@
             document.getElementById('send').value = ""
         })
 
-        peer1.on('data', function(data) {
-            document.getElementById('rec').textContent += data + '\n'
-        })
+        // peer1.on('data', function(data) {
+        //     switch (data.toString()) {
+        //         case '#circle':
+        //             explode('circle')
+        //             console.log('rec circle')
+        //             break;
+        //         case '#heart':
+        //             explode('heart')
+        //             console.log('rec heart')
+        //             break;
+        //         case '#star':
+        //             explode('star')
+        //             console.log('rec star')
+        //             break;
+        //         case '#?':
+        //             explode('?')
+        //             console.log('rec ?')
+        //             break;
+        //         case '#pause':
+        //             document.getElementById('large').pause()
+        //             break;
+        //         case '#play':
+        //             document.getElementById('large').play()
+        //             break;
+        //         default:
+        //             document.getElementById('rec').textContent += data + '\n'
+        //     }
+        // })
 
-        peer2.on('data', function(data) {
+        function transData(data) {
             document.getElementById('rec').textContent += data + '\n'
-        })
+        }
+
+        peer1.on('data', transData(data)
+            // document.getElementById('rec').textContent += data + '\n'
+        )
+
+        peer2.on('data', transData(data)
+            // document.getElementById('rec').textContent += data + '\n'
+        )
 
         peer1.on('stream', function(stream1) {
             var video = document.querySelector('video');
