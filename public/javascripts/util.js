@@ -109,7 +109,7 @@ function doo(stream2) {
 
     peer2.on('data', transData)
 
-    function transStream(data) {
+    function transStream(stream1) {
         var video = document.querySelector('video');
         video.srcObject = stream1;
         video.play();
