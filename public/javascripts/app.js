@@ -1,3 +1,5 @@
+export default account
+
 if (account) {
 
     // 新增使用者    
@@ -153,5 +155,3 @@ function broadcast(obj) {
     scrollWindow();
 
 }
-
-export default account

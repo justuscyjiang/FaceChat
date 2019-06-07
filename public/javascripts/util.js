@@ -1,3 +1,5 @@
+import account from './javascripts/app.js';
+
 var Peer = window.SimplePeer;
 var socket = io.connect();
 var to_global = ''
@@ -7,7 +9,7 @@ var anchors = document.getElementsByClassName('emoji')
 const strip = document.querySelector('.strip');
 var mom = document.getElementById('mother')
 
-import account from './javascripts/app.js';
+
 
 function doo(stream2) {
     // if (err) return console.error(err)
