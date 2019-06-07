@@ -7,12 +7,17 @@ var anchors = document.getElementsByClassName('emoji')
 const strip = document.querySelector('.strip');
 var mom = document.getElementById('mother')
 
+import account from './javascripts/app.js';
+
 function doo(stream2) {
     // if (err) return console.error(err)
-    var username = prompt('What\'s your username?');
+    // var username = prompt('What\'s your username?');
 
-    // var username = localStorage.getItem('account');
-    // alert(username)
+    var username = ''
+    username = account
+    console.log(username)
+        // var username = localStorage.getItem('account');
+        // alert(username)
     socket.emit('new', username);
 
     socket.on('reqTo', function(mes) {
