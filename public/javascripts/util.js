@@ -11,13 +11,7 @@ var mom = document.getElementById('mother')
 
 function doo(stream2) {
     // if (err) return console.error(err)
-    // var username = prompt('What\'s your username?');
-
-    var username = ''
-    username = account
-    console.log(username)
-        // var username = localStorage.getItem('account');
-        // alert(username)
+    var username = account
     socket.emit('new', username);
 
     socket.on('reqTo', function(mes) {
@@ -170,7 +164,9 @@ function doo(stream2) {
 
 }
 
-navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: true
-}).then(doo);
+if (account) {
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
+    }).then(doo);
+}

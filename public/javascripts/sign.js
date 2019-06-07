@@ -1,3 +1,5 @@
+// localStorage 要改成 sessionStorage
+
 let account = sessionStorage.getItem('account');
 
 if (typeof(Storage) !== "undefined") {
