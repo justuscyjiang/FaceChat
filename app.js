@@ -148,8 +148,8 @@ app.use(function(err, req, res, next) {
 
 function countUser() {
     var count = 0;
-    var item;
-    for (item in ID) {
+    var i;
+    for (i in ID) {
         if (ID.hasOwnProperty(i)) {
             count++;
         }
