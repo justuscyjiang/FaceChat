@@ -58,7 +58,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on('clients', (obj) => {
-        countUser()
+
         io.emit("clients", {
             clients: L,
             user: obj,
@@ -71,10 +71,10 @@ io.on('connection', async(socket) => {
         socket.username = username;
         ID[username] = socket.id
         online[username] = 'free'
-            // countUser()
-            // io.emit("clients", {
-            //     clients: L,
-            // });
+        countUser()
+        io.emit("clients", {
+            clients: L,
+        });
     });
 
     socket.on('reqFrom', function(mes) {
