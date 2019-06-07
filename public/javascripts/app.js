@@ -4,7 +4,8 @@ if (account) {
 
     console.log('account:' + account);
 
-    socket = io.connect('ws://localhost:3001');
+    // socket = io.connect('ws://localhost:3001');
+    socket = io.connect();
 
     socket.emit('clients', account);
 
