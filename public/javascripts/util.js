@@ -57,7 +57,7 @@ function insert_fg(fg) {
             var fgTimer = setInterval(trb, 40)
         }
     } else {
-        if (fg == 'trb') {
+        if (foreground == 'trb') {
             clearInterval(fgTimer)
         }
         var tmp = document.getElementById(foreground)
