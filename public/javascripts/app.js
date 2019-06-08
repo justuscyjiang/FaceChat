@@ -42,8 +42,8 @@ document.querySelector('input').addEventListener('keypress', (e) => {
 function sendData() {
     let msg = document.querySelector('input').value;
     if (msg == '#trb') {
-        preprocess()
-            // filterUse = 'trb'
+        // preprocess()
+        filterUse = 'trb'
         document.querySelector('input').value = '';
         return
     }
