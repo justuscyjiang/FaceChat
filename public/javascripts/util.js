@@ -18,7 +18,7 @@ function doo(stream2) {
         swal({
                 title: '',
                 text: from + ' wants to speak to you!',
-                icon: 'info',
+                icon: 'success',
                 buttons: ['Decline', 'Accept'],
             })
             .then((ans) => {
@@ -40,7 +40,9 @@ function doo(stream2) {
             swal({
                 title: '',
                 text: from + ' has decline your request.',
-                type: 'error'
+                type: 'error',
+                buttons: false,
+                timer: 2000,
             })
         } else {
             document.getElementById('p1id2').value = id
