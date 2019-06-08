@@ -168,6 +168,12 @@ canvas {
     background: rgba(67, 216, 74, 0.575);
 }
 
+.strip {
+    float: left;
+    margin-left: 1000px;
+    margin-top: 130px;
+}
+
 
 /*snow*/
 
