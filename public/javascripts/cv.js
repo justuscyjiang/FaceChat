@@ -10,6 +10,15 @@ let dstC3 = null;
 let dstC4 = null;
 
 var tr
+var min = 25
+var max = 65
+var init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
+var init_V = 8
+var Vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
+var Vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
+var x = 100
+var y = 100
+var pd = false
 
 function startVideoProcessing() {
     if (!streaming) { console.warn("Please startup your webcam"); return; }
@@ -47,37 +56,33 @@ function preprocess() {
 }
 
 function trb(src) {
-    preprocess()
-    var min = 25
-    var max = 65
-    init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
-    var init_V = 8
-    var Vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
-    var Vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
-    var x = 100
-    var y = 100
+    if (!pd) {
+        preprocess()
+        pd = true
+    }
 
-    if (x + 130 + Vx >= 479 || x + Vx <= 0) {
+    if (x + 130 + Vx >= 449 || x + Vx <= 0) {
         Vx = -Vx
     }
-    if (y + 190 + Vy >= 639 || y + Vy <= 0) {
+    if (y + 190 + Vy >= 599 || y + Vy <= 0) {
         Vy = -Vy
     }
 
     x += Vx
     y += Vy
 
-    // for (i in range(len(tr))) {
-    //     for (j in range(len(tr[0]))) {
-    //         for (k in range(len(blur[0, 0]))) {
-    //             if (tr[i, j, 3] == 1.0) {
-    //                 blur[i + x, j + y, k] = tr[i, j, k]
-    //             }
-    //         }
-    //     }
-    // }
+    for (var col = 1; col < 599; col++) {
+        for (var row = 1; col < 449; row++) {
+            for (var c = 0; c < 4; c++) {
+                if (tr.ucharPtr(row, col)[3] == 255) {
+                    // src[i + x, j + y, k] = tr[i, j, k]
+                    src.ucharPtr(row + y, col + x)[c] = tr.ucharPtr(row, col)[c]
+                }
+            }
+        }
+    }
 
-    return tr
+    return src
 }
 
 function processVideo() {
