@@ -27,6 +27,7 @@ var vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
 var vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
 var x = 100
 var y = 100
+var fgTimer
 
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
@@ -54,7 +55,7 @@ function insert_fg(fg) {
         section.id = fg
         foreground = fg
         if (fg == 'trb') {
-            var fgTimer = setInterval(trb, 40)
+            fgTimer = setInterval(trb, 40)
         }
     } else {
         if (foreground == 'trb') {
@@ -71,12 +72,12 @@ function insert_fg(fg) {
 }
 
 function trb() {
-    if (x < 600 && x > 0) {
+    if (x < 600 - 190 && x > 0) {
         vx = vx
     } else {
         vx = -vx
     }
-    if (y < 450 && y > 0) {
+    if (y < 450 - 130 && y > 0) {
         vy = vy
     } else {
         vy = -vy
