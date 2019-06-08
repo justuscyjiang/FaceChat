@@ -50,9 +50,10 @@ function insert_fg(fg) {
         delete tmp
         console.log('stop' + foreground + '~~~')
         if (fg != foreground) {
+            foreground = false
             insert_fg(fg)
         }
-        foreground = false
+
     }
 }
 
