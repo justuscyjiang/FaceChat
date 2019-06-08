@@ -52,7 +52,7 @@ function insert_fg(fg) {
         if (fg != foreground) {
             foreground = false
             insert_fg(fg)
-        }
+        } else { foreground = false }
 
     }
 }
