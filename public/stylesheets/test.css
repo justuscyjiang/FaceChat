@@ -15,13 +15,13 @@
 
 #snow {
     /* background-color: transparent; */
-    background-color: blueviolet;
+    background-color: rgb(16, 7, 102);
     background-image: url('./snow1.png'), url('./snow2.png');
     -webkit-animation: snow 20s linear infinite;
     -moz-animation: snow 20s linear infinite;
     -ms-animation: snow 20s linear infinite;
     animation: snow 20s linear infinite;
-    z-index: auto;
+    z-index: 5;
     right: 0;
     top: 0;
     left: 0;
