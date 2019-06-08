@@ -18,15 +18,6 @@ var set_fgs = document.getElementsByClassName('set_fg')
 var filterUse = null;
 var foreground = false;
 
-
-var min = 25
-var max = 65
-var init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
-var init_V = 8
-var vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
-var vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
-var x = 100
-var y = 100
 var fgTimer
 
 Array.prototype.forEach.call(anchors, function(anchor) {
@@ -72,6 +63,14 @@ function insert_fg(fg) {
 }
 
 function trb() {
+    var min = 30
+    var max = 60
+    var init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
+    var init_V = 8
+    var vx = Math.floor(init_V * Math.cos(init_angle * Math.PI / 180))
+    var vy = Math.floor(init_V * Math.sin(init_angle * Math.PI / 180))
+    var x = 100
+    var y = 100
     if (x < 600 - 190 && x > 0) {
         vx = vx
     } else {
@@ -84,7 +83,6 @@ function trb() {
     }
     x += vx
     y += vy
-    console.log('!')
     document.documentElement.style.setProperty('--left', x);
     document.documentElement.style.setProperty('--top', y);
 }
