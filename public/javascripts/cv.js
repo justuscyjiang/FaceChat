@@ -35,12 +35,16 @@ function erosion(src) {
 }
 
 
+var tr = cv.imread(idtrb);
+tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
+
 
 
 
 
 function trb(src) {
     // console.log('trb.!!!')
+    return tr
 }
 
 function processVideo() {
