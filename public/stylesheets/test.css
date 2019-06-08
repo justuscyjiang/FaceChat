@@ -15,7 +15,7 @@
 
 #snow {
     background-color: transparent;
-    background-image: url('./public/images/snow1.png'), url('./public/images/snow2.png');
+    background-image: url('./snow1.png'), url('./snow2.png');
     -webkit-animation: snow 20s linear infinite;
     -moz-animation: snow 20s linear infinite;
     -ms-animation: snow 20s linear infinite;
