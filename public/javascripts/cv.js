@@ -34,10 +34,14 @@ function erosion(src) {
     return dstC4;
 }
 
-function trb(src) {
-    console.log('trb.!!!')
-}
 
+
+
+
+
+function trb(src) {
+    // console.log('trb.!!!')
+}
 
 function processVideo() {
     vc.read(src);

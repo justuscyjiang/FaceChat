@@ -186,6 +186,14 @@ function doo(stream2) {
         video2.id = "small"
         video2.srcObject = stream2
 
+        var image = document.createElement('image')
+        mom.appendChild(image)
+        image.className = 'ctrb'
+        image.id = "idtrb"
+        image.srcObject = './images/trb.png'
+
+
+
         video2.volume = 0
 
         video2.play()
