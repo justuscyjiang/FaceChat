@@ -134,12 +134,6 @@ function doo(stream2) {
         socket.emit('backFrom', to_global + '^' + id)
     })
 
-    // document.getElementById('bsend').addEventListener('click', function() {
-    //     var yourMessage = document.getElementById('send').value
-    //     peer.send(yourMessage)
-    //     document.getElementById('send').value = ""
-    // })
-
     function transData(data) {
         switch (data.toString()) {
             case '#circle':
@@ -161,8 +155,6 @@ function doo(stream2) {
             case '#play':
                 document.getElementById('large').play()
                 break;
-                // default:
-                // document.getElementById('rec').textContent += data + '\n'
         }
     }
 
@@ -171,9 +163,6 @@ function doo(stream2) {
     peer2.on('data', transData)
 
     function transStream(stream1) {
-        // var video = document.querySelector('video');
-        // video.srcObject = stream1;
-        // video.play();
         var video1 = document.createElement('video')
         mom.appendChild(video1)
         video1.className = "bgphoto"
@@ -191,8 +180,6 @@ function doo(stream2) {
         // image.className = 'ctrb'
         // image.id = "idtrb"
         // image.src = './images/trb.png'
-
-
 
         video2.volume = 0
 
@@ -222,8 +209,6 @@ function doo(stream2) {
             strip.insertBefore(link, strip.firstChild);
             const bbrr = document.createElement('br');
             strip.insertBefore(bbrr, strip.firstChild);
-
-
         })
 
         video1.addEventListener("canplay", function(ev) {

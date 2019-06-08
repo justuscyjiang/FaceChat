@@ -34,29 +34,30 @@ function erosion(src) {
     return dstC4;
 }
 
-// function preprocess() {
-//     tr = cv.imread('idtrb');
-//     dst = new cv.Mat();
-//     dsize = new cv.Size(190, 130);
-//     // You can try more different parameters
-//     cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
-//     // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
-//     tr = dst
-// }
+function preprocess() {
+    tr = cv.imread('idtrb');
+    dst = new cv.Mat();
+    dsize = new cv.Size(190, 130);
+    // You can try more different parameters
+    cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
+    // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
+    tr = dst
+}
 
-// function trb(src) {
-//     preprocess()
-//     var min = 25
-//     var max = 65
-//     init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
-//     var init_V = 8
-//     var Vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
-//     var Vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
-//     var x = 100
-//     var y = 100
+function trb(src) {
+    preprocess()
+    var min = 25
+    var max = 65
+    init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
+    var init_V = 8
+    var Vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
+    var Vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
+    var x = 100
+    var y = 100
 
-//     return tr
-// }
+
+    return tr
+}
 
 function processVideo() {
     vc.read(src);
