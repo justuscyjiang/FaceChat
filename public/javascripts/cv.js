@@ -79,6 +79,7 @@ function trb(src) {
                 if (tr.ucharPtr(row, col)[3] == 255) {
                     // src[i + x, j + y, k] = tr[i, j, k]
                     src.ucharPtr(row + x, col + y)[c] = tr.ucharPtr(row, col)[c]
+                    console.log('row: ' + row + ', col: ' + 'col')
                 }
             }
         }
