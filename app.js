@@ -90,9 +90,15 @@ io.on('connection', async(socket) => {
         var from = socket.username
         var to = mes.split("^")[0]
         id = mes.split("^")[1]
-        console.log(from + ' is replying to ' + to + '.');
-        io.to(ID[to]).emit('backTo', from + '^' + id)
-        online[from] = 'busy'
+        if (id == "decline") {
+            console.log(from + ' is replying to ' + to + ': decline.');
+            io.to(ID[to]).emit('backTo', from + '^' + id)
+            online[to] = 'free'
+        } else {
+            console.log(from + ' is replying to ' + to + ': accept.');
+            io.to(ID[to]).emit('backTo', from + '^' + id)
+            online[from] = 'busy'
+        }
     });
 
 

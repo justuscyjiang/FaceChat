@@ -15,17 +15,38 @@ function doo(stream2) {
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
-        alert(from + ' wants to speak to you!')
-        document.getElementById('p2id2').value = id
-        to_global = from
-        peer2.signal(JSON.parse(id))
+        swal({
+            title: '',
+            text: from + ' wants to speak to you!',
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Accept',
+            cencelButton: 'Decline',
+        }, function(answer) {
+            if (!answer) {
+                socket.emit('backFrom', from + '^' + " has decline your request.")
+            } else {
+                document.getElementById('p2id2').value = id
+                to_global = from
+                peer2.signal(JSON.parse(id))
+            }
+        });
     })
 
     socket.on('backTo', function(mes) {
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
-        document.getElementById('p1id2').value = id
-        peer1.signal(JSON.parse(id))
+        if (id == "decline") {
+            swal({
+                title: '',
+                text: from + ' has declined!',
+                type: 'error'
+            })
+        } else {
+            document.getElementById('p1id2').value = id
+            peer1.signal(JSON.parse(id))
+        }
+
     })
 
     document.getElementById('poke').addEventListener('click', function() {
