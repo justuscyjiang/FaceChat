@@ -96,6 +96,12 @@ function processVideo() {
             break;
         case 'erosion':
             result = erosion(src);
+            console.log('image width: ' + src.cols + '\n' +
+                'image height: ' + src.rows + '\n' +
+                'image size: ' + src.size().width + '*' + src.size().height + '\n' +
+                'image depth: ' + src.depth() + '\n' +
+                'image channels ' + src.channels() + '\n' +
+                'image type: ' + src.type() + '\n');
             break;
         case 'trb':
             result = trb(src)
