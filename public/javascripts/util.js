@@ -46,7 +46,7 @@ function insert_fg(fg) {
         console.log('snow~~~')
     } else {
         var tmp = document.getElementsByClassName('foreground')
-        tmp[0].parentNode.removeChild(tmp);
+        tmp.parentNode.removeChild(tmp);
         delete tmp
         foreground = false
         console.log('stop snow~~~')
