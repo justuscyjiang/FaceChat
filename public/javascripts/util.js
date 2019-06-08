@@ -71,12 +71,12 @@ function insert_fg(fg) {
 }
 
 function trb() {
-    if (x < 300 && x > 0) {
+    if (x < 600 && x > 0) {
         vx = vx
     } else {
         vx = -vx
     }
-    if (y < 300 && y > 0) {
+    if (y < 450 && y > 0) {
         vy = vy
     } else {
         vy = -vy
