@@ -181,6 +181,8 @@ function doo(stream2) {
         video2.id = "small"
         video2.srcObject = stream2
 
+        video2.volume = 1
+
         video2.play()
         video1.play()
 
