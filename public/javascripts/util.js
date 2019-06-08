@@ -43,18 +43,39 @@ function insert_fg(fg) {
         section.className = "foreground"
         section.id = fg
         foreground = fg
-        console.log(fg + '~~~')
+        if (fg == 'trb') {
+            var fgTimer = setInterval(trb, 40)
+        }
     } else {
+        if (fg == 'trb') {
+            clearInterval(fgTimer)
+        }
         var tmp = document.getElementById(foreground)
         tmp.parentNode.removeChild(tmp);
         delete tmp
-        console.log('stop' + foreground + '~~~')
         if (fg != foreground) {
             foreground = false
             insert_fg(fg)
         } else { foreground = false }
-
     }
+}
+
+function trb() {
+    if (x < 300 && x > 0) {
+        vx = vx
+    } else {
+        vx = -vx
+    }
+    if (y < 300 && y > 0) {
+        vy = vy
+    } else {
+        vy = -vy
+    }
+    x += vx
+    y += vy
+
+    document.documentElement.style.setProperty('--left', x);
+    document.documentElement.style.setProperty('--top', y);
 }
 
 function doo(stream2) {

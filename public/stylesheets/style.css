@@ -235,22 +235,32 @@ canvas {
 }
 
 #trb {
+    --left: 150;
+    --top: 100;
     background-color: transparent;
     background-image: url('./trb.png');
-    /* -webkit-animation: snow 20s linear infinite;
-    -moz-animation: snow 20s linear infinite;
-    -ms-animation: snow 20s linear infinite;
-    animation: snow 20s linear infinite; */
+    /* -webkit-animation: snow 20s linear infinite; */
+    /* -moz-animation: snow 20s linear infinite; */
+    /* -ms-animation: snow 20s linear infinite; */
+    /* animation: trb alternate linear infinite; */
     z-index: 103;
-    right: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    margin-top: 0;
+    margin-left: calc(var(--left) * 1px);
+    margin-top: calc(var(--top) * 1px);
     pointer-events: none;
     position: absolute;
-    /* width: 595px; */
+    width: 190px;
+    height: 130px;
 }
+
+
+/* @keyframes trb {
+    0% {
+        margin-left: 0px
+    }
+    100% {
+        margin-left: 600px
+    }
+} */
 
 .hideid {
     display: none;
