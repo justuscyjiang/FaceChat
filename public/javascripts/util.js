@@ -83,7 +83,7 @@ function trb() {
     }
     x += vx
     y += vy
-
+    console.log('!')
     document.documentElement.style.setProperty('--left', x);
     document.documentElement.style.setProperty('--top', y);
 }
