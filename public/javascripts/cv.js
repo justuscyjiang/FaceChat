@@ -42,7 +42,12 @@ function preprocess() {
     cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
     // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
     tr = dst
-    console.log(tr[0])
+    console.log('image width: ' + tr.cols + '\n' +
+        'image height: ' + tr.rows + '\n' +
+        'image size: ' + tr.size().width + '*' + tr.size().height + '\n' +
+        'image depth: ' + tr.depth() + '\n' +
+        'image channels ' + tr.channels() + '\n' +
+        'image type: ' + tr.type() + '\n');
 }
 
 function trb(src) {
