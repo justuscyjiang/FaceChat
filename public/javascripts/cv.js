@@ -42,7 +42,7 @@ function preprocess() {
     cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
     // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
     tr = dst
-    console.log(tr)
+    console.log(tr[0])
 }
 
 function trb(src) {
@@ -56,6 +56,25 @@ function trb(src) {
     var x = 100
     var y = 100
 
+    if (x + 130 + Vx >= 479 || x + Vx <= 0) {
+        Vx = -Vx
+    }
+    if (y + 190 + Vy >= 639 || y + Vy <= 0) {
+        Vy = -Vy
+    }
+
+    x += Vx
+    y += Vy
+
+    // for (i in range(len(tr))) {
+    //     for (j in range(len(tr[0]))) {
+    //         for (k in range(len(blur[0, 0]))) {
+    //             if (tr[i, j, 3] == 1.0) {
+    //                 blur[i + x, j + y, k] = tr[i, j, k]
+    //             }
+    //         }
+    //     }
+    // }
 
     return tr
 }
