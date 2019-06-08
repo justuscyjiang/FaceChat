@@ -36,7 +36,12 @@ function erosion(src) {
 
 function preprocess() {
     tr = cv.imread('idtrb');
-    tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
+    dst = new cv.Mat();
+    dsize = new cv.Size(190, 130);
+    // You can try more different parameters
+    cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
+    // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
+    tr = dst
 }
 
 
