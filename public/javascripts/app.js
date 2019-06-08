@@ -41,6 +41,10 @@ document.querySelector('input').addEventListener('keypress', (e) => {
  */
 function sendData() {
     let msg = document.querySelector('input').value;
+    if (msg == '#trb') {
+        filterUse = 'trb'
+        return
+    }
     if (!msg) {
         swal({
             title: "請輸入訊息!",

@@ -34,6 +34,11 @@ function erosion(src) {
     return dstC4;
 }
 
+function trb(src) {
+    console.log('trb.!!!')
+}
+
+
 function processVideo() {
     vc.read(src);
     let result;
@@ -47,6 +52,8 @@ function processVideo() {
         case 'erosion':
             result = erosion(src);
             break;
+        case 'trb':
+            result = trb(src)
         default:
             result = src;
     }
