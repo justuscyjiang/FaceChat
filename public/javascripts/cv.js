@@ -9,7 +9,7 @@ let dstC1 = null;
 let dstC3 = null;
 let dstC4 = null;
 
-
+var tr
 
 function startVideoProcessing() {
     if (!streaming) { console.warn("Please startup your webcam"); return; }
@@ -34,10 +34,10 @@ function erosion(src) {
     return dstC4;
 }
 
-
-var tr = cv.imread(idtrb);
+// function preprocess() {
+tr = cv.imread('idtrb');
 tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
-
+    // }
 
 
 
