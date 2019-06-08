@@ -42,6 +42,7 @@ function preprocess() {
     cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
     // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
     tr = dst
+    console.log(tr)
 }
 
 function trb(src) {
