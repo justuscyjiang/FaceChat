@@ -242,13 +242,14 @@ html {
 #trb {
     background-color: transparent;
     background-image: url('./trb.png');
+    background-size: 190px 130px;
     z-index: 103;
     margin-left: calc(var(--left) * 1px);
     margin-top: calc(var(--top) * 1px);
     pointer-events: none;
     position: absolute;
-    width: 190px;
-    height: 130px;
+    /* width: 190px;
+    height: 130px; */
 }
 
 .hideid {
