@@ -8,6 +8,7 @@
     <!-- added by 江 ↓-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.1.2/simplepeer.min.js"></script>
     <link rel='stylesheet' href='/stylesheets/test.css' />
+    <script src="https://huningxin.github.io/opencv.js/build/asm.js/opencv.js "></script>
     <!-- added by 江 ↑ -->
     <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -16,7 +17,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/zh-tw.js'></script>
-    <script src="https://huningxin.github.io/opencv.js/build/asm.js/opencv.js "></script>
+
 </head>
 
 <body>
@@ -30,6 +31,8 @@
         </div>
     </div>
     <!-- / 頂部導航選單 -->
+
+
 
     <!-- 主要容器網格系統 -->
     <div class="ts narrow container grid">
@@ -46,7 +49,6 @@
                             <div class="column row">
                                 <div class="left floated column left aligned secondary">
                                     這裡是可以視訊的聊天室喲^//^
-
                                 </div>
                                 <div class="right floated column right aligned">
                                     <i class="icon user positive" aria-hidden="true" alt="線上人數" title="線上人數"></i>
@@ -58,25 +60,6 @@
                 </div>
             </div>
             <!-- / 頂部聊天室資訊欄位 -->
-            <!--video-->
-            <div class="ts attached secondary segment">
-                <center>
-                    <div id="mother" class="vidcontent">
-                        <canvas id="canvasOutput" class="photo"></canvas>
-                        <div class="four wide column eright">
-                            <div class="item">
-                                <div><button id="heart" class="ts button info bwidth">Heart</button></div><br>
-                                <div><button id="star" class="ts button info bwidth">Stars</button></div><br>
-                                <div><button id="circle" class="ts button info bwidth">Circles</button></div><br>
-                                <div><button id="pass" class="ts button info bwidth">Pass</button></div><br>
-                                <div><button id="gray" class="ts button info bwidth">Gray</button></div><br>
-                                <div><button id="erosion" class="ts button info bwidth">Erosion</button></div><br>
-                            </div>
-                        </div>
-                    </div>
-                </center>
-
-            </div>
 
             <!-- 中部主要聊天訊息 -->
             <div class="ts attached secondary segment">
@@ -103,6 +86,43 @@
                 </div>
             </div>
             <!-- / 底部輸入欄位 -->
+
+            <!-- added by 江 ↓-->
+            <p><button type="button" id="poke">Find someone</button>
+                <input type="text" id="to" value=""><br>
+            </p>
+            <input type="text" id="p1id1" value="">
+            <input type="text" id="p2id1" value="">這個不用管它<br>
+            <input type="text" id="p1id2" value="">
+            <input type="text" id="p2id2" value="">這個不用管它<br><br>
+            <p>
+                <input type='text' id='send' value="">要傳送的訊息<br>
+                <button type="button" id="bsend">Send</button><br>
+                <textarea id="rec"></textarea>收到的訊息
+            </p>
+            <div id="mother" style="position: relative">
+                <!-- <video class="bgphoto" id="large"></video> -->
+                <canvas id="canvasOutput" class="photo"></canvas>
+                <img src="./images/tr.png" id='idtrb' style="display: none">
+            </div>
+            <button id="cam" class="control">Start WebCam</button>
+            <button id="play" class="control">Play Video</button>
+            <button id="pause" class="control">Pause Video</button>
+            <button id="snap" class="control">Snapshot 📸</button>
+            <div>
+                <button class="emoji" id="circle">Circles</button>
+                <button class="emoji" id="heart">Heart</button>
+                <button class="emoji" id="star">Star</button>
+                <button class="emoji" id="?">?</button>
+            </div>
+            <div>
+                <button class="filter" id="pass">None</button>
+                <button class="filter" id="gray">Gray</button>
+                <button class="filter" id="erosion">Erosion</button>
+                <button class="set_fg" id="b_snow">Snow</button>
+            </div>
+            <div class="strip"></div>
+            <!-- added by 江 ↑ -->
         </div>
         <!-- / 左側欄位 -->
 
@@ -117,8 +137,7 @@
                     <div class="content">
                         <div class="header">皮卡丘</div>
                         <div class="meta">
-                            <div>@pikachu520<br> Your ID:<br>
-                                <textarea id="yourID"></textarea></div>
+                            <div>@pikachu520</div>
                         </div>
                     </div>
                 </div>
@@ -129,16 +148,10 @@
                     <div class="content">
                         <div class="header">小魔女</div>
                         <div class="meta">
-                            <div>@DoReMi_yo<br> Peer ID:<br>
-                                <textarea id="otherId"></textarea></div>
+                            <div>@DoReMi_yo</div>
                         </div>
                     </div>
                 </div>
-                <center>
-                    <div class="item">
-                        <div><button id="connect" class="ts button info">Connect</button></div>
-                    </div>
-                </center>
 
             </div>
         </div>

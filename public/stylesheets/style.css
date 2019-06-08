@@ -48,3 +48,182 @@
 .ts.menu .item.logout {
     display: none;
 }
+
+
+/*for the video*/
+
+.bgphoto {
+    display: none;
+}
+
+.photoflex {
+    display: flex;
+    /*align-items: stretch;*/
+    flex-wrap: nowrap;
+    background: pink;
+}
+
+.photo_item1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 85%;
+}
+
+.photo_item2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 15%;
+    margin-left: 0px;
+}
+
+.emoji_flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.aemo {
+    padding: 10px;
+}
+
+.emo_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    border: none;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    position: relative;
+}
+
+
+/*emoji button*/
+
+.bwidth {
+    width: 100px;
+}
+
+
+/*move the buttons to the right*/
+
+.filter {
+    width: 100px;
+}
+
+
+/*webcam buttons*/
+
+.wspace {
+    margin: auto;
+}
+
+.wwidth {
+    width: 130px;
+}
+
+
+/*video self*/
+
+.photobooth {
+    display: flex;
+    /*align-items: stretch;*/
+    flex-wrap: nowrap;
+    /* 太寬會占用到strip */
+}
+
+
+/*clearfix*/
+
+.photo {
+    /* 大視窗 */
+    z-index: 99;
+    position: relative;
+    background: black;
+}
+
+.player {
+    /*小視窗*/
+    z-index: 101;
+    width: 180px;
+    height: 150px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+/*for snapshot*/
+
+.strip img {
+    width: 120px;
+    height: 90px;
+    overflow-x: scroll;
+    padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background: rgba(67, 216, 74, 0.575);
+}
+
+
+/*snow*/
+
+#snow {
+    background-color: transparent;
+    background-image: url('./snow1.png'), url('./snow2.png');
+    -webkit-animation: snow 20s linear infinite;
+    -moz-animation: snow 20s linear infinite;
+    -ms-animation: snow 20s linear infinite;
+    animation: snow 20s linear infinite;
+    z-index: 103;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin-top: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 595px;
+}
+
+
+/*Keyframes*/
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px
+    }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px
+    }
+}
+
+@-moz-keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px
+    }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px
+    }
+}
+
+@-webkit-keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px
+    }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px;
+    }
+}
+
+@-ms-keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px
+    }
+    100% {
+        background-position: 500px 1000px, 400px 400px, 300px 300px
+    }
+}
