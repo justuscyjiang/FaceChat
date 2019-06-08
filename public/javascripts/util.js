@@ -24,7 +24,7 @@ function doo(stream2) {
             cencelButton: 'Decline',
         }, function(answer) {
             if (!answer) {
-                socket.emit('backFrom', from + '^' + " has decline your request.")
+                socket.emit('backFrom', from + '^' + "decline")
             } else {
                 document.getElementById('p2id2').value = id
                 to_global = from
@@ -39,7 +39,7 @@ function doo(stream2) {
         if (id == "decline") {
             swal({
                 title: '',
-                text: from + ' has declined!',
+                text: from + ' has decline your request.',
                 type: 'error'
             })
         } else {
