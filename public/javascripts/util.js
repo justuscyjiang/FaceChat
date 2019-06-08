@@ -16,22 +16,24 @@ function doo(stream2) {
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
         swal({
-            title: '',
-            text: from + ' wants to speak to you!',
-            type: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Accept',
-            cencelButton: 'Decline',
-        }, function(answer) {
-            if (!answer) {
-                socket.emit('backFrom', from + '^' + "decline")
-            } else {
-                document.getElementById('p2id2').value = id
-                to_global = from
-                peer2.signal(JSON.parse(id))
-            }
-        });
+                title: '',
+                text: from + ' wants to speak to you!',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Accept',
+                cencelButton: 'Decline'
+            })
+            .then((ans) => {
+                if (ans) {
+                    document.getElementById('p2id2').value = id
+                    to_global = from
+                    peer2.signal(JSON.parse(id))
+                } else {
+                    socket.emit('backFrom', from + '^' + "decline")
+                }
+            })
     })
+
 
     socket.on('backTo', function(mes) {
         var from = mes.split("^")[0]
