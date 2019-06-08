@@ -134,11 +134,11 @@ function doo(stream2) {
         socket.emit('backFrom', to_global + '^' + id)
     })
 
-    document.getElementById('bsend').addEventListener('click', function() {
-        var yourMessage = document.getElementById('send').value
-        peer.send(yourMessage)
-        document.getElementById('send').value = ""
-    })
+    // document.getElementById('bsend').addEventListener('click', function() {
+    //     var yourMessage = document.getElementById('send').value
+    //     peer.send(yourMessage)
+    //     document.getElementById('send').value = ""
+    // })
 
     function transData(data) {
         switch (data.toString()) {
