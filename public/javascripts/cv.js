@@ -34,16 +34,17 @@ function erosion(src) {
     return dstC4;
 }
 
-// function preprocess() {
-tr = cv.imread('idtrb');
-tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
-    // }
+function preprocess() {
+    tr = cv.imread('idtrb');
+    tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
+}
 
 
 
 
 function trb(src) {
-    // console.log('trb.!!!')
+    preprocess()
+        // console.log('trb.!!!')
     return tr
 }
 
