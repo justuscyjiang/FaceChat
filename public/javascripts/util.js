@@ -39,8 +39,8 @@ function doo(stream2) {
         if (id == "decline") {
             swal({
                 title: '',
-                text: from + ' has decline your request.',
-                type: 'error',
+                text: from + ' has declined your request.',
+                icon: 'error',
                 buttons: false,
                 timer: 2000,
             })
