@@ -43,51 +43,6 @@ function erosion(src) {
     return dstC4;
 }
 
-function preprocess() {
-    tr = cv.imread('idtrb');
-    dst = new cv.Mat();
-    dsize = new cv.Size(190, 130);
-    // You can try more different parameters
-    cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
-    // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
-    tr = dst
-    pixel = tr.ucharPtr(129, 189);
-    console.log(pixel)
-    pixel = tr.ucharPtr(0, 0);
-    console.log(pixel)
-}
-
-function trb(src) {
-    if (!pd) {
-        preprocess()
-        pd = true
-    }
-
-    if (x + 130 + Vx >= 449 || x + Vx <= 0) {
-        Vx = -Vx
-    }
-    if (y + 190 + Vy >= 599 || y + Vy <= 0) {
-        Vy = -Vy
-    }
-
-    x += Vx
-    y += Vy
-
-    for (var col = 0; col < 189; col++) {
-        for (var row = 0; row < 129; row++) {
-            for (var c = 0; c < 4; c++) {
-                console.log('row: ' + row + ', col: ' + col)
-                if (tr.ucharPtr(row, col)[3] == 255) {
-                    // src[i + x, j + y, k] = tr[i, j, k]
-                    src.ucharPtr(row + x, col + y)[c] = tr.ucharPtr(row, col)[c]
-                }
-            }
-        }
-    }
-
-    return src
-}
-
 function processVideo() {
     vc.read(src);
     let result;
@@ -100,9 +55,6 @@ function processVideo() {
             break;
         case 'erosion':
             result = erosion(src);
-            break;
-        case 'trb':
-            result = trb(src)
             break;
         default:
             result = src;

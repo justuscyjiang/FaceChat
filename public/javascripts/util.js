@@ -53,7 +53,6 @@ function insert_fg(fg) {
             insert_fg(fg)
         }
         foreground = false
-
     }
 }
 
