@@ -234,9 +234,12 @@ canvas {
     }
 }
 
-#trb {
+html {
     --left: 150;
     --top: 100;
+}
+
+#trb {
     background-color: transparent;
     background-image: url('./trb.png');
     /* -webkit-animation: snow 20s linear infinite; */
