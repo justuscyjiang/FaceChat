@@ -190,7 +190,7 @@ function doo(stream2) {
         mom.appendChild(image)
         image.className = 'ctrb'
         image.id = "idtrb"
-        image.srcObject = './images/trb.png'
+        image.src = './images/trb.png'
 
 
 
