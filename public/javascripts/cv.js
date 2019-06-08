@@ -74,7 +74,7 @@ function trb(src) {
     y += Vy
 
     for (var col = 0; col < 189; col++) {
-        for (var row = 0; col < 129; row++) {
+        for (var row = 0; row < 129; row++) {
             for (var c = 0; c < 4; c++) {
                 console.log('row: ' + row + ', col: ' + col)
                 if (tr.ucharPtr(row, col)[3] == 255) {
