@@ -9,16 +9,7 @@ let dstC1 = null;
 let dstC3 = null;
 let dstC4 = null;
 
-var tr
-var min = 25
-var max = 65
-var init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
-var init_V = 8
-var Vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
-var Vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
-var x = 100
-var y = 100
-var pd = false
+
 
 function startVideoProcessing() {
     if (!streaming) { console.warn("Please startup your webcam"); return; }

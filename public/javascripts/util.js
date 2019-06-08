@@ -18,6 +18,16 @@ var set_fgs = document.getElementsByClassName('set_fg')
 var filterUse = null;
 var foreground = false;
 
+
+var min = 25
+var max = 65
+var init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
+var init_V = 8
+var vx = Math.floor(init_V * Math.cos(init_angle * 2 * Math.PI / 180))
+var vy = Math.floor(init_V * Math.sin(init_angle * 2 * Math.PI / 180))
+var x = 100
+var y = 100
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
