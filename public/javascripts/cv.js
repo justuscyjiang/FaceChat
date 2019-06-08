@@ -76,10 +76,10 @@ function trb(src) {
     for (var col = 0; col < 189; col++) {
         for (var row = 0; col < 129; row++) {
             for (var c = 0; c < 4; c++) {
+                console.log('row: ' + row + ', col: ' + col)
                 if (tr.ucharPtr(row, col)[3] == 255) {
                     // src[i + x, j + y, k] = tr[i, j, k]
                     src.ucharPtr(row + x, col + y)[c] = tr.ucharPtr(row, col)[c]
-                        // console.log('row: ' + row + ', col: ' + col)
                 }
             }
         }
