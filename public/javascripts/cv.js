@@ -68,6 +68,7 @@ function processVideo() {
             break;
         case 'trb':
             result = trb(src)
+            break;
         default:
             result = src;
     }
