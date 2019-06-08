@@ -2,22 +2,20 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>
         <%= title %>
     </title>
     <!-- added by 江 ↓-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.1.2/simplepeer.min.js"></script>
-    <link rel='stylesheet' href='/stylesheets/test.css' />
-    <script src="https://huningxin.github.io/opencv.js/build/asm.js/opencv.js "></script>
     <!-- added by 江 ↑ -->
     <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='style.css' />
     <script src="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/zh-tw.js'></script>
-
 </head>
 
 <body>
@@ -62,37 +60,37 @@
             <!-- / 頂部聊天室資訊欄位 -->
             <!--video hwh-->
             <div class="ts attached secondary segment">
-                <div class="photobooth">
-                    <div id="mother" class="photo_item1" style="position: relative">
-                        <!---canvas Bug-->
-                        <!---<canvas id = "canvasOutput" class ="photo"></canvas>-->
-                    </div>
-                    <div class="photo_item2">
-                        <div class="emoji_flex">
-                            <div class="aemo emo_item"><button id="heart" class="emoji ts button info bwidth">Heart</button></div><br>
-                            <div class="aemo emo_item"><button id="star" class="emoji ts button info bwidth">Stars</button></div><br>
-                            <div class="aemo emo_item"><button id="circle" class="emoji ts button info bwidth">Circles</button></div><br>
-                            <!---承昱,放長號天鈞會不會囧XDDD-->
-                            <div class="aemo emo_item"><button id="?" class="emoji ts button info bwidth">Trb.</button></div><br>
-                            <div class="aemo emo_item"><button id="pass" class="filter ts button info bwidth">None</button></div><br>
-                            <div class="aemo emo_item"><button id="gray" class="filter ts button info bwidth">Gray</button></div><br>
-                            <div class="aemo emo_item"><button id="erosion" class="filter ts button info bwidth">Erosion</button></div><br>
-                            <div class="aemo emo_item"><button id="b_snow" class="set_fg ts button info bwidth">Snow</button></div><br>
-                        </div>
-                    </div>
-                </div>
+            <div class="photobooth">
+            <div id = "mother" class = "photo_item1" style="position: relative">
+                <!---canvas Bug-->
+                <!---<canvas id = "canvasOutput" class ="photo"></canvas>-->
             </div>
-            <!--video hwh-->
-            <!---webcam hwh-->
+            <div class = "photo_item2">
+              <div class="emoji_flex">
+                    <div class="aemo emo_item"><button id="heart" class="emoji ts button info bwidth">Heart</button></div><br>
+                    <div class="aemo emo_item"><button id="star" class="emoji ts button info bwidth">Stars</button></div><br>
+                    <div class="aemo emo_item"><button id="circle" class="emoji ts button info bwidth">Circles</button></div><br>
+                    <!---承昱,放長號天鈞會不會囧XDDD-->
+                    <div class="aemo emo_item"><button id="?" class="emoji ts button info bwidth">Trb.</button></div><br>
+                    <div class="aemo emo_item"><button id="pass" class="filter ts button info bwidth">None</button></div><br>
+                    <div class="aemo emo_item"><button id="gray" class="filter ts button info bwidth">Gray</button></div><br>
+                    <div class="aemo emo_item"><button id="erosion" class="filter ts button info bwidth">Erosion</button></div><br>
+                    <div class="aemo emo_item"><button id="b_snow" class="set_fg ts button info bwidth">Snow</button></div><br>
+                  </div>
+            </div>
+          </div>
+          </div>
+          <!--video hwh-->
+          <!---webcam hwh-->
             <div class="ts attached segmented small single line items">
-                <div class="item">
-                    <!---<button id="cam" class="ts button info wwidth wspace">Start WebCam</button>-->
-                    <button id="play" class="ts button info wwidth wspace">Play Video</button>
-                    <button id="pause" class="ts button info wwidth wspace">Pause Video</button>
-                    <button id="snap" class="ts button info wwidth wspace">Snapshot 📸</button>
-                </div>
+            <div class = "item">
+                <!---<button id="cam" class="ts button info wwidth wspace">Start WebCam</button>-->
+                <button id="play" class="ts button info wwidth wspace">Play Video</button>
+                <button id="pause" class="ts button info wwidth wspace">Pause Video</button>
+                <button id="snap" class="ts button info wwidth wspace">Snapshot 📸</button>
             </div>
-            <!---webcam hwh-->
+            </div>
+          <!---webcam hwh-->
             <!-- 中部主要聊天訊息 -->
             <div class="ts attached secondary segment">
                 <!-- 對話氣泡 -->
@@ -151,31 +149,29 @@
             </div>
             <!---Poke hwh-->
             <div class="ts tiny segmented single line items pokebox">
-                <div class="item">
-                    <div class="content">
-                        <div class="header">戳戳人</div><br/>
-                        <div class="header">
-                            <div class="ts fluid input">
-                                <input type="text" id="to" placeholder="想戳誰?" /><br/>
-                            </div>
-                            <center>
-                                <div><button type="button" id="poke" class="ts button info bwidth"><center><i class = "icon pointing right">戳</i><center></button></div>
-                            </center>
-                        </div>
+              <div class = "item">
+                <div class = "content">
+                  <div class="header">戳戳人</div><br/>
+                  <div class = "header">
+                    <div class="ts fluid input">
+                      <input type = "text" id="to" placeholder="想戳誰?"/><br/>
                     </div>
+                    <center><div><button type="button" id="poke" class="ts button info bwidth"><center><i class = "icon pointing right">戳</i><center></button></div></center>
                 </div>
+              </div>
+             </div>
             </div>
             <!---Poke hwh-->
             <!---Snapshot hwh-->
             <div class="ts tiny segmented single line items">
-                <div class="item">
-                    <div class="content">
-                        <div class="header">
-                            <i class="icon camera"> Snapshot</i>
-                            <div class="strip"></div>
-                        </div>
-                    </div>
+              <div class = "item">
+                <div class = "content">
+                  <div class = "header">
+                    <i class = "icon camera"> Snapshot</i>
+                  <div class="strip"></div>
                 </div>
+              </div>
+             </div>
             </div>
             <!---Snapshot hwh-->
         </div>
@@ -183,10 +179,10 @@
     </div>
     <!-- / 主要容器網格系統 -->
     <div class="hideid">
-        <input class="hideid" type="text" id="p1id1" value="">
-        <input class="hideid" type="text" id="p2id1" value="">
-        <input class="hideid" type="text" id="p1id2" value="">
-        <input class="hideid" type="text" id="p2id2" value="">
+      <input class="hideid" type="text" id="p1id1" value="">
+      <input class="hideid" type="text" id="p2id1" value="">
+      <input class="hideid" type="text" id="p1id2" value="">
+      <input class="hideid" type="text" id="p2id2" value="">
     </div>
 </body>
 <script src='./javascripts/sign.js'></script>
@@ -194,8 +190,6 @@
 <!-- added by 江 ↓ -->
 <script src='./javascripts/util.js'></script>
 <script src='./javascripts/explode.js'></script>
-<script src='./javascripts/cv.js'></script>
-
 <!-- added by 江 ↑ -->
 
 </html>
