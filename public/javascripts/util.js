@@ -18,6 +18,7 @@ var set_fgs = document.getElementsByClassName('set_fg')
 var filterUse = null;
 var foreground = false;
 
+// foreground trb
 var min = 30
 var max = 60
 var init_angle = Math.floor(Math.random() * (max - min + 1)) + min;
