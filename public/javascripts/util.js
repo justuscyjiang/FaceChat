@@ -18,10 +18,8 @@ function doo(stream2) {
         swal({
                 title: '',
                 text: from + ' wants to speak to you!',
-                type: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Accept',
-                cencelButton: 'Decline'
+                icon: 'info',
+                buttons: ['Decline', 'Accept'],
             })
             .then((ans) => {
                 if (ans) {
