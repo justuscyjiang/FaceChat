@@ -220,6 +220,9 @@ function doo(stream2) {
             link.setAttribute('download', 'image.png');
             link.innerHTML = `<img src="${data}" alt="image" />`;
             strip.insertBefore(link, strip.firstChild);
+            const bbrr = document.createElement('br');
+            strip.insertBefore(bbrr, strip.firstChild);
+
 
         })
 
