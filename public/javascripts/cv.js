@@ -34,22 +34,28 @@ function erosion(src) {
     return dstC4;
 }
 
-function preprocess() {
-    tr = cv.imread('idtrb');
-    dst = new cv.Mat();
-    dsize = new cv.Size(190, 130);
-    // You can try more different parameters
-    cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
-    // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
-    tr = dst
-}
+// function preprocess() {
+tr = cv.imread('idtrb');
+dst = new cv.Mat();
+dsize = new cv.Size(190, 130);
+// You can try more different parameters
+cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
+// tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
+tr = dst
+    // }
 
 
 
 
 function trb(src) {
-    preprocess()
-        // console.log('trb.!!!')
+    // preprocess()
+    // console.log('trb.!!!')
+    //         init_angle=random.randint(25,65)
+    // init_V=8
+    // Vx=math.floor(init_V*math.cos(init_angle*2*math.pi/180))
+    // Vy=math.floor(init_V*math.sin(init_angle*2*math.pi/180))
+    // x=100
+    // y=100
     return tr
 }
 
