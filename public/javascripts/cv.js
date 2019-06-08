@@ -73,12 +73,12 @@ function trb(src) {
     x += Vx
     y += Vy
 
-    for (var col = 1; col < 599; col++) {
-        for (var row = 1; col < 449; row++) {
+    for (var col = 0; col < 599; col++) {
+        for (var row = 0; col < 449; row++) {
             for (var c = 0; c < 4; c++) {
                 if (tr.ucharPtr(row, col)[3] == 255) {
                     // src[i + x, j + y, k] = tr[i, j, k]
-                    src.ucharPtr(row + y, col + x)[c] = tr.ucharPtr(row, col)[c]
+                    src.ucharPtr(row + x, col + y)[c] = tr.ucharPtr(row, col)[c]
                 }
             }
         }
