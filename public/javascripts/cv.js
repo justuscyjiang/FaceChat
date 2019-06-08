@@ -42,12 +42,8 @@ function preprocess() {
     cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
     // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
     tr = dst
-    console.log('image width: ' + dst.cols + '\n' +
-        'image height: ' + dst.rows + '\n' +
-        'image size: ' + dst.size().width + '*' + dst.size().height + '\n' +
-        'image depth: ' + dst.depth() + '\n' +
-        'image channels ' + dst.channels() + '\n' +
-        'image type: ' + dst.type() + '\n');
+    let pixel = tr.ucharPtr(15, 15);
+    console.log(pixel)
 }
 
 function trb(src) {
@@ -96,12 +92,6 @@ function processVideo() {
             break;
         case 'erosion':
             result = erosion(src);
-            console.log('image width: ' + src.cols + '\n' +
-                'image height: ' + src.rows + '\n' +
-                'image size: ' + src.size().width + '*' + src.size().height + '\n' +
-                'image depth: ' + src.depth() + '\n' +
-                'image channels ' + src.channels() + '\n' +
-                'image type: ' + src.type() + '\n');
             break;
         case 'trb':
             result = trb(src)
