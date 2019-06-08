@@ -3,9 +3,54 @@ var socket = io.connect();
 var to_global = ''
 var peer
 var stunServerConfig = ''
-var anchors = document.getElementsByClassName('emoji')
-const strip = document.querySelector('.strip');
+
+// Videos container
 var mom = document.getElementById('mother')
+
+// Snapshots container
+const strip = document.querySelector('.strip');
+
+// Buttons
+var anchors = document.getElementsByClassName('emoji')
+var filters = document.getElementsByClassName('filter')
+var set_fgs = document.getElementsByClassName('set_fg')
+
+var filterUse = null;
+var foreground = false;
+
+Array.prototype.forEach.call(anchors, function(anchor) {
+    anchor.addEventListener('click', function() {
+        peer.send("#" + anchor.id)
+    })
+})
+
+Array.prototype.forEach.call(filters, function(filter) {
+    filter.addEventListener('click', function() {
+        filterUse = filter.id;
+    })
+})
+
+Array.prototype.forEach.call(set_fgs, function(set_fg) {
+    set_fg.addEventListener('click', function() {
+        insert_fg(set_fg.id.split("_")[1])
+    })
+})
+
+function insert_fg(fg) {
+    if (!foreground) {
+        var section = document.createElement('section')
+        mom.appendChild(section)
+        section.className = "foreground"
+        section.id = fg
+        foreground = true
+
+    } else {
+        var tmp = document.getElementById('snow')
+        tmp.parentNode.removeChild(tmp);
+        delete tmp
+        foreground = false
+    }
+}
 
 function doo(stream2) {
     // if (err) return console.error(err)
@@ -42,13 +87,12 @@ function doo(stream2) {
                 text: from + ' has declined your request.',
                 icon: 'error',
                 buttons: false,
-                timer: 2000,
+                timer: 2500,
             })
         } else {
             document.getElementById('p1id2').value = id
             peer1.signal(JSON.parse(id))
         }
-
     })
 
     document.getElementById('poke').addEventListener('click', function() {
@@ -91,25 +135,16 @@ function doo(stream2) {
         document.getElementById('send').value = ""
     })
 
-    Array.prototype.forEach.call(anchors, function(anchor) {
-        anchor.addEventListener('click', function() {
-            peer.send("#" + anchor.id)
-        })
-    })
-
     function transData(data) {
         switch (data.toString()) {
             case '#circle':
                 explode('circle')
-                console.log('rec circle')
                 break;
             case '#heart':
                 explode('heart')
-                console.log('rec heart')
                 break;
             case '#star':
                 explode('star')
-                console.log('rec star')
                 break;
             case '#?':
                 explode('?')
@@ -121,8 +156,8 @@ function doo(stream2) {
             case '#play':
                 document.getElementById('large').play()
                 break;
-            default:
-                document.getElementById('rec').textContent += data + '\n'
+                // default:
+                // document.getElementById('rec').textContent += data + '\n'
         }
     }
 
@@ -172,14 +207,22 @@ function doo(stream2) {
             strip.insertBefore(link, strip.firstChild);
 
         })
+
+        video1.addEventListener("canplay", function(ev) {
+            if (!streaming) {
+                height = video1.videoHeight / (video1.videoWidth / width);
+                video1.setAttribute("width", width);
+                video1.setAttribute("height", height);
+                streaming = true;
+                vc = new cv.VideoCapture(video1);
+            }
+            startVideoProcessing();
+        }, false);
     }
 
     peer1.on('stream', transStream)
 
     peer2.on('stream', transStream)
-
-
-
 
 }
 
