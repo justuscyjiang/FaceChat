@@ -42,14 +42,18 @@ function insert_fg(fg) {
         mom.appendChild(section)
         section.className = "foreground"
         section.id = fg
-        foreground = true
-        console.log('snow~~~')
+        foreground = fg
+        console.log(fg + '~~~')
     } else {
-        var tmp = document.getElementsByClassName('foreground')
+        var tmp = document.getElementById(foreground)
         tmp.parentNode.removeChild(tmp);
         delete tmp
+        console.log('stop' + foreground + '~~~')
+        if (fg != foreground) {
+            insert_fg(fg)
+        }
         foreground = false
-        console.log('stop snow~~~')
+
     }
 }
 

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    FaceChat
+  </title>
+  <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'>
+  <link rel='stylesheet' href='style.css' />
+  <script src="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/zh-tw.js'></script>
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="explode.js "></script>
+</head>
+
+<body>
+
+  <!-- 頂部導航選單 -->
+  <div class="ts large link attached inverted info menu">
+    <div class="ts narrow container">
+      <a href="./" class="header item">FaceChat</a>
+      <a class="right item login" onclick="login()">登入</a>
+      <a class="right item logout" onclick="logout()">登出</a>
+    </div>
+  </div>
+  <!-- / 頂部導航選單 -->
+
+  <!-- 主要容器網格系統 -->
+  <div class="ts narrow container grid">
+    <!-- 左側欄位 -->
+    <div class="twelve wide column">
+      <br>
+      <!-- 頂部聊天室資訊欄位 -->
+      <div class="ts top attached segmented small single line items">
+        <div class="item">
+          <i class="large inverted info rounded announcement icon"></i>
+          <div class="content">
+            <div class="header">FaceChat</div>
+            <div class="ts column grid">
+              <div class="column row">
+                <div class="left floated column left aligned secondary">
+                  這裡是可以視訊的聊天室喲^//^
+
+                </div>
+                <div class="right floated column right aligned">
+                  <i class="icon user positive" aria-hidden="true" alt="線上人數" title="線上人數"></i>
+                  <span class="online">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / 頂部聊天室資訊欄位 -->
+      <!--video-->
+      <div class="ts attached secondary segment">
+      <div class="photobooth">
+      <div id = "mother" class = "photo_item1" style="position: relative">
+          <canvas id = "canvasOutput" class ="photo"></canvas>
+      </div>
+      <div class = "photo_item2">
+        <div class="emoji_flex">
+              <div class="aemo emo_item"><button id="heart" class="emoji ts button info bwidth">Heart</button></div><br>
+              <div class="aemo emo_item"><button id="star" class="emoji ts button info bwidth">Stars</button></div><br>
+              <div class="aemo emo_item"><button id="circle" class="emoji ts button info bwidth">Circles</button></div><br>
+              <div class="aemo emo_item"><button id="pass" class="filter ts button info bwidth">None</button></div><br>
+              <div class="aemo emo_item"><button id="gray" class="filter ts button info bwidth">Gray</button></div><br>
+              <div class="aemo emo_item"><button id="erosion" class="filter ts button info bwidth">Erosion</button></div><br>
+              <div class="aemo emo_item"><button id="b_snow" class="set_fg ts button info bwidth">Snow</button></div><br>
+            </div>
+      </div>
+    </div>
+    </div>
+
+      <div class="ts attached segmented small single line items">
+      <div class = "item">
+          <button id="cam" class="ts button info wwidth wspace">Start WebCam</button>
+          <button id="play" class="ts button info wwidth wspace">Play Video</button>
+          <button id="pause" class="ts button info wwidth wspace">Pause Video</button>
+          <button id="snap" class="ts button info wwidth wspace">Snapshot 📸</button>
+      </div>
+      </div>
+      <!-- 中部主要聊天訊息 -->
+      <div class="ts attached secondary segment">
+        <!-- 對話氣泡 -->
+        <div id = "messages" class="ts speeches">
+          <!-- appendChild from app.js -->
+        </div>
+        <!-- / 對話氣泡 -->
+      </div>
+      <!-- / 中部主要聊天訊息 -->
+
+      <!-- 底部輸入欄位 -->
+      <div class="ts bottom attached segment">
+        <div class="ts grid">
+          <div class="stretched column">
+            <div class="ts fluid input">
+              <input id = "yourMessage" placeholder="在此輸入文字⋯⋯" />
+            </div>
+          </div>
+          <div class="column">
+
+            <div id="btnAddMsg" class="ts button info">
+              <i id = "send" class="icon chat"></i>送出</div>
+          </div>
+        </div>
+      </div>
+      <!-- / 底部輸入欄位 -->
+    </div>
+    <!-- / 左側欄位 -->
+
+    <!-- 右側欄位 -->
+    <div class="four wide column">
+      <br>
+      <div class="ts tiny segmented single line items">
+        <div class="item">
+          <div class="ts mini image">
+            <img src="pikachu.png">
+          </div>
+          <div class="content">
+            <div class="header">皮卡丘</div>
+            <div class="meta">
+              <div>@pikachu520<br>
+              Your ID:<br>
+              <textarea id = "yourId"></textarea></div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="ts mini image">
+            <img src="DoReMi.png">
+          </div>
+          <div class="content">
+            <div class="header">小魔女</div>
+            <div class="meta">
+              <div>@DoReMi_yo<br>
+              Peer ID:<br>
+              <textarea id="otherId"></textarea></div>
+            </div>
+          </div>
+        </div>
+        <center><div class = "item">
+          <div><button id="connect" class="ts button info">Connect</button></div>
+        </div></center>
+
+      </div>
+      <div class="ts tiny segmented single line items">
+        <div class = "item">
+        <div class = "content">
+        <div class = "header">
+          <i class = "icon photo"> Snapshot</i>
+          <div class="strip"></div>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- / 右側欄位 -->
+  </div>
+  <!-- / 主要容器網格系統 -->
+</body>
+<!---<script src='./javascripts/sign.js'></script>-->
+<!---<script src='./javascripts/app.js'></script>-->
+<!---<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.1.2/simplepeer.min.js"></script>-->
+<!--<script src="./javascripts/webrtc-handler.js"></script>-->
+<script src="bundle.js " charset="utf-8 "></script>
+<script src="https://huningxin.github.io/opencv.js/build/asm.js/opencv.js "></script>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js "></script>
+</html>
