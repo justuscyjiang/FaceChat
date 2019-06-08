@@ -51,7 +51,8 @@ function preprocess() {
     cv.resize(tr, dst, dsize, 0, 0, cv.INTER_AREA);
     // tr = cv.resize(tr, (190, 130), interpolation = cv.INTER_AREA)
     tr = dst
-    let pixel = tr.ucharPtr(15, 15);
+    let pixel = tr.ucharPtr(129, 189);
+    let pixel = tr.ucharPtr(0, 0);
     console.log(pixel)
 }
 
