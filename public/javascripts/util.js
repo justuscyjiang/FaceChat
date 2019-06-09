@@ -103,17 +103,17 @@ function doo(stream2) {
                 title: '',
                 text: from + ' wants to speak to you!',
                 icon: 'success',
-                buttons: [false, 'Decline', 'Accept'],
+                buttons: ['Decline', 'Accept'],
                 closeOnClickOutside: false,
                 closeOnEsc: false,
             })
             .then((ans) => {
-                if (ans == 'Accept') {
+                if (ans) {
                     document.getElementById('p2id2').value = id
                     to_global = from
                     peer2.signal(JSON.parse(id))
                 } else {
-                    socket.emit('backFrom', from + '^' + "decline")
+                    socket.emit('notcie', from + '^' + "decline")
                 }
             })
     })
@@ -186,6 +186,17 @@ function doo(stream2) {
                     closeOnEsc: false,
                 })
                 return
+            case 'decline':
+                document.getElementById("poke").disabled = false;
+                swal({
+                    title: '',
+                    text: from + ' has declined your request.',
+                    icon: 'error',
+                    buttons: false,
+                    timer: 3000,
+                })
+
+
         }
     })
 

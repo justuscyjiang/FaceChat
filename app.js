@@ -113,6 +113,15 @@ io.on('connection', async(socket) => {
                 return
             case 'timeout':
                 io.to(ID[to]).emit('notice', from + '^' + type)
+                return
+            case 'decline':
+                if (online[to] == 'busy') {
+                    io.to(ID[to]).emit('notice', from + '^' + type)
+                    online[from] = 'free'
+                }
+                return
+
+
 
         }
 
