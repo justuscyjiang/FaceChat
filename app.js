@@ -82,6 +82,9 @@ io.on('connection', async(socket) => {
         var to = mes.split("^")[0]
         var id = mes.split("^")[1]
         console.log(from + ' is trying to speak to ' + to + '.');
+        if (!1) {
+            io.to(ID[from]).emit('notice', to + '^' + offline);
+        }
         io.to(ID[to]).emit('reqTo', from + '^' + id)
         online[from] = 'busy'
     });

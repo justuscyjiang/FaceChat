@@ -25,10 +25,10 @@ function login() {
         })
         .then((value) => {
             console.log(value);
-            if (value === undefined || value === null || value.includes("^")) {
+            if (value === undefined || value === null || value == "" || value.includes("^")) {
                 swal({
                         title: "Oops!",
-                        text: "Username can not contain space or \"^.\"",
+                        text: "Username can not contain \"^\"!",
                         icon: "error",
                     }).then(() => { login(); })
                     // login();
