@@ -49,7 +49,7 @@ io.on('connection', async(socket) => {
             })
         }
         console.log(socket.id)
-            // io.to(socket.id).emit("member", arr); // 可以不用廣播
+        io.to(socket.id).emit("test", '456'); // 可以不用廣播
         io.emit("member", arr);
     });
 

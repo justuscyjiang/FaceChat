@@ -31,6 +31,10 @@ if (account) {
         document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
     });
+
+    socket.on('test', (obj) => {
+        console.log(obj)
+    });
 }
 
 
