@@ -141,15 +141,7 @@ function doo(stream2) {
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
         peer = peer1
-            // callTimer = setTimeout(() => {
-            //     swal({
-            //         text: 'No reply.',
-            //         icon: 'warning',
-            //         buttons: false,
-            //         timer: 3000,
-            //     })
-            //     document.getElementById("poke").disabled = false;
-            // }, 8000);
+
         swal({
                 title: '',
                 text: 'Waiting...',
@@ -166,9 +158,6 @@ function doo(stream2) {
             })
     })
 
-    socket.on('test', (obj) => {
-        console.log(account)
-    });
 
     socket.on('notice', (mes) => {
         var from = mes.split('^')[0]

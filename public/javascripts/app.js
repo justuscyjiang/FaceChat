@@ -27,19 +27,11 @@ if (account) {
     });
 
     socket.on('member', (obj) => {
-        console.log('rec')
         document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
     });
 
-    // socket.on('test', (obj) => {
-    //     console.log(obj)
-    // });
 }
-
-socket.on('test', (obj) => {
-    console.log(obj)
-});
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {
     sendData();
