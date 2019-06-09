@@ -218,8 +218,13 @@ function ShowOnlineMember(obj) {
     el.innerHTML = html.trim();
 
     //show sidebar
-    ts('.left.sidebar:not(.inverted)').sidebar({
-        scrollLock: true,
-        closable: true
-    }).sidebar('show');
+    // ts('.left.sidebar:not(.inverted)').sidebar({
+    //     scrollLock: true,
+    //     closable: true
+    // }).sidebar('show');
 }
+
+ts('.left.sidebar:not(.inverted)').sidebar({
+    scrollLock: true,
+    closable: true
+}).sidebar('toggle');
