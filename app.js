@@ -48,8 +48,8 @@ io.on('connection', async(socket) => {
                 status: online[i]
             })
         }
-        io.to(socket.id).emit("member", arr); // 可以不用廣播
-        console.log('send')
+        // io.to(socket.id).emit("member", arr); // 可以不用廣播
+        socket.emit("member", arr);
     });
 
     socket.on('error', (error) => {
