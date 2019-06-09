@@ -49,7 +49,6 @@ io.on('connection', async(socket) => {
             })
         }
         io.to(socket.id).emit("member", arr); // 可以不用廣播
-        // io.emit("member", arr);
     });
 
     socket.on('error', (error) => {
@@ -57,7 +56,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("disconnect", () => {
-        console.log("a user go out");
+        console.log("A user has left.");
         delete ID[socket.username]
         delete online[socket.username]
         delete name[socket.username]
@@ -65,7 +64,7 @@ io.on('connection', async(socket) => {
         io.emit("clients", {
             clients: L,
         });
-
+        info()
     });
 
     socket.on("message", (obj) => {
@@ -74,7 +73,6 @@ io.on('connection', async(socket) => {
     });
 
     socket.on('clients', (obj) => {
-
         io.emit("clients", {
             clients: L,
             user: obj,
@@ -85,6 +83,7 @@ io.on('connection', async(socket) => {
 
     socket.on('new', function(username) {
         socket.username = username;
+        console.log(username + " has come in.");
         ID[username] = socket.id
         online[username] = 'free'
         name[username] = username
@@ -92,6 +91,7 @@ io.on('connection', async(socket) => {
         io.emit("clients", {
             clients: L,
         });
+        info()
     });
 
 
