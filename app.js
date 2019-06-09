@@ -26,31 +26,32 @@ var L = 0
     // added by 江 ↑
 
 
-async function messages() {
-    const socketid = socket.id;
-    socketHander = new SocketHander(); // messages
-    socketHander.connect();
+// function messages() {
+//     const socketid = socket.id;
 
-    const history = await socketHander.getMessages();
+//     socketHander = new SocketHander(); // messages
+//     socketHander.connect();
+//     const history = await socketHander.getMessages();
+//     io.to(socketid).emit('history', history);
+// }
 
-    io.to(socketid).emit('history', history);
-}
+// function privateMessages() {
+//     const socketid = socket.id;
 
-async function privateMessages() {
-    const socketid = socket.id;
-    socketHander = new SocketHanderP(); // public messages
-    socketHander.connect();
-
-    const history = await socketHander.getMessages();
-
-    io.to(socketid).emit('history', history);
-}
+//     socketHander = new SocketHanderP(); // public messages
+//     socketHander.connect();
+//     const history = await socketHander.getMessages();
+//     io.to(socketid).emit('history', history);
+// }
 
 io.on('connection', async(socket) => {
     console.log('a user connected');
     // const clients = await io.engine.clientsCount;
 
-    messages()
+    // messages()
+    const socketid = socket.id;
+
+
 
     io.to(socketid).emit('clients', {
         clients: L,
@@ -102,6 +103,10 @@ io.on('connection', async(socket) => {
             clients: L,
         });
         info()
+        socketHander = new SocketHanderP(); // public messages
+        socketHander.connect();
+        const history = await socketHander.getMessages();
+        io.to(socketid).emit('history', history);
     });
 
 
