@@ -220,6 +220,6 @@ function ShowOnlineMember(obj) {
     //show sidebar
     ts('.left.sidebar:not(.inverted)').sidebar({
         scrollLock: true,
-        closable: true
+        closable: false
     }).sidebar('toggle');
 }
