@@ -248,13 +248,14 @@ function ShowOnlineMember(obj) {
         scrollLock: true,
         closable: false
     }).sidebar('toggle');
-    // ccc = true
-    // } else {
-    // ts('.left.sidebar:not(.inverted)').sidebar({
-    //     scrollLock: true,
-    //     closable: false
-    // }).sidebar('show');
-    // ccc = false
+    document.getElementById("theSlideBarWithoutAnyToggleFunction").setAttribute("data-closable", "false")
+        // ccc = true
+        // } else {
+        // ts('.left.sidebar:not(.inverted)').sidebar({
+        //     scrollLock: true,
+        //     closable: false
+        // }).sidebar('show');
+        // ccc = false
 
     // }
 }
