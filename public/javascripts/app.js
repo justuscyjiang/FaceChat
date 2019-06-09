@@ -31,10 +31,32 @@ if (account) {
         ShowOnlineMember(obj)
     });
 
-    // socket.on('refresh', (obj) => {
-    //     document.getElementById("OnlineMemberList").innerHTML = '';
-    //     ShowOnlineMember(obj)
-    // });
+    socket.on('refresh', (obj) => {
+        document.getElementById("OnlineMemberList").innerHTML = '';
+
+        let el = document.getElementById("OnlineMemberList");
+        let html = el.innerHTML;
+
+        obj.forEach(element => {
+
+            html +=
+                `
+            <div class="item">
+                <div class="ts mini image">
+                    <img src='./images/user.png'>
+                </div>
+                <div class="content">
+                    <div class="header">${element.name}</div>
+                    <div class="meta">
+                        <div>${element.status}</div>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+
+        el.innerHTML = html.trim();
+    });
 
 }
 
@@ -217,14 +239,9 @@ function ShowOnlineMember(obj) {
 
     el.innerHTML = html.trim();
 
-    //show sidebar
-    // ts('.left.sidebar:not(.inverted)').sidebar({
-    //     scrollLock: true,
-    //     closable: true
-    // }).sidebar('show');
+    // show sidebar
+    ts('.left.sidebar:not(.inverted)').sidebar({
+        scrollLock: true,
+        closable: true
+    }).sidebar('toggle');
 }
-
-ts('.left.sidebar:not(.inverted)').sidebar({
-    scrollLock: true,
-    closable: true
-}).sidebar('toggle');

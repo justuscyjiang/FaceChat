@@ -11,8 +11,14 @@ class SocketHander {
         this.db.Promise = global.Promise;
     }
 
+    // getMessages() {
+    //     return Messages.find();
+    // }
+
     getMessages() {
-        return Messages.find();
+        var onedayago = moment().add(-1, 'day');
+        return Messages.find({ time: { $gte: onedayago } });
+
     }
 
     storeMessages(data) {
