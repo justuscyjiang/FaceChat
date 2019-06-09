@@ -48,7 +48,7 @@ io.on('connection', async(socket) => {
                 status: online[i]
             })
         }
-        io.emit("member", arr);
+        io.to(socket.id).emit("member", arr); // 可以不用廣播
     });
 
     socket.on("disconnect", () => {
@@ -220,8 +220,8 @@ function countUser() {
 function info() {
     // console.log(ID)
     console.log(L + ' online.    ' + JSON.stringify(online))
-    console.log(name)
         // console.log(L)
 }
+
 
 module.exports = app;
