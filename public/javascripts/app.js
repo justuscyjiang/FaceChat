@@ -241,19 +241,20 @@ function ShowOnlineMember(obj) {
 
     el.innerHTML = html.trim();
 
-    // show sidebar
-    if (document.getElementById("theSlideBarWithoutAnyToggleFunction").classList.contains("visible")) {
-        ts('.left.sidebar:not(.inverted)').sidebar({
-            scrollLock: true,
-            closable: false
-        }).sidebar('hide');
-        // ccc = true
-    } else {
-        ts('.left.sidebar:not(.inverted)').sidebar({
-            scrollLock: true,
-            closable: false
-        }).sidebar('show');
-        // ccc = false
 
-    }
+    // show sidebar
+    // if (document.getElementById("theSlideBarWithoutAnyToggleFunction").classList.contains("visible")) {
+    ts('.left.sidebar:not(.inverted)').sidebar({
+        scrollLock: true,
+        closable: false
+    }).sidebar('toggle');
+    // ccc = true
+    // } else {
+    // ts('.left.sidebar:not(.inverted)').sidebar({
+    //     scrollLock: true,
+    //     closable: false
+    // }).sidebar('show');
+    // ccc = false
+
+    // }
 }
