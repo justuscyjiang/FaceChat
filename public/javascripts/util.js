@@ -93,19 +93,28 @@ function trb() {
 
 if (account) {
     socket.emit('new', account);
-    console.log('account');
+    // console.log('account');
 
 }
 
 socket.on('new', (mes) => {
-    console.log('new rec')
+    // console.log('new rec')
     if (mes == 'ok') {
         start();
-        console.log('new rec')
+        // console.log('new rec')
     } else if (mes == 'duplicate') {
-        console.log('new d');
-        sessionStorage.clear();
-        location.reload();
+        // console.log('new d');
+        swal({
+            text: 'Duplicate username: ' + account + ' !',
+            icon: 'error',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        }).then(() => {
+            sessionStorage.clear();
+            location.reload();
+        })
+
     }
 });
 

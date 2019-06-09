@@ -30,7 +30,7 @@ function login() {
             if (value === undefined || value === null || value == "" || value.includes("^")) {
                 swal({
                     title: "Oops!",
-                    text: "Username is required, and it can not contain \"^\"!",
+                    text: "Username is required, and it can not contain \"^\" !",
                     icon: "error",
                     closeOnClickOutside: false,
                     closeOnEsc: false,
