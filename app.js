@@ -207,7 +207,7 @@ function countUser() {
 
 function info() {
     // console.log(ID)
-    console.log(L + ' online.    ' + toString(online))
+    console.log(L + ' online.    ' + JSON.stringify(online))
         // console.log(L)
 }
 
