@@ -32,9 +32,9 @@ if (account) {
         ShowOnlineMember(obj)
     });
 
-    socket.on('test', (obj) => {
-        console.log(obj)
-    });
+    // socket.on('test', (obj) => {
+    //     console.log(obj)
+    // });
 }
 
 
