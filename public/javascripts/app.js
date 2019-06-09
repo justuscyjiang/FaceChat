@@ -169,7 +169,6 @@ function appendData(obj) {
 
     el.innerHTML = html.trim();
     scrollWindow();
-    console.log('fff')
 
 }
 
