@@ -137,6 +137,22 @@ function doo(stream2) {
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
         peer = peer1
+            // swal({
+            //     title: '',
+            //     text: from + 'Waiting...',
+            //     icon: 'info',
+            //     buttons: ['Cancel', false],
+            //     closeOnClickOutside: false,
+            // })
+            // .then((ans) => {
+            //     if (!ans) {
+            //         document.getElementById('p2id2').value = id
+            //         to_global = from
+            //         peer2.signal(JSON.parse(id))
+            //     } else {
+            //         socket.emit('backFrom', from + '^' + "decline")
+            //     }
+            // })
     })
 
     const peer1 = new Peer({
