@@ -30,6 +30,7 @@ function login() {
                     title: "Oops!",
                     text: "Username can not contain space or \"^.\"",
                     icon: "error",
+                    timer: 3000
                 })
                 login();
                 return false;
