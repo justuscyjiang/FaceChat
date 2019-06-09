@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-const SocketHander = require('./socket/index');
+const SocketHander = require('./socket/indexP'); // ++++++++
 
 //require('dotenv').config();
 
@@ -29,7 +29,7 @@ io.on('connection', async(socket) => {
     // const clients = await io.engine.clientsCount;
 
     const socketid = socket.id;
-    socketHander = new SocketHander();
+    socketHander = new SocketHanderP(); // ++++++++++++
     socketHander.connect();
 
     const history = await socketHander.getMessages();
