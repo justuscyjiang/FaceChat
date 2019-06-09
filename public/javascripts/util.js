@@ -29,6 +29,8 @@ var x = 100
 var y = 100
 var fgTimer
 
+var callTimer
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
@@ -118,6 +120,7 @@ function doo(stream2) {
 
 
     socket.on('backTo', function(mes) {
+        clearTimeout(callTimer)
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
         if (id == "decline") {
@@ -141,7 +144,7 @@ function doo(stream2) {
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
         peer = peer1
-        setTimeout(() => {
+        callTimer = setTimeout(() => {
             swal.close()
             swal({
                 text: 'No reply.',
@@ -149,10 +152,11 @@ function doo(stream2) {
                 buttons: false,
                 timer: 2500,
             })
+            document.getElementById('poke').setAttribute("disabled", false)
         }, 5000);
         swal({
                 title: '',
-                text: from + 'Waiting...',
+                text: 'Waiting...',
                 icon: 'info',
                 buttons: ['Cancel', false],
                 closeOnClickOutside: false,
@@ -163,6 +167,8 @@ function doo(stream2) {
                     //    swal({
 
                     //    })
+                    document.getElementById('poke').setAttribute("disabled", false)
+                    clearTimeout(callTimer)
                 }
             })
     })
