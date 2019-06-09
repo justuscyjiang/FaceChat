@@ -242,18 +242,18 @@ function ShowOnlineMember(obj) {
     el.innerHTML = html.trim();
 
     // show sidebar
-    // if (ccc == false) {
-    ts('.left.sidebar:not(.inverted)').sidebar({
-        scrollLock: true,
-        closable: false
-    }).sidebar('show');
-    ccc = true
-        // } else {
-    ts('.left.sidebar:not(.inverted).visible').sidebar({
-        scrollLock: true,
-        closable: false
-    }).sidebar('hide');
-    ccc = false
+    if (document.getElementById("theSlideBarWithoutAnyToggleFunction").classList.contains("visible")) {
+        ts('.left.sidebar:not(.inverted)').sidebar({
+            scrollLock: true,
+            closable: false
+        }).sidebar('hide');
+        // ccc = true
+    } else {
+        ts('.left.sidebar:not(.inverted)').sidebar({
+            scrollLock: true,
+            closable: false
+        }).sidebar('show');
+        // ccc = false
 
-    // }
+    }
 }
