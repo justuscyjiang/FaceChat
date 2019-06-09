@@ -167,7 +167,7 @@ function doo(stream2) {
     })
 
     socket.on('test', (obj) => {
-        console.log(obj)
+        console.log(account)
     });
 
     socket.on('notice', (mes) => {

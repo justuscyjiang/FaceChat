@@ -37,7 +37,9 @@ if (account) {
     // });
 }
 
-
+socket.on('test', (obj) => {
+    console.log(obj)
+});
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {
     sendData();
