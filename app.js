@@ -9,7 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 const SocketHander = require('./socket/index'); // messages
-const SocketHanderP = require('./socket/indexP'); // private messages
+// const SocketHanderP = require('./socket/indexP'); // private messages
 
 //require('dotenv').config();
 
@@ -25,33 +25,16 @@ var name = {}
 var L = 0
     // added by 江 ↑
 
-
-// function messages() {
-//     const socketid = socket.id;
-
-//     socketHander = new SocketHander(); // messages
-//     socketHander.connect();
-//     const history = await socketHander.getMessages();
-//     io.to(socketid).emit('history', history);
-// }
-
-// function privateMessages() {
-//     const socketid = socket.id;
-
-//     socketHander = new SocketHanderP(); // private messages
-//     socketHander.connect();
-//     const history = await socketHander.getMessages();
-//     io.to(socketid).emit('history', history);
-// }
-
 io.on('connection', async(socket) => {
     console.log('a user connected');
     // const clients = await io.engine.clientsCount;
 
-    // messages()
     const socketid = socket.id;
 
-
+    socketHander = new SocketHander(); // private messages
+    socketHander.connect();
+    const history = await socketHander.getMessagesP();
+    io.to(socketid).emit('history', history);
 
     io.to(socketid).emit('clients', {
         clients: L,
@@ -103,10 +86,7 @@ io.on('connection', async(socket) => {
             clients: L,
         });
         info()
-        socketHander = new SocketHanderP(); // private messages
-        socketHander.connect();
-        const history = socketHander.getMessages();
-        io.to(socketid).emit('history', history);
+
     });
 
 

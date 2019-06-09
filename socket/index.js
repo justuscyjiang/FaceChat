@@ -1,4 +1,5 @@
 const Messages = require('../models/Messages');
+const MessagesP = require('../models/MessagesP');
 const moment = require('moment');
 class SocketHander {
 
@@ -20,6 +21,11 @@ class SocketHander {
         return Messages.find({ time: { $gte: onedayago } });
 
     }
+
+    getMessagesP() {
+        return MessagesP.find();
+    }
+
 
     storeMessages(data) {
 

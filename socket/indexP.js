@@ -15,6 +15,10 @@ class SocketHanderP {
         return Messages.find();
     }
 
+    getMessages() {
+        return Messages.find();
+    }
+
     // getMessages() {
     //     var onedayago = moment().add(-1, 'day');
     //     return Messages.find({ time: { $gte: onedayago } });
