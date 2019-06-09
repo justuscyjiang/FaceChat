@@ -6,4 +6,4 @@ const messagesSchema = mongoose.Schema({
     time: Number,
 });
 
-module.exports = mongoose.model('Trombone', messagesSchema);
+module.exports = mongoose.model('horNs', messagesSchema);
