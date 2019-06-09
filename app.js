@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-const SocketHander = require('./socket/indexP'); // ++++++++
+const SocketHanderP = require('./socket/indexP'); // ++++++++ X2
 
 //require('dotenv').config();
 
