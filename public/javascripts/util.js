@@ -129,7 +129,7 @@ function doo(stream2) {
                 text: from + ' has declined your request.',
                 icon: 'error',
                 buttons: false,
-                timer: 2500,
+                timer: 3000,
             })
         } else {
             document.getElementById('p1id2').value = id
@@ -150,10 +150,10 @@ function doo(stream2) {
                 text: 'No reply.',
                 icon: 'warning',
                 buttons: false,
-                timer: 2500,
+                timer: 3000,
             })
             document.getElementById('poke').setAttribute("disabled", false)
-        }, 5000);
+        }, 8000);
         swal({
                 title: '',
                 text: 'Waiting...',
