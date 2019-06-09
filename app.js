@@ -92,7 +92,6 @@ io.on('connection', async(socket) => {
         io.emit("clients", {
             clients: L,
         });
-        test()
         info()
     });
 
@@ -230,31 +229,5 @@ function info() {
         // console.log(L)
 }
 
-
-
-function test() {
-    let el = document.getElementById("OnlineMemberList");
-    let html = el.innerHTML;
-
-    obj.forEach(element => {
-
-        html +=
-            `
-        <div class="item">
-            <div class="ts mini image">
-                <img src='./images/user.png'>
-            </div>
-            <div class="content">
-                <div class="header">${element.name}</div>
-                <div class="meta">
-                    <div>${element.status}</div>
-                </div>
-            </div>
-        </div>
-        `;
-    });
-
-    el.innerHTML = html.trim();
-}
 
 module.exports = app;
