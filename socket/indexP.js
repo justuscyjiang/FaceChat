@@ -1,6 +1,6 @@
-const Messages = require('../models/Messages');
+const Messages = require('../models/MessagesP');
 const moment = require('moment');
-class SocketHander {
+class SocketHanderP {
 
     constructor() {
         this.db;
@@ -11,15 +11,14 @@ class SocketHander {
         this.db.Promise = global.Promise;
     }
 
-    // getMessages() {
-    //     return Messages.find();
-    // }
-
     getMessages() {
-        var onedayago = moment().add(-1, 'day');
-        return Messages.find({ time: { $gte: onedayago } });
-
+        return Messages.find();
     }
+
+    // getMessages() {
+    //     var onedayago = moment().add(-1, 'day');
+    //     return Messages.find({ time: { $gte: onedayago } });
+    // }
 
     storeMessages(data) {
 
@@ -34,4 +33,4 @@ class SocketHander {
     }
 }
 
-module.exports = SocketHander;
+module.exports = SocketHanderP;
