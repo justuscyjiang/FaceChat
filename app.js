@@ -117,7 +117,7 @@ io.on('connection', async(socket) => {
             case 'decline':
                 if (online[to] == 'busy') {
                     io.to(ID[to]).emit('notice', from + '^' + type)
-                    online[from] = 'free'
+                    online[to] = 'free'
                 }
                 return
 
