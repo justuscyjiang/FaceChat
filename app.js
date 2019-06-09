@@ -232,7 +232,7 @@ function info() {
             status: online[i]
         })
     }
-    io.emit('refresh', arr)
+    // io.emit('refresh', arr)
 }
 
 

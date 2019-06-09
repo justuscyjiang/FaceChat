@@ -31,10 +31,10 @@ if (account) {
         ShowOnlineMember(obj)
     });
 
-    socket.on('refresh', (obj) => {
-        document.getElementById("OnlineMemberList").innerHTML = '';
-        ShowOnlineMember(obj)
-    });
+    // socket.on('refresh', (obj) => {
+    //     document.getElementById("OnlineMemberList").innerHTML = '';
+    //     ShowOnlineMember(obj)
+    // });
 
 }
 
@@ -220,6 +220,6 @@ function ShowOnlineMember(obj) {
     //show sidebar
     ts('.left.sidebar:not(.inverted)').sidebar({
         scrollLock: true,
-        closable: false
-    }).sidebar('toggle');
+        closable: true
+    }).sidebar('show');
 }
