@@ -29,6 +29,7 @@ if (account) {
     socket.on('member', (obj) => {
         document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
+        console.log('ac')
     });
 
     socket.on('refresh', (obj) => {
@@ -240,12 +241,9 @@ function ShowOnlineMember(obj) {
     el.innerHTML = html.trim();
 
     // show sidebar
-    // ts('.left.sidebar:not(.inverted)').sidebar({
-    //     scrollLock: true,
-    //     closable: true
-    // }).sidebar('toggle');
+    ts('.left.sidebar:not(.inverted)').sidebar({
+        scrollLock: true,
+        closable: true
+    }).sidebar('toggle');
 
-    ts('.left.sidebar').sidebar('toggle');
-    ts('.left.sidebar').sidebar('toggle');
-    ts('.left.sidebar').sidebar('toggle');
 }
