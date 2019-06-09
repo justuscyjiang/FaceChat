@@ -131,43 +131,44 @@ function doo(stream2) {
                 buttons: false,
                 timer: 3000,
             })
+            document.getElementById("poke").disabled = false;
         } else {
             document.getElementById('p1id2').value = id
             peer1.signal(JSON.parse(id))
-
+            swal.close()
         }
     })
 
     document.getElementById('poke').addEventListener('click', function() {
-        document.getElementById('poke').setAttribute("disabled", 'disabled')
+        document.getElementById("myBtn").disabled = true;
         var to = document.getElementById('to').value
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
         peer = peer1
         callTimer = setTimeout(() => {
-            swal.close()
+            // swal.close()
             swal({
                 text: 'No reply.',
                 icon: 'warning',
                 buttons: false,
                 timer: 3000,
             })
-            document.getElementById('poke').setAttribute("disabled", false)
+            document.getElementById("poke").disabled = false;
         }, 8000);
         swal({
                 title: '',
                 text: 'Waiting...',
                 icon: 'info',
-                buttons: ['Cancel', false],
+                buttons: [false, 'Cancel'],
                 closeOnClickOutside: false,
                 closeOnEsc: false,
             })
-            .then((ans) => {
-                if (!ans) {
+            .then((cancel) => {
+                if (cancel) {
                     //    swal({
 
                     //    })
-                    document.getElementById('poke').setAttribute("disabled", false)
+                    document.getElementById("poke").disabled = false;
                     clearTimeout(callTimer)
                 }
             })
