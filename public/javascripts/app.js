@@ -201,6 +201,8 @@ function broadcast(obj) {
 
 }
 
+var ccc = false
+
 function ShowOnlineMember(obj) {
     /*
     <div class="item">
@@ -240,9 +242,17 @@ function ShowOnlineMember(obj) {
     el.innerHTML = html.trim();
 
     // show sidebar
-    ts('.left.sidebar:not(.inverted)').sidebar({
-        scrollLock: true,
-        closable: false
-    }).sidebar('show');
-
+    if (ccc == false) {
+        ts('.left.sidebar:not(.inverted)').sidebar({
+            scrollLock: true,
+            closable: false
+        }).sidebar('show');
+        ccc = true
+    } else {
+        ts('.left.sidebar:not(.inverted)').sidebar({
+            scrollLock: true,
+            closable: false
+        }).sidebar('hide');
+        ccc = false
+    }
 }
