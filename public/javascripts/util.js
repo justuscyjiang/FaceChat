@@ -102,6 +102,8 @@ function doo(stream2) {
                 text: from + ' wants to speak to you!',
                 icon: 'success',
                 buttons: ['Decline', 'Accept'],
+                closeOnClickOutside: false,
+                closeOnEsc: false,
             })
             .then((ans) => {
                 if (ans) {
@@ -129,30 +131,40 @@ function doo(stream2) {
         } else {
             document.getElementById('p1id2').value = id
             peer1.signal(JSON.parse(id))
+
         }
     })
 
     document.getElementById('poke').addEventListener('click', function() {
+        document.getElementById('poke').setAttribute("disabled", 'disabled')
         var to = document.getElementById('to').value
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
         peer = peer1
-            // swal({
-            //     title: '',
-            //     text: from + 'Waiting...',
-            //     icon: 'info',
-            //     buttons: ['Cancel', false],
-            //     closeOnClickOutside: false,
-            // })
-            // .then((ans) => {
-            //     if (!ans) {
-            //         document.getElementById('p2id2').value = id
-            //         to_global = from
-            //         peer2.signal(JSON.parse(id))
-            //     } else {
-            //         socket.emit('backFrom', from + '^' + "decline")
-            //     }
-            // })
+        setTimeout(() => {
+            swal.close()
+            swal({
+                text: 'No reply.',
+                icon: 'warning',
+                buttons: false,
+                timer: 2500,
+            })
+        }, 5000);
+        swal({
+                title: '',
+                text: from + 'Waiting...',
+                icon: 'info',
+                buttons: ['Cancel', false],
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+            })
+            .then((ans) => {
+                if (!ans) {
+                    //    swal({
+
+                    //    })
+                }
+            })
     })
 
     const peer1 = new Peer({
