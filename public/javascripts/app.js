@@ -243,6 +243,6 @@ function ShowOnlineMember(obj) {
     ts('.left.sidebar:not(.inverted)').sidebar({
         scrollLock: true,
         closable: false
-    }).sidebar('toggle');
+    }).sidebar('show');
 
 }
