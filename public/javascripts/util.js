@@ -113,7 +113,7 @@ function doo(stream2) {
                     to_global = from
                     peer2.signal(JSON.parse(id))
                 } else {
-                    socket.emit('notcie', from + '^' + "decline")
+                    socket.emit('notice', from + '^' + "decline")
                 }
             })
     })
@@ -195,6 +195,7 @@ function doo(stream2) {
                     buttons: false,
                     timer: 3000,
                 })
+                return
 
 
         }
