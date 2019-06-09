@@ -94,7 +94,12 @@ function trb() {
 if (account) { socket.emit('new', account); }
 
 socket.on('new', (mes) => {
-    if (mes == 'ok') { start() } else if (mes == 'duplicate') {
+    console.log('new rec')
+    if (mes == 'ok') {
+        start();
+        console.log('new rec')
+    } else if (mes == 'duplicate') {
+        console.log('new d');
         sessionStorage.clear();
         location.reload();
     }

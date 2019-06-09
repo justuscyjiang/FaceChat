@@ -70,8 +70,10 @@ io.on('connection', async(socket) => {
     socket.on('new', (username) => {
         if (username in ID) {
             io.to(socket.id).emit('new', 'duplicate')
+            console.log('duplicate!')
         } else {
             io.to(socket.id).emit('new', 'ok')
+            console.log('ok!')
             socket.username = username;
             ID[username] = socket.id
             online[username] = 'free'
