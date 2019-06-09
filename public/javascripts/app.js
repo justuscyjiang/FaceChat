@@ -27,6 +27,7 @@ if (account) {
     });
 
     socket.on('member', (obj) => {
+        console.log('rec')
         document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
     });
@@ -52,6 +53,7 @@ document.querySelector('#btnReqOnMember').addEventListener('click', () => {
  */
 function reqOnMember() {
     socket.emit('member')
+    console.log('emit')
 }
 
 function sendData() {
