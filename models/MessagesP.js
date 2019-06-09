@@ -6,4 +6,4 @@ const messagesSchema = mongoose.Schema({
     time: Number,
 });
 
-module.exports = mongoose.model('PrivateMessages', messagesSchema);
+module.exports = mongoose.model('PrivateMessages', messagesSchema); // collection: privatemessages

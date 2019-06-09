@@ -8,7 +8,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-const SocketHanderP = require('./socket/indexP'); // ++++++++ X2
+const SocketHander = require('./socket/index'); // messages
+const SocketHanderP = require('./socket/indexP'); // private messages
 
 //require('dotenv').config();
 
@@ -24,17 +25,33 @@ var name = {}
 var L = 0
     // added by 江 ↑
 
-io.on('connection', async(socket) => {
-    console.log('a user connected');
-    // const clients = await io.engine.clientsCount;
 
+function messages() {
     const socketid = socket.id;
-    socketHander = new SocketHanderP(); // ++++++++++++
+    socketHander = new SocketHander(); // messages
     socketHander.connect();
 
     const history = await socketHander.getMessages();
 
     io.to(socketid).emit('history', history);
+}
+
+function privateMessages() {
+    const socketid = socket.id;
+    socketHander = new SocketHanderP(); // public messages
+    socketHander.connect();
+
+    const history = await socketHander.getMessages();
+
+    io.to(socketid).emit('history', history);
+}
+
+io.on('connection', async(socket) => {
+    console.log('a user connected');
+    // const clients = await io.engine.clientsCount;
+
+    messages()
+
     io.to(socketid).emit('clients', {
         clients: L,
     });
