@@ -48,7 +48,7 @@ io.on('connection', async(socket) => {
                 status: online[i]
             })
         }
-        console.log(socket.id)
+        // console.log(socket.id)
         io.to(socket.id).emit("test", '456'); // 可以不用廣播
         io.emit("member", arr);
     });

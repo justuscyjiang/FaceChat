@@ -166,6 +166,10 @@ function doo(stream2) {
             })
     })
 
+    socket.on('test', (obj) => {
+        console.log(obj)
+    });
+
     socket.on('notice', (mes) => {
         var from = mes.split('^')[0]
         var type = mes.split('^')[1]
