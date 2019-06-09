@@ -29,7 +29,6 @@ if (account) {
     socket.on('member', (obj) => {
         document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
-        console.log('ac')
     });
 
     socket.on('refresh', (obj) => {
