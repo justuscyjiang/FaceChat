@@ -89,7 +89,7 @@ io.on('connection', async(socket) => {
     socket.on('backFrom', function(mes) {
         var from = socket.username
         var to = mes.split("^")[0]
-        id = mes.split("^")[1]
+        var id = mes.split("^")[1]
         if (id == "decline") {
             console.log(from + ' is replying to ' + to + ': decline.');
             io.to(ID[to]).emit('backTo', from + '^' + id)
@@ -101,6 +101,22 @@ io.on('connection', async(socket) => {
         }
     });
 
+    socket.on('notice', (mes) => {
+        var from = socket.username
+        var to = mes.split('^')[0]
+        var type = mes.split('^')[1]
+
+        switch (type) {
+            case 'cancel':
+                io.to(ID[to]).emit('notice', from + '^' + type)
+                online[from] = 'free'
+                return
+            case 'timeout':
+                io.to(ID[to]).emit('notice', from + '^' + type)
+
+        }
+
+    })
 
     // added by 江 ↑
 

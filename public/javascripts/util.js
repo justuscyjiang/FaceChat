@@ -145,16 +145,15 @@ function doo(stream2) {
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
         peer = peer1
-        callTimer = setTimeout(() => {
-            // swal.close()
-            swal({
-                text: 'No reply.',
-                icon: 'warning',
-                buttons: false,
-                timer: 3000,
-            })
-            document.getElementById("poke").disabled = false;
-        }, 8000);
+            // callTimer = setTimeout(() => {
+            //     swal({
+            //         text: 'No reply.',
+            //         icon: 'warning',
+            //         buttons: false,
+            //         timer: 3000,
+            //     })
+            //     document.getElementById("poke").disabled = false;
+            // }, 8000);
         swal({
                 title: '',
                 text: 'Waiting...',
@@ -165,13 +164,29 @@ function doo(stream2) {
             })
             .then((cancel) => {
                 if (cancel) {
-                    //    swal({
-
-                    //    })
+                    socket.emit('notice', to + "^" + 'cancel')
                     document.getElementById("poke").disabled = false;
-                    clearTimeout(callTimer)
                 }
             })
+    })
+
+    socket.on('notice', (mes) => {
+        var from = mes.split('^')[0]
+        var type = mes.split('^')[1]
+        switch (type) {
+            case 'cancel':
+                document.getElementById("poke").disabled = false;
+                clearTimeout(callTimer)
+                swal.close()
+                swal({
+                    text: 'You have got a missed call from ' + from + '!',
+                    icon: 'warning',
+                    buttons: [false, true],
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                })
+                return
+        }
     })
 
     const peer1 = new Peer({
