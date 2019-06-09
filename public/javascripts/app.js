@@ -31,6 +31,11 @@ if (account) {
         ShowOnlineMember(obj)
     });
 
+    socket.on('refresh', (obj) => {
+        document.getElementById("OnlineMemberList").innerHTML = '';
+        ShowOnlineMember(obj)
+    });
+
 }
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {

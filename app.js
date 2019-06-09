@@ -224,9 +224,15 @@ function countUser() {
 }
 
 function info() {
-    // console.log(ID)
     console.log(L + ' online.    ' + JSON.stringify(online))
-        // console.log(L)
+    var arr = []
+    for (i in name) {
+        arr.push({
+            name: i,
+            status: online[i]
+        })
+    }
+    io.emit('refresh', arr)
 }
 
 
