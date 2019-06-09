@@ -172,12 +172,12 @@ canvas {
 /*for snapshot*/
 
 .strip img {
-    width: 120px;
-    height: 90px;
-    overflow-x: scroll;
+    width: 200px;
+    height: 150px;
+    overflow-y: scroll;
     padding: 0.6rem 0.6rem 0.6rem 0.6rem;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    background: rgba(67, 216, 74, 0.575);
+    box-shadow: #cce6ff;
+    background: #cce6ff
 }
 
 .strip {
