@@ -52,6 +52,10 @@ io.on('connection', async(socket) => {
         console.log('send')
     });
 
+    socket.on('error', (error) => {
+        console.log(error)
+    });
+
     socket.on("disconnect", () => {
         console.log("a user go out");
         delete ID[socket.username]
