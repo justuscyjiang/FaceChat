@@ -247,4 +247,5 @@ function ShowOnlineMember(obj) {
 
     ts('.left.sidebar').sidebar('toggle');
     ts('.left.sidebar').sidebar('toggle');
+    ts('.left.sidebar').sidebar('toggle');
 }
