@@ -53,7 +53,6 @@ document.querySelector('#btnReqOnMember').addEventListener('click', () => {
  */
 function reqOnMember() {
     socket.emit('member')
-    console.log('emit')
 }
 
 function sendData() {

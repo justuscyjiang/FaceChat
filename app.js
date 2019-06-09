@@ -49,6 +49,7 @@ io.on('connection', async(socket) => {
             })
         }
         io.to(ID[socket.username]).emit("member", arr); // 可以不用廣播
+        console.log('send')
     });
 
     socket.on("disconnect", () => {
