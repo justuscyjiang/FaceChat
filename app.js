@@ -67,10 +67,11 @@ io.on('connection', async(socket) => {
 
     // added by 江 ↓
 
-    socket.on('new', function(username) {
+    socket.on('new', (username) => {
         if (username in ID) {
-            io.to(socket.id).emit('notice', ' ' + '^' + 'duplicate')
+            io.to(socket.id).emit('new', 'duplicate')
         } else {
+            io.to(socket.id).emit('new', 'ok')
             socket.username = username;
             ID[username] = socket.id
             online[username] = 'free'

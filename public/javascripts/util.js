@@ -91,10 +91,19 @@ function trb() {
     document.documentElement.style.setProperty('--top', y);
 }
 
+if (account) { socket.emit('new', account); }
+
+socket.on('new', (mes) => {
+    if (mes == 'ok') { start() } else if (mes == 'duplicate') {
+        sessionStorage.clear();
+        location.reload();
+    }
+});
+
 function doo(stream2) {
     // if (err) return console.error(err)
-    var username = account
-    socket.emit('new', username);
+    // var username = account
+    // socket.emit('new', username);
 
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
@@ -344,7 +353,7 @@ function doo(stream2) {
 
 }
 
-if (account) {
+function start() {
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
