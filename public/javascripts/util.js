@@ -196,6 +196,24 @@ function doo(stream2) {
                     timer: 3000,
                 })
                 return
+            case 'offline':
+                swal({
+                    title: '',
+                    text: from + ' is offline now.',
+                    icon: 'warning',
+                    buttons: false,
+                    timer: 3000,
+                })
+                return
+            case 'busy':
+                swal({
+                    title: '',
+                    text: from + ' is busy now.',
+                    icon: 'warning',
+                    buttons: false,
+                    timer: 3000,
+                })
+                return
 
 
         }

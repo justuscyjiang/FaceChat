@@ -13,7 +13,9 @@ if (typeof(Storage) !== "undefined") {
     swal({
         title: "Oops!",
         text: "Your browser can not support localstorage.",
-        icon: "error"
+        icon: "error",
+        closeOnClickOutside: false,
+        closeOnEsc: false,
     });
 }
 
@@ -27,11 +29,12 @@ function login() {
             console.log(value);
             if (value === undefined || value === null || value == "" || value.includes("^")) {
                 swal({
-                        title: "Oops!",
-                        text: "Username can not contain \"^\"!",
-                        icon: "error",
-                    }).then(() => { login(); })
-                    // login();
+                    title: "Oops!",
+                    text: "Username is required, and it can not contain \"^\"!",
+                    icon: "error",
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                }).then(() => { login(); })
                 return false;
             }
 
