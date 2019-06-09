@@ -119,6 +119,7 @@ function doo(stream2) {
                     peer2.signal(JSON.parse(id))
                 } else {
                     socket.emit('notice', from + '^' + "decline")
+                    clearTimeout(callTimer)
                 }
             })
     })
@@ -181,7 +182,6 @@ function doo(stream2) {
                 return
             case 'decline':
                 document.getElementById("poke").disabled = false;
-                clearTimeout(callTimer)
                 swal({
                     title: '',
                     text: from + ' has declined your request.',

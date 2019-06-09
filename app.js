@@ -75,6 +75,7 @@ io.on('connection', async(socket) => {
         io.emit("clients", {
             clients: L,
         });
+        info()
     });
 
     socket.on('reqFrom', function(mes) {
@@ -95,6 +96,7 @@ io.on('connection', async(socket) => {
             online[from] = 'busy'
             online[to] = 'busy'
         }
+        info()
     });
 
     socket.on('backFrom', function(mes) {
@@ -103,6 +105,7 @@ io.on('connection', async(socket) => {
         var id = mes.split("^")[1]
         console.log(from + ' is replying to ' + to + ': accept.');
         io.to(ID[to]).emit('backTo', from + '^' + id)
+        info()
     });
 
     socket.on('notice', (mes) => {
@@ -132,10 +135,8 @@ io.on('connection', async(socket) => {
                     console.log(from + ' is replying to ' + to + ': decline.');
                 }
                 return
-
-
-
         }
+        info()
 
     })
 
@@ -204,10 +205,10 @@ function countUser() {
     L = count
 }
 
-setInterval(function() {
+function info() {
     console.log(ID)
     console.log(online)
     console.log(L)
-}, 3000)
+}
 
 module.exports = app;
