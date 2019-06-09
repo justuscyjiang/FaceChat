@@ -38,7 +38,7 @@ var L = 0
 // function privateMessages() {
 //     const socketid = socket.id;
 
-//     socketHander = new SocketHanderP(); // public messages
+//     socketHander = new SocketHanderP(); // private messages
 //     socketHander.connect();
 //     const history = await socketHander.getMessages();
 //     io.to(socketid).emit('history', history);
@@ -103,9 +103,9 @@ io.on('connection', async(socket) => {
             clients: L,
         });
         info()
-        socketHander = new SocketHanderP(); // public messages
+        socketHander = new SocketHanderP(); // private messages
         socketHander.connect();
-        const history = await socketHander.getMessages();
+        const history = socketHander.getMessages();
         io.to(socketid).emit('history', history);
     });
 
