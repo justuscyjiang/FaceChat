@@ -240,7 +240,8 @@ function ShowOnlineMember(obj) {
     el.innerHTML = html.trim();
 
     // show sidebar
-    ts('.left.sidebar:not(.inverted)').sidebar({
+    // ts('.left.sidebar:not(.inverted)').sidebar({
+    ts('.left.sidebar').sidebar({
         scrollLock: true,
         closable: true
     }).sidebar('toggle');
