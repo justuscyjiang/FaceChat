@@ -25,7 +25,12 @@ function login() {
         })
         .then((value) => {
             console.log(value);
-            if (value === undefined || value === null) {
+            if (value === undefined || value === null || value.includes("^")) {
+                swal({
+                    title: "Oops!",
+                    text: "Username is required, and it can not contain \"^.\"",
+                    icon: "error"
+                })
                 login();
                 return false;
             }

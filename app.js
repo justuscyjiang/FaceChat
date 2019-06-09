@@ -105,6 +105,7 @@ io.on('connection', async(socket) => {
             case 'cancel':
                 io.to(ID[to]).emit('notice', from + '^' + type)
                 online[from] = 'free'
+                console.log(from + ' has cancelled the call to ' + to + '.');
                 return
             case 'timeout':
                 io.to(ID[to]).emit('notice', from + '^' + type)
