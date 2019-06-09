@@ -27,7 +27,7 @@ if (account) {
     });
 
     socket.on('member', (obj) => {
-        document.getElementById("OnlineMemberList").innerHTML = '';
+        // document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
     });
 
@@ -41,18 +41,18 @@ if (account) {
 
             html +=
                 `
-            <div class="item">
-                <div class="ts mini image">
-                    <img src='./images/user.png'>
-                </div>
-                <div class="content">
-                    <div class="header">${element.name}</div>
-                    <div class="meta">
-                        <div>${element.status}</div>
+                <div class="item">
+                    <div class="ts mini image">
+                        <img src='./images/user.png'>
+                    </div>
+                    <div class="content">
+                        <div class="header">${element.name}</div>
+                        <div class="meta">
+                            <div>${element.status}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
         });
 
         el.innerHTML = html.trim();
@@ -218,44 +218,32 @@ function ShowOnlineMember(obj) {
   </div>
   */
 
-    let el = document.getElementById("OnlineMemberList");
-    let html = el.innerHTML;
+    // let el = document.getElementById("OnlineMemberList");
+    // let html = el.innerHTML;
 
-    obj.forEach(element => {
+    // obj.forEach(element => {
 
-        html +=
-            `
-            <div class="item">
-                <div class="ts mini image">
-                    <img src='./images/user.png'>
-                </div>
-                <div class="content">
-                    <div class="header">${element.name}</div>
-                    <div class="meta">
-                        <div>${element.status}</div>
-                    </div>
-                </div>
-            </div>
-            `;
-    });
+    //     html +=
+    //         `
+    //         <div class="item">
+    //             <div class="ts mini image">
+    //                 <img src='./images/user.png'>
+    //             </div>
+    //             <div class="content">
+    //                 <div class="header">${element.name}</div>
+    //                 <div class="meta">
+    //                     <div>${element.status}</div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         `;
+    // });
 
-    el.innerHTML = html.trim();
-
+    // el.innerHTML = html.trim();
 
     // show sidebar
-    // if (document.getElementById("theSlideBarWithoutAnyToggleFunction").classList.contains("visible")) {
     ts('.left.sidebar:not(.inverted)').sidebar({
         scrollLock: true,
         closable: false
     }).sidebar('toggle');
-    document.getElementById("theSlideBarWithoutAnyToggleFunction").setAttribute("data-closable", "false")
-        // ccc = true
-        // } else {
-        // ts('.left.sidebar:not(.inverted)').sidebar({
-        //     scrollLock: true,
-        //     closable: false
-        // }).sidebar('show');
-        // ccc = false
-
-    // }
 }
