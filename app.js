@@ -20,6 +20,7 @@ const io = require('socket.io')(server);
 // added by 江 ↓
 var ID = {}
 var online = {}
+var name = {}
 var L = 0
     // added by 江 ↑
 
@@ -38,18 +39,28 @@ io.on('connection', async(socket) => {
         clients: L,
     });
 
+    socket.on("member", () => {
+        var arr = []
+        console.log("send online member list");
+        for (i in name) {
+            arr.push({
+                name: i,
+                status: online[i]
+            })
+        }
+        io.emit("member", arr);
+    });
+
     socket.on("disconnect", () => {
         console.log("a user go out");
-        // added by 江 ↓
         delete ID[socket.username]
         delete online[socket.username]
+        delete name[socket.username]
         countUser()
-
-        // added by 江 ↑
         io.emit("clients", {
             clients: L,
         });
-        info()
+
     });
 
     socket.on("message", (obj) => {
@@ -67,17 +78,17 @@ io.on('connection', async(socket) => {
 
     // added by 江 ↓
 
-    socket.on('new', (username) => {
+    socket.on('new', function(username) {
         socket.username = username;
         ID[username] = socket.id
         online[username] = 'free'
+        name[username] = username
         countUser()
         io.emit("clients", {
             clients: L,
         });
-
-        info()
     });
+
 
     socket.on('reqFrom', function(mes) {
         var from = socket.username
@@ -209,6 +220,7 @@ function countUser() {
 function info() {
     // console.log(ID)
     console.log(L + ' online.    ' + JSON.stringify(online))
+    console.log(name)
         // console.log(L)
 }
 

@@ -25,7 +25,14 @@ if (account) {
     socket.on('message', (obj) => {
         appendData([obj]);
     });
+
+    socket.on('member', (obj) => {
+        document.getElementById("OnlineMemberList").innerHTML = '';
+        ShowOnlineMember(obj)
+    });
 }
+
+
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {
     sendData();
@@ -36,9 +43,17 @@ document.querySelector('input').addEventListener('keypress', (e) => {
     }
 });
 
+document.querySelector('#btnReqOnMember').addEventListener('click', () => {
+    reqOnMember();
+});
+
 /**
  * 傳送訊息
  */
+function reqOnMember() {
+    socket.emit('member')
+}
+
 function sendData() {
     let msg = document.querySelector('input').value;
     if (msg == '#trb') {
@@ -158,4 +173,48 @@ function broadcast(obj) {
     el.innerHTML = html.trim();
     scrollWindow();
 
+}
+
+function ShowOnlineMember(obj) {
+    /*
+    <div class="item">
+    <div class="ts mini image">
+      <img src="./images/pikachu.png">
+    </div>
+    <div class="content">
+      <div class="header">皮卡丘</div>
+      <div class="meta">
+        <div>@pikachu520</div>
+      </div>
+    </div>
+  </div>
+  */
+    let el = document.getElementById("OnlineMemberList");
+    let html = el.innerHTML;
+
+    obj.forEach(element => {
+
+        html +=
+            `
+            <div class="item">
+                <div class="ts mini image">
+                    <img src='./images/user.png'>
+                </div>
+                <div class="content">
+                    <div class="header">${element.name}</div>
+                    <div class="meta">
+                        <div>${element.status}</div>
+                    </div>
+                </div>
+            </div>
+            `;
+    });
+
+    el.innerHTML = html.trim();
+
+    //show sidebar
+    ts('.left.sidebar:not(.inverted)').sidebar({
+        scrollLock: true,
+        closable: true
+    }).sidebar('toggle');
 }
