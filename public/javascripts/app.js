@@ -26,7 +26,7 @@ if (account) {
         appendData([obj]);
     });
 
-    socket.on('member2', (obj) => {
+    socket.on('member', (obj) => {
         console.log('rec')
         document.getElementById("OnlineMemberList").innerHTML = '';
         ShowOnlineMember(obj)
