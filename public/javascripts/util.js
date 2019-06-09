@@ -177,7 +177,6 @@ function doo(stream2) {
             case 'cancel':
                 document.getElementById("poke").disabled = false;
                 clearTimeout(callTimer)
-                swal.close()
                 swal({
                     text: 'You have got a missed call from ' + from + '!',
                     icon: 'warning',
@@ -197,6 +196,7 @@ function doo(stream2) {
                 })
                 return
             case 'offline':
+                document.getElementById("poke").disabled = false;
                 swal({
                     title: '',
                     text: from + ' is offline now.',
@@ -206,6 +206,7 @@ function doo(stream2) {
                 })
                 return
             case 'busy':
+                document.getElementById("poke").disabled = false;
                 swal({
                     title: '',
                     text: from + ' is busy now.',
