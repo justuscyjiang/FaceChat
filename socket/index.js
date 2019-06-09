@@ -38,6 +38,18 @@ class SocketHander {
 
         const doc = newMessages.save();
     }
+
+    storeMessagesP(data) {
+
+        console.log(data);
+        const newMessages = new MessagesP({
+            name: data.name,
+            msg: data.msg,
+            time: moment().valueOf(),
+        });
+
+        const doc = newMessages.save();
+    }
 }
 
 module.exports = SocketHander;
