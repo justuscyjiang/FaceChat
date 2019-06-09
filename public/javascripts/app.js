@@ -241,8 +241,8 @@ function ShowOnlineMember(obj) {
 
     // show sidebar
     ts('.left.sidebar:not(.inverted)').sidebar({
-        scrollLock: false,
-        closable: true
+        scrollLock: true,
+        closable: false
     }).sidebar('toggle');
 
 }
