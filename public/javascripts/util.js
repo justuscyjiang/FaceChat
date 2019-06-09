@@ -179,7 +179,7 @@ function doo(stream2) {
                     closeOnClickOutside: false,
                     closeOnEsc: false,
                 })
-                return
+                break
             case 'decline':
                 document.getElementById("poke").disabled = false;
                 swal({
@@ -189,7 +189,7 @@ function doo(stream2) {
                     buttons: false,
                     timer: 3000,
                 })
-                return
+                break
             case 'offline':
                 document.getElementById("poke").disabled = false;
                 swal({
@@ -199,7 +199,7 @@ function doo(stream2) {
                     buttons: false,
                     timer: 3000,
                 })
-                return
+                break
             case 'busy':
                 document.getElementById("poke").disabled = false;
                 swal({
@@ -209,7 +209,7 @@ function doo(stream2) {
                     buttons: false,
                     timer: 3000,
                 })
-                return
+                break
             case 'timeout':
                 document.getElementById("poke").disabled = false;
                 swal({
@@ -218,7 +218,7 @@ function doo(stream2) {
                     buttons: false,
                     timer: 3000,
                 })
-                return
+                break
 
 
         }

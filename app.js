@@ -119,14 +119,14 @@ io.on('connection', async(socket) => {
                 online[from] = 'free'
                 online[to] = 'free'
                 console.log(from + ' has cancelled the call to ' + to + '.');
-                return
+                break
             case 'timeout':
                 io.to(ID[to]).emit('notice', from + '^' + type)
                 io.to(ID[from]).emit('notice', to + '^' + 'cancel')
                 online[from] = 'free'
                 online[to] = 'free'
                 console.log(from + ' has not replied to ' + to + ' within 10 seconds.');
-                return
+                break
             case 'decline':
                 if (online[to] == 'busy') {
                     io.to(ID[to]).emit('notice', from + '^' + type)
@@ -134,7 +134,7 @@ io.on('connection', async(socket) => {
                     online[to] = 'free'
                     console.log(from + ' is replying to ' + to + ': decline.');
                 }
-                return
+                break
         }
         info()
 
@@ -206,9 +206,9 @@ function countUser() {
 }
 
 function info() {
-    console.log(ID)
-    console.log(online)
-    console.log(L)
+    // console.log(ID)
+    console.log(L + ' online.    ' + online)
+        // console.log(L)
 }
 
 module.exports = app;
