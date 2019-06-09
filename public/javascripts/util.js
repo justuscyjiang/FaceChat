@@ -91,37 +91,11 @@ function trb() {
     document.documentElement.style.setProperty('--top', y);
 }
 
-if (account) {
-    socket.emit('new', account);
-    // console.log('account');
-
-}
-
-socket.on('new', (mes) => {
-    // console.log('new rec')
-    if (mes == 'ok') {
-        start();
-        // console.log('new rec')
-    } else if (mes == 'duplicate') {
-        // console.log('new d');
-        swal({
-            text: 'Duplicate username: ' + account + ' !',
-            icon: 'error',
-            buttons: [false, true],
-            closeOnClickOutside: false,
-            closeOnEsc: false,
-        }).then(() => {
-            sessionStorage.clear();
-            location.reload();
-        })
-
-    }
-});
 
 function doo(stream2) {
     // if (err) return console.error(err)
-    // var username = account
-    // socket.emit('new', username);
+    var username = account
+    socket.emit('new', username);
 
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
@@ -246,10 +220,6 @@ function doo(stream2) {
                     timer: 3000,
                 })
                 break
-            case 'duplicate':
-                sessionStorage.clear();
-                location.reload();
-                break
 
 
         }
@@ -371,7 +341,7 @@ function doo(stream2) {
 
 }
 
-function start() {
+if (account) {
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
