@@ -26,7 +26,7 @@ var L = 0
     // added by 江 ↑
 
 
-function messages() {
+async function messages() {
     const socketid = socket.id;
     socketHander = new SocketHander(); // messages
     socketHander.connect();
@@ -36,7 +36,7 @@ function messages() {
     io.to(socketid).emit('history', history);
 }
 
-function privateMessages() {
+async function privateMessages() {
     const socketid = socket.id;
     socketHander = new SocketHanderP(); // public messages
     socketHander.connect();
