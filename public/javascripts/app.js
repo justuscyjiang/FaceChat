@@ -5,7 +5,7 @@ if (account) {
     console.log('account:' + account);
 
     // socket = io.connect('ws://localhost:3001');
-    var socket = io.connect();
+    socket = io.connect();
 
     socket.emit('clients', account);
 
