@@ -37,6 +37,7 @@ function login() {
                 }).then(() => { login(); })
                 return false;
             }
+            console.log(value in ID)
             if (value in ID) {
                 swal({
                     title: "Oops!",
