@@ -26,11 +26,11 @@ if (account) {
         appendData([obj]);
     });
 
-    socket.on('member', (obj) => {
-        // document.getElementById("OnlineMemberList").innerHTML = '';
-        ShowOnlineMember(obj)
+    socket.on('member', () => {
+        ShowOnlineMember()
     });
 
+    // 修改線上名單
     socket.on('refresh', (obj) => {
         document.getElementById("OnlineMemberList").innerHTML = '';
 
@@ -203,7 +203,7 @@ function broadcast(obj) {
 
 var ccc = false
 
-function ShowOnlineMember(obj) {
+function ShowOnlineMember() {
     /*
     <div class="item">
     <div class="ts mini image">
@@ -217,29 +217,6 @@ function ShowOnlineMember(obj) {
     </div>
   </div>
   */
-
-    // let el = document.getElementById("OnlineMemberList");
-    // let html = el.innerHTML;
-
-    // obj.forEach(element => {
-
-    //     html +=
-    //         `
-    //         <div class="item">
-    //             <div class="ts mini image">
-    //                 <img src='./images/user.png'>
-    //             </div>
-    //             <div class="content">
-    //                 <div class="header">${element.name}</div>
-    //                 <div class="meta">
-    //                     <div>${element.status}</div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         `;
-    // });
-
-    // el.innerHTML = html.trim();
 
     // show sidebar
     ts('.left.sidebar:not(.inverted)').sidebar({

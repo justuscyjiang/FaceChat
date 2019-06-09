@@ -40,15 +40,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("member", () => {
-        var arr = []
-        console.log("send online member list");
-        for (i in name) {
-            arr.push({
-                name: i,
-                status: online[i]
-            })
-        }
-        io.to(socket.id).emit("member", arr); // 可以不用廣播
+        io.to(socket.id).emit("member"); // 可以不用廣播
     });
 
     socket.on('error', (error) => {
