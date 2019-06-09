@@ -30,10 +30,8 @@ function login() {
                     title: "Oops!",
                     text: "Username can not contain space or \"^.\"",
                     icon: "error",
-                    buttons: [false, true],
-                    closeOnClickOutside: false,
-                    closeOnEsc: false,
-                }).then({ login(); })
+                })
+                login();
                 return false;
             }
 
