@@ -37,17 +37,6 @@ function login() {
                 }).then(() => { login(); })
                 return false;
             }
-            console.log(value in ID)
-            if (value in ID) {
-                swal({
-                    title: "Oops!",
-                    text: "Duplicate username.",
-                    icon: "error",
-                    closeOnClickOutside: false,
-                    closeOnEsc: false,
-                }).then(() => { login(); })
-                return false;
-            }
             sessionStorage.setItem('account', value);
             account = sessionStorage.getItem('account');
             location.reload();
