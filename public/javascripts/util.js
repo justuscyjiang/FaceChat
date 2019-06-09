@@ -103,12 +103,12 @@ function doo(stream2) {
                 title: '',
                 text: from + ' wants to speak to you!',
                 icon: 'success',
-                buttons: ['Decline', 'Accept'],
+                buttons: [false, 'Decline', 'Accept'],
                 closeOnClickOutside: false,
                 closeOnEsc: false,
             })
             .then((ans) => {
-                if (ans) {
+                if (ans == 'Accept') {
                     document.getElementById('p2id2').value = id
                     to_global = from
                     peer2.signal(JSON.parse(id))
