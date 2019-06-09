@@ -90,15 +90,10 @@ io.on('connection', async(socket) => {
         var from = socket.username
         var to = mes.split("^")[0]
         var id = mes.split("^")[1]
-        if (id == "decline") {
-            console.log(from + ' is replying to ' + to + ': decline.');
-            io.to(ID[to]).emit('backTo', from + '^' + id)
-            online[to] = 'free'
-        } else {
-            console.log(from + ' is replying to ' + to + ': accept.');
-            io.to(ID[to]).emit('backTo', from + '^' + id)
-            online[from] = 'busy'
-        }
+        console.log(from + ' is replying to ' + to + ': accept.');
+        io.to(ID[to]).emit('backTo', from + '^' + id)
+        online[from] = 'busy'
+
     });
 
     socket.on('notice', (mes) => {
@@ -118,6 +113,7 @@ io.on('connection', async(socket) => {
                 if (online[to] == 'busy') {
                     io.to(ID[to]).emit('notice', from + '^' + type)
                     online[to] = 'free'
+                    console.log(from + ' is replying to ' + to + ': decline.');
                 }
                 return
 
