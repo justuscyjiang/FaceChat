@@ -33,7 +33,7 @@ io.on('connection', async(socket) => {
 
     socketHander = new SocketHander(); // private messages
     socketHander.connect();
-    const history = await socketHander.getMessagesP(); // ++++
+    const history = await socketHander.getMessages(); // ++++
     io.to(socketid).emit('history', history);
 
     io.to(socketid).emit('clients', {
@@ -62,7 +62,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("message", (obj) => {
-        socketHander.storeMessagesP(obj); // +++++
+        socketHander.storeMessages(obj); // +++++
         io.emit("message", obj);
     });
 
