@@ -1,3 +1,5 @@
+var privateMessages = false
+
 if (account) {
 
     // 新增使用者    
@@ -99,7 +101,11 @@ function sendData() {
         name: account,
         msg: msg,
     };
-    socket.emit('message', data);
+    if (!privateMessages) {
+        socket.emit('message', data);
+    } else {
+        socket.emit('messageP', data);
+    }
     document.querySelector('input').value = '';
 }
 

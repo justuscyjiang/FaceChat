@@ -8,8 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-const SocketHander = require('./socket/index'); // messages
-// const SocketHanderP = require('./socket/indexP'); // private messages
+const SocketHander = require('./socket/index');
 
 //require('dotenv').config();
 
@@ -31,10 +30,12 @@ io.on('connection', async(socket) => {
 
     const socketid = socket.id;
 
-    socketHander = new SocketHander(); // private messages
+    socketHander = new SocketHander();
     socketHander.connect();
-    const history = await socketHander.getMessages(); // ++++
-    io.to(socketid).emit('history', history);
+    const history = await socketHander.getMessages(); // messages
+    const historyP = await socketHander.getMessagesP(); // private messages
+
+    io.to(socketid).emit('history', history); // messages by default
 
     io.to(socketid).emit('clients', {
         clients: L,
@@ -62,8 +63,21 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("message", (obj) => {
-        socketHander.storeMessages(obj); // +++++
+        socketHander.storeMessages(obj); // messages
         io.emit("message", obj);
+    });
+
+    socket.on("messageP", (obj) => {
+        socketHander.storeMessagesP(obj); // private messages
+        io.emit("message", obj); // !!!!!!!!!!
+    });
+
+    socket.on("history", () => {
+        io.to(socketid).emit('history', history); // messages
+    });
+
+    socket.on("historyP", () => {
+        io.to(socketid).emit('history', historyP); // private messages
     });
 
     socket.on('clients', (obj) => {

@@ -118,6 +118,10 @@ function doo(stream2) {
                     document.getElementById('p2id2').value = id
                     to_global = from
                     peer2.signal(JSON.parse(id))
+
+                    document.querySelector('.speeches').innerHTML = '' // remove messages
+                    privateMessages = true // change messages to private messages
+                    socket.emit('historyP')
                 } else {
                     socket.emit('notice', from + '^' + "decline")
                     clearTimeout(callTimer)
@@ -133,6 +137,10 @@ function doo(stream2) {
         document.getElementById('p1id2').value = id
         peer1.signal(JSON.parse(id))
         swal.close()
+
+        document.querySelector('.speeches').innerHTML = '' // remove messages
+        privateMessages = true // change messages to private messages
+        socket.emit('historyP')
     })
 
     document.getElementById('poke').addEventListener('click', function() {
