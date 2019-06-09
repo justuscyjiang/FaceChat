@@ -157,6 +157,18 @@ canvas {
 }
 
 
+/* poke, snapshot */
+
+#poke {
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+#to {
+    margin-top: 20px;
+}
+
+
 /*for snapshot*/
 
 .strip img {
