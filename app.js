@@ -68,80 +68,80 @@ io.on('connection', async(socket) => {
     // added by 江 ↓
 
     socket.on('new', (username) => {
-            socket.username = username;
-            ID[username] = socket.id
-            online[username] = 'free'
-            countUser()
-            io.emit("clients", {
-                clients: L,
-            });
-            info()
-        }
+        socket.username = username;
+        ID[username] = socket.id
+        online[username] = 'free'
+        countUser()
+        io.emit("clients", {
+            clients: L,
+        });
+
+        info()
     });
 
-socket.on('reqFrom', function(mes) {
-    var from = socket.username
-    var to = mes.split("^")[0]
-    var id = mes.split("^")[1]
-    console.log(from + ' is trying to speak to ' + to + '.');
-    if (!(to in ID)) {
-        io.to(ID[from]).emit('notice', to + '^' + 'offline');
-        online[from] = 'free'
-        console.log(to + ' is offline now.')
-    } else if (online[to] == 'busy') {
-        io.to(ID[from]).emit('notice', to + '^' + 'busy');
-        online[from] = 'free'
-        console.log(to + ' is busy now.')
-    } else {
-        io.to(ID[to]).emit('reqTo', from + '^' + id)
-        online[from] = 'busy'
-        online[to] = 'busy'
-    }
-    info()
-});
-
-socket.on('backFrom', function(mes) {
-    var from = socket.username
-    var to = mes.split("^")[0]
-    var id = mes.split("^")[1]
-    console.log(from + ' is replying to ' + to + ': accept.');
-    io.to(ID[to]).emit('backTo', from + '^' + id)
-    info()
-});
-
-socket.on('notice', (mes) => {
-    var from = socket.username
-    var to = mes.split('^')[0]
-    var type = mes.split('^')[1]
-
-    switch (type) {
-        case 'cancel':
-            io.to(ID[to]).emit('notice', from + '^' + type)
+    socket.on('reqFrom', function(mes) {
+        var from = socket.username
+        var to = mes.split("^")[0]
+        var id = mes.split("^")[1]
+        console.log(from + ' is trying to speak to ' + to + '.');
+        if (!(to in ID)) {
+            io.to(ID[from]).emit('notice', to + '^' + 'offline');
             online[from] = 'free'
-            online[to] = 'free'
-            console.log(from + ' has cancelled the call to ' + to + '.');
-            break
-        case 'timeout':
-            io.to(ID[to]).emit('notice', from + '^' + type)
-            io.to(ID[from]).emit('notice', to + '^' + 'cancel')
+            console.log(to + ' is offline now.')
+        } else if (online[to] == 'busy') {
+            io.to(ID[from]).emit('notice', to + '^' + 'busy');
             online[from] = 'free'
-            online[to] = 'free'
-            console.log(from + ' has not replied to ' + to + ' within 10 seconds.');
-            break
-        case 'decline':
-            if (online[to] == 'busy') {
+            console.log(to + ' is busy now.')
+        } else {
+            io.to(ID[to]).emit('reqTo', from + '^' + id)
+            online[from] = 'busy'
+            online[to] = 'busy'
+        }
+        info()
+    });
+
+    socket.on('backFrom', function(mes) {
+        var from = socket.username
+        var to = mes.split("^")[0]
+        var id = mes.split("^")[1]
+        console.log(from + ' is replying to ' + to + ': accept.');
+        io.to(ID[to]).emit('backTo', from + '^' + id)
+        info()
+    });
+
+    socket.on('notice', (mes) => {
+        var from = socket.username
+        var to = mes.split('^')[0]
+        var type = mes.split('^')[1]
+
+        switch (type) {
+            case 'cancel':
                 io.to(ID[to]).emit('notice', from + '^' + type)
                 online[from] = 'free'
                 online[to] = 'free'
-                console.log(from + ' is replying to ' + to + ': decline.');
-            }
-            break
-    }
-    info()
+                console.log(from + ' has cancelled the call to ' + to + '.');
+                break
+            case 'timeout':
+                io.to(ID[to]).emit('notice', from + '^' + type)
+                io.to(ID[from]).emit('notice', to + '^' + 'cancel')
+                online[from] = 'free'
+                online[to] = 'free'
+                console.log(from + ' has not replied to ' + to + ' within 10 seconds.');
+                break
+            case 'decline':
+                if (online[to] == 'busy') {
+                    io.to(ID[to]).emit('notice', from + '^' + type)
+                    online[from] = 'free'
+                    online[to] = 'free'
+                    console.log(from + ' is replying to ' + to + ': decline.');
+                }
+                break
+        }
+        info()
 
-})
+    })
 
-// added by 江 ↑
+    // added by 江 ↑
 
 });
 
