@@ -140,7 +140,7 @@ function doo(stream2) {
     })
 
     document.getElementById('poke').addEventListener('click', function() {
-        document.getElementById("myBtn").disabled = true;
+        document.getElementById("poke").disabled = true;
         var to = document.getElementById('to').value
         var id = document.getElementById('p1id1').value
         socket.emit('reqFrom', to + "^" + id);
