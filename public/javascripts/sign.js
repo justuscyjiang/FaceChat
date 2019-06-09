@@ -28,10 +28,12 @@ function login() {
             if (value === undefined || value === null || value.includes("^")) {
                 swal({
                     title: "Oops!",
-                    text: "Username is required, and it can not contain \"^.\"",
-                    icon: "error"
-                })
-                login();
+                    text: "Username can not contain space or \"^.\"",
+                    icon: "error",
+                    buttons: [false, true],
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                }).then({ login(); })
                 return false;
             }
 
