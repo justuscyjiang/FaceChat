@@ -246,4 +246,5 @@ function ShowOnlineMember(obj) {
     // }).sidebar('toggle');
 
     ts('.left.sidebar').sidebar('toggle');
+    ts('.left.sidebar').sidebar('toggle');
 }
