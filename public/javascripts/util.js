@@ -91,7 +91,11 @@ function trb() {
     document.documentElement.style.setProperty('--top', y);
 }
 
-if (account) { socket.emit('new', account); }
+if (account) {
+    socket.emit('new', account);
+    console.log('account');
+
+}
 
 socket.on('new', (mes) => {
     console.log('new rec')
