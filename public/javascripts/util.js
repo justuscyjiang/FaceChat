@@ -219,6 +219,10 @@ function doo(stream2) {
                     timer: 3000,
                 })
                 break
+            case 'duplicate':
+                sessionStorage.clear();
+                location.reload();
+                break
 
 
         }

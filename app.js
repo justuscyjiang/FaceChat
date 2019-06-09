@@ -68,14 +68,18 @@ io.on('connection', async(socket) => {
     // added by 江 ↓
 
     socket.on('new', function(username) {
-        socket.username = username;
-        ID[username] = socket.id
-        online[username] = 'free'
-        countUser()
-        io.emit("clients", {
-            clients: L,
-        });
-        info()
+        if (username in ID) {
+            io.to(socket.id).emit('notice', ' ' + '^' + 'duplicate')
+        } else {
+            socket.username = username;
+            ID[username] = socket.id
+            online[username] = 'free'
+            countUser()
+            io.emit("clients", {
+                clients: L,
+            });
+            info()
+        }
     });
 
     socket.on('reqFrom', function(mes) {
