@@ -99,6 +99,9 @@ function doo(stream2) {
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
+        callTimer = setTimeout(() => {
+            socket.emit('notice', from + '^' + "timeout")
+        }, 5000)
         swal({
                 title: '',
                 text: from + ' wants to speak to you!',
@@ -109,6 +112,8 @@ function doo(stream2) {
             })
             .then((ans) => {
                 if (ans) {
+                    document.getElementById("poke").disabled = true;
+                    clearTimeout(callTimer)
                     document.getElementById('p2id2').value = id
                     to_global = from
                     peer2.signal(JSON.parse(id))
@@ -123,20 +128,9 @@ function doo(stream2) {
         clearTimeout(callTimer)
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
-        if (id == "decline") {
-            swal({
-                title: '',
-                text: from + ' has declined your request.',
-                icon: 'error',
-                buttons: false,
-                timer: 3000,
-            })
-            document.getElementById("poke").disabled = false;
-        } else {
-            document.getElementById('p1id2').value = id
-            peer1.signal(JSON.parse(id))
-            swal.close()
-        }
+        document.getElementById('p1id2').value = id
+        peer1.signal(JSON.parse(id))
+        swal.close()
     })
 
     document.getElementById('poke').addEventListener('click', function() {
@@ -187,6 +181,7 @@ function doo(stream2) {
                 return
             case 'decline':
                 document.getElementById("poke").disabled = false;
+                clearTimeout(callTimer)
                 swal({
                     title: '',
                     text: from + ' has declined your request.',
@@ -210,6 +205,15 @@ function doo(stream2) {
                 swal({
                     title: '',
                     text: from + ' is busy now.',
+                    icon: 'warning',
+                    buttons: false,
+                    timer: 3000,
+                })
+                return
+            case 'timeout':
+                document.getElementById("poke").disabled = false;
+                swal({
+                    text: 'No reply.',
                     icon: 'warning',
                     buttons: false,
                     timer: 3000,
