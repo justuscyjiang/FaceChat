@@ -404,6 +404,9 @@ function doo(stream2) {
             buttons: [false, true],
             closeOnClickOutside: false,
             closeOnEsc: false,
+        }).then(() => {
+            sessionStorage.clear();
+            location.reload();
         })
     })
     peer2.on('error', (err) => {
@@ -414,36 +417,39 @@ function doo(stream2) {
             buttons: [false, true],
             closeOnClickOutside: false,
             closeOnEsc: false,
-        })
-    })
-
-    peer1.on('close', () => {
-        swal({
-            title: '',
-            text: 'The connection has closed!',
-            icon: 'warning',
-            buttons: [false, true],
-            closeOnClickOutside: false,
-            closeOnEsc: false,
         }).then(() => {
             sessionStorage.clear();
             location.reload();
         })
     })
 
-    peer2.on('close', () => {
-        swal({
-            title: '',
-            text: 'The connection has closed!',
-            icon: 'warning',
-            buttons: [false, true],
-            closeOnClickOutside: false,
-            closeOnEsc: false,
-        }).then(() => {
-            sessionStorage.clear();
-            location.reload();
-        })
-    })
+    // peer1.on('close', () => {
+    //     swal({
+    //         title: '',
+    //         text: 'The connection has closed!',
+    //         icon: 'warning',
+    //         buttons: [false, true],
+    //         closeOnClickOutside: false,
+    //         closeOnEsc: false,
+    // }).then(() => {
+    //     sessionStorage.clear();
+    //     location.reload();
+    // })
+    // })
+
+    // peer2.on('close', () => {
+    //     swal({
+    //         title: '',
+    //         text: 'The connection has closed!',
+    //         icon: 'warning',
+    //         buttons: [false, true],
+    //         closeOnClickOutside: false,
+    //         closeOnEsc: false,
+    //     }).then(() => {
+    //         sessionStorage.clear();
+    //         location.reload();
+    //     })
+    // })
 
 }
 
