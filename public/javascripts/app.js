@@ -1,4 +1,5 @@
 var privateMessages = false
+var config = false
 
 if (account) {
 
@@ -94,6 +95,21 @@ function reqOnMember() {
 
 function sendData() {
     let msg = document.querySelector('input').value;
+    if (config) {
+
+        switch (msg) {
+            case 'version':
+                swal('Version', '2019.06.11', 'success')
+                document.querySelector('input').value = '';
+                break
+            case 'end':
+                config = false
+                document.querySelector('input').value = '';
+                if (!privateMessages) { socket.emit('history') } else { socket.emit('historyP') }
+                break
+        }
+        return
+    }
     if (msg == '#trb') {
         // pass
         swal({
@@ -101,6 +117,8 @@ function sendData() {
             icon: "success",
             buttons: [false, false],
         });
+        config = true
+        document.querySelector('.speeches').innerHTML = ''
         document.querySelector('input').value = '';
         return
     }
