@@ -106,9 +106,9 @@ function doo(stream2) {
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
-        callTimer = setTimeout(() => {
-            socket.emit('notice', from + '^' + "timeout")
-        }, 10000)
+            // callTimer = setTimeout(() => {
+            //     socket.emit('notice', from + '^' + "timeout")
+            // }, 10000)
         swal({
                 title: '',
                 text: from + ' wants to speak to you!',
