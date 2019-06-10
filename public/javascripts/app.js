@@ -107,10 +107,8 @@ function sendData() {
                 document.querySelector('input').value = '';
                 if (!privateMessages) {
                     socket.emit('history');
-                    history = socketHander.getMessages();
                 } else {
                     socket.emit('historyP')
-                    historyP = socketHander.getMessagesP();
                 }
                 break
         }
