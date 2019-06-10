@@ -396,6 +396,55 @@ function doo(stream2) {
 
     peer2.on('stream', transStream)
 
+    peer1.on('error', (err) => {
+        swal({
+            title: 'Peep Error',
+            text: err,
+            icon: 'error',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        })
+    })
+    peer2.on('error', (err) => {
+        swal({
+            title: 'Peep Error',
+            text: err,
+            icon: 'error',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        })
+    })
+
+    peer1.on('close', () => {
+        swal({
+            title: '',
+            text: 'The connection has closed!',
+            icon: 'warning',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        }).then(() => {
+            sessionStorage.clear();
+            location.reload();
+        })
+    })
+
+    peer2.on('close', () => {
+        swal({
+            title: '',
+            text: 'The connection has closed!',
+            icon: 'warning',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        }).then(() => {
+            sessionStorage.clear();
+            location.reload();
+        })
+    })
+
 }
 
 if (account) {

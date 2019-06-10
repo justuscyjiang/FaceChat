@@ -303,6 +303,7 @@ canvas {
 html {
     --left: 150;
     --top: 100;
+    background-color: #01004b
 }
 
 #trb {
