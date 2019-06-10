@@ -18,6 +18,12 @@ if (account) {
         }
     });
 
+    socket.on('historyP', (obj) => {
+        if (obj.length > 0) {
+            appendDataP(obj);
+        }
+    });
+
     socket.on('clients', (obj) => {
         console.log(obj);
         document.querySelector('.online').innerHTML = obj.clients;
@@ -26,6 +32,10 @@ if (account) {
 
     socket.on('message', (obj) => {
         appendData([obj]);
+    });
+
+    socket.on('messageP', (obj) => {
+        appendDataP([obj]);
     });
 
     socket.on('member', () => {
@@ -86,7 +96,11 @@ function sendData() {
     let msg = document.querySelector('input').value;
     if (msg == '#trb') {
         // pass
-
+        swal({
+            title: "Easter egg!",
+            icon: "success",
+            buttons: [false, false],
+        });
         document.querySelector('input').value = '';
         return
     }
@@ -97,13 +111,19 @@ function sendData() {
         });
         return;
     }
-    let data = {
-        name: account,
-        msg: msg,
-    };
+
     if (!privateMessages) {
+        let data = {
+            name: account,
+            msg: msg,
+        };
         socket.emit('message', data);
     } else {
+        let data = {
+            name: account,
+            msg: msg,
+            to: theOther,
+        };
         socket.emit('messageP', data);
     }
     document.querySelector('input').value = '';
@@ -128,32 +148,6 @@ function appendData(obj) {
 
     obj.forEach(element => {
 
-        // other peaple
-        //   <div class="speech">
-        //     <div class="avatar">
-        //       <img src="./images/user.png">
-        //     </div>
-        //     <div class="content">
-        //       <div class="inline author">Yami Odymel</div>
-        //       <div class="text">：嗨！早安。</div>
-        //     </div>
-        //     <div class=" time"></div>
-        //   </div>
-
-        // myself
-        //   <div class="speech">
-        //     <div class="group">
-        //       <div class="avatar">
-        //         <img src="./images/user.png">
-        //       </div>
-        //       <div class="content">
-        //         <div class="inline author">Yami Odymel</div>
-        //         <div class="text">：嗨！早安。</div>
-        //       </div>
-        //     <div class=" time"></div>
-        //     </div>
-        //   </div>
-
         html +=
             `
             <div class="${element.name == account ? 'right circular group' : 'circular group'}">
@@ -171,6 +165,42 @@ function appendData(obj) {
                 </div>
             </div>
             `;
+    });
+
+    el.innerHTML = html.trim();
+    scrollWindow();
+
+}
+
+/**
+ * 私人聊天紀錄
+ * @param {聊天訊息} obj 
+ */
+function appendDataP(obj) {
+
+    let el = document.querySelector('.speeches');
+    let html = el.innerHTML;
+
+    obj.forEach(element => {
+        if ((element.name == account && element.to == theOther) || (element.name == theOther && element.to == account)) {
+            html +=
+                `
+            <div class="${element.name == account ? 'right circular group' : 'circular group'}">
+                <div class="speech">
+                    ${element.name == account? "<div class='group'>":''}
+                        <div class="avatar">
+                            <img src="${element.name == account ? './images/user.png' : './images/user1.png'}">
+                        </div>
+                        <div class="content">
+                            <div class="inline author">${element.name == account ? '' : element.name}</div>
+                            <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div> 
+                        </div>  
+                        <div class=" time">${moment(element.time).fromNow()}</div>
+                    ${element.name == account? "</div>":''}
+                </div>
+            </div>
+            `;
+        }
     });
 
     el.innerHTML = html.trim();

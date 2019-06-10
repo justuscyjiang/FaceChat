@@ -1,4 +1,4 @@
-let width = 600;
+let width = 700;
 let height = 0;
 
 let streaming = false;

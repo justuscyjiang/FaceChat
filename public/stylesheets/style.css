@@ -60,7 +60,6 @@
     display: flex;
     /*align-items: stretch;*/
     flex-wrap: nowrap;
-    background: pink;
 }
 
 .photo_item1 {
@@ -136,6 +135,14 @@ canvas {
     /* 太寬會占用到strip */
 }
 
+#poke {
+    margin-top: 25px;
+}
+
+#btnReqOnMember {
+    margin-top: 20px;
+}
+
 
 /*clearfix*/
 
@@ -157,18 +164,6 @@ canvas {
 }
 
 
-/* poke, snapshot */
-
-#poke {
-    margin-top: 25px;
-    margin-bottom: 0px;
-}
-
-#to {
-    margin-top: 20px;
-}
-
-
 /*for snapshot*/
 
 .strip img {
@@ -177,7 +172,7 @@ canvas {
     overflow-y: scroll;
     padding: 0.6rem 0.6rem 0.6rem 0.6rem;
     box-shadow: #cce6ff;
-    background: #cce6ff
+    background: #cce6ff;
 }
 
 .strip {
@@ -246,6 +241,65 @@ canvas {
     }
 }
 
+.hideid {
+    display: none;
+}
+
+
+/*for private message*/
+
+.pbwidth {
+    width: 100px;
+}
+
+
+/*.ts .speeches .secret{
+  overflow-y: scroll;
+  height: 200px;
+  padding-right: 10px;
+}*/
+
+#pmmsg {
+    overflow-y: scroll;
+    height: 200px;
+    padding-right: 10px;
+}
+
+.secret {
+    height: 300px;
+}
+
+.item .secret {
+    height: 300px;
+}
+
+
+/*.content .secret {
+  height: 320px;
+}*/
+
+
+/*.ts .secondary .segment .secret{
+  height: 200px;
+}*/
+
+
+/*.ts .tiny .segmented .single .line .items .secret{
+  height: 320px;
+}*/
+
+#secretgray {
+    height: 290px;
+}
+
+#secretbox {
+    height: 340px;
+}
+
+#csecret {
+    height: 300px;
+}
+
 html {
     --left: 150;
     --top: 100;
@@ -262,8 +316,4 @@ html {
     position: absolute;
     width: 190px;
     height: 130px;
-}
-
-.hideid {
-    display: none;
 }

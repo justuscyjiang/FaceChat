@@ -8,13 +8,10 @@ class SocketHander {
     }
 
     connect() {
-        this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
+        // this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
+        this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
         this.db.Promise = global.Promise;
     }
-
-    // getMessages() {
-    //     return Messages.find();
-    // }
 
     getMessages() {
         var onedayago = moment().add(-1, 'day');
@@ -46,6 +43,7 @@ class SocketHander {
             name: data.name,
             msg: data.msg,
             time: moment().valueOf(),
+            to: data.to
         });
 
         const doc = newMessages.save();

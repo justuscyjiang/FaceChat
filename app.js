@@ -17,12 +17,10 @@ var app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-// added by 江 ↓
 var ID = {}
 var online = {}
 var name = {}
 var L = 0
-    // added by 江 ↑
 
 io.on('connection', async(socket) => {
     console.log('a user connected');
@@ -69,7 +67,7 @@ io.on('connection', async(socket) => {
 
     socket.on("messageP", (obj) => {
         socketHander.storeMessagesP(obj); // private messages
-        io.emit("message", obj); // !!!!!!!!!!
+        io.emit("messageP", obj); // 
     });
 
     socket.on("history", () => {
@@ -77,7 +75,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("historyP", () => {
-        io.to(socketid).emit('history', historyP); // private messages
+        io.to(socketid).emit('historyP', historyP); // private messages
     });
 
     socket.on('clients', (obj) => {
@@ -87,10 +85,13 @@ io.on('connection', async(socket) => {
         });
     });
 
-    // added by 江 ↓
-
     socket.on('new', function(username) {
         socket.username = username;
+        if (username in ID) {
+            socket.username = "^duplicate^"
+            io.to(socket.id).emit('notice', " " + '^' + 'duplicate');
+            return
+        }
         console.log(username + " has come in.");
         ID[username] = socket.id
         online[username] = 'free'
@@ -165,8 +166,6 @@ io.on('connection', async(socket) => {
         info()
 
     })
-
-    // added by 江 ↑
 
 });
 

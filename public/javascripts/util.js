@@ -31,6 +31,8 @@ var fgTimer
 
 var callTimer
 
+var theOther
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
@@ -91,6 +93,10 @@ function trb() {
     document.documentElement.style.setProperty('--top', y);
 }
 
+function pmscrollWindow() {
+    let h = document.querySelector('.secret');
+    h.scrollTo(0, h.scrollHeight);
+}
 
 function doo(stream2) {
     // if (err) return console.error(err)
@@ -119,9 +125,13 @@ function doo(stream2) {
                     to_global = from
                     peer2.signal(JSON.parse(id))
 
-                    document.querySelector('.speeches').innerHTML = '' // remove messages
-                    privateMessages = true // change messages to private messages
-                    socket.emit('historyP')
+                    /**
+                     * private messages by socket.io
+                     */
+                    // document.querySelector('.speeches').innerHTML = '' // remove messages
+                    // privateMessages = true // change messages to private messages
+                    // socket.emit('historyP')
+                    // theOther = from
                 } else {
                     socket.emit('notice', from + '^' + "decline")
                     clearTimeout(callTimer)
@@ -138,9 +148,13 @@ function doo(stream2) {
         peer1.signal(JSON.parse(id))
         swal.close()
 
-        document.querySelector('.speeches').innerHTML = '' // remove messages
-        privateMessages = true // change messages to private messages
-        socket.emit('historyP')
+        /**
+         * private messages by socket.io
+         */
+        // document.querySelector('.speeches').innerHTML = '' // remove messages
+        // privateMessages = true // change messages to private messages
+        // socket.emit('historyP')
+        // theOther = from
     })
 
     document.getElementById('poke').addEventListener('click', function() {
@@ -221,6 +235,18 @@ function doo(stream2) {
                     timer: 3000,
                 })
                 break
+            case 'duplicate':
+                swal({
+                    text: 'Duplicate username: ' + username + ' !',
+                    icon: 'error',
+                    buttons: [false, true],
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                }).then(() => {
+                    sessionStorage.clear();
+                    location.reload();
+                })
+                break
 
 
         }
@@ -274,6 +300,15 @@ function doo(stream2) {
             case '#play':
                 document.getElementById('large').play()
                 break;
+            default:
+                let el = document.getElementById('pmmsg');
+                let html = el.innerHTML;
+                html +=
+                    `<div class="left speech">
+                      <div class="content">${data}</div>
+                    </div>`
+                el.innerHTML = html.trim();
+                pmscrollWindow();
         }
     }
 
@@ -322,6 +357,27 @@ function doo(stream2) {
             strip.insertBefore(link, strip.firstChild);
             const bbrr = document.createElement('br');
             strip.insertBefore(bbrr, strip.firstChild);
+        })
+
+        document.getElementById('pmsend').addEventListener('click', function() {
+            var yourMessage = document.getElementById('yourMessage').value
+            peer.send(yourMessage);
+            document.getElementById('yourMessage').value = ""
+                /*let self = document.querySelector('pmspeeches');
+                let h = self.innerHTML;
+                h =`<div class = "content" align = "right">
+                    <div class="text">${yourMessage}</div>
+                  </div>`;*/
+            let el = document.getElementById('pmmsg');
+            let html = el.innerHTML;
+            html +=
+                `<div class="right speech">
+                  <div class="content">${yourMessage}</div>
+              </div>
+              `
+            el.innerHTML = html.trim();
+            pmscrollWindow();
+
         })
 
         video1.addEventListener("canplay", function(ev) {

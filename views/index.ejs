@@ -7,17 +7,11 @@
     </title>
     <!-- added by 江 ↓-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.1.2/simplepeer.min.js"></script>
-    <!-- <link rel='stylesheet' href='/stylesheets/test.css' /> -->
     <script src="https://huningxin.github.io/opencv.js/build/asm.js/opencv.js "></script>
     <!-- added by 江 ↑ -->
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <!-- Tocas UI：CSS 與元件 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
-    <!-- Tocas JS：模塊與 JavaScript 函式 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
-    <!-- <link href="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.css" rel='stylesheet'> -->
-
-    <!-- <script src="https://cdn.rawgit.com/TeaMeow/TocasUI/2.3.2/dist/tocas.js"></script> -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
@@ -28,13 +22,17 @@
 <body>
     <!-- 查看線上成員側邊欄 -->
     <div class="ts fitted left sidebar">
-        <div class="ts header">
-            搭拉！
-            <div class="sub header">你打開了秘密的側邊欄！</div>
+        <div class="ts top attached segmented small single line items">
+            <div class="item">
+                <i class="inverted big info rounded icon user"></i>
+                <div class="content">
+                    <div class="header"><br/>Users Online</div>
+                </div>
+            </div>
         </div>
+
         <!-- 右側欄位 -->
         <div class="four wide column">
-            <br>
             <div id="OnlineMemberList" class="ts tiny segmented single line items">
                 <!-- appendMembers from app.js -->
             </div>
@@ -42,7 +40,7 @@
         <!-- / 右側欄位 -->
     </div>
 
-    <div class="squeezable pusher">
+    <div class=" squeezable pusher">
         <!-- 頂部導航選單 -->
         <div class="ts large link attached inverted info menu">
             <div class="ts narrow container">
@@ -54,9 +52,8 @@
         <!-- / 頂部導航選單 -->
 
 
-
         <!-- 主要容器網格系統 -->
-        <div class="ts narrow container grid">
+        <div class="ts container grid">
             <!-- 左側欄位 -->
             <div class="twelve wide column">
                 <br>
@@ -110,7 +107,7 @@
                         <!---<button id="cam" class="ts button info wwidth wspace">Start WebCam</button>-->
                         <button id="play" class="ts button info wwidth wspace">Play Video</button>
                         <button id="pause" class="ts button info wwidth wspace">Pause Video</button>
-                        <button id="snap" class="ts button info wwidth wspace">Snapshot 📸</button>
+                        <button id="snap" class="ts button info wwidth wspace"><center>Snapshot <i class = "icon camera"></i></center></button>
                     </div>
                 </div>
                 <!---webcam hwh-->
@@ -149,30 +146,66 @@
                 <div class="ts tiny segmented single line items pokebox">
                     <div class="item">
                         <div class="content">
-                            <div class="header">戳戳人</div><br/>
+                            <div class="header">戳戳人(￣∇￣)</div><br/><br/>
                             <div class="header">
                                 <div class="ts flatted fluid input">
                                     <input type="text" id="to" placeholder="想戳誰?" /><br/>
                                 </div>
                                 <center>
                                     <div class="ts buttons">
-                                        <button id="btnReqOnMember" class="ts positive basic button"><center>誰在線上</center></button>
-                                        <button id="poke" class="ts primary button"><center><i class = "icon pointing right">戳</i></center></button>
+                                        <!---<button id="btnReqOnMember" class="ts positive basic button"><center>誰在線上</center></button>-->
+                                        <button id="poke" class="ts primary button bwidth"><center><i class = "icon pointing right">戳</i></center></button>
                                     </div>
                                 </center>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!---private hwh-->
+                <div id="secretbox" class="ts tiny segmented single line items secret">
+                    <div class="item secret">
+                        <div id="csecret" class="content secret">
+                            <div class="header">偷偷聊(*≧ω≦)</div><br/>
+                            <div id="secretgray" class="ts secondary segment secret">
+                                <!-- 對話氣泡 -->
+                                <div id="pmmsg" class="ts speeches secret">
+                                    <!-- appendChild from app.js -->
+                                </div>
+                                <!-- / 對話氣泡 -->
+                                <div class="ts flatted fluid input">
+                                    <input id="yourMessage" placeholder="想說什麼?" />&nbsp<button id="pmsend" class="ts button info">送出!</button><br/>
+                                </div>
+                            </div>
+                        </div>
+                        <!---content-->
+                    </div>
+                    <!---item-->
+                </div>
                 <!---Poke hwh + Req Online Member-->
+                <div class="ts tiny segmented single line items pokebox">
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">可以找誰玩\(≧▽≦)/</div><br/>
+                            <div class="header">
+                                <center>
+                                    <div class="ts buttons bwidth">
+                                        <button id="btnReqOnMember" class="ts positive basic button"><center>誰在線上</center></button>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---private hwh-->
                 <!---Snapshot hwh-->
                 <div class="ts tiny segmented single line items">
                     <div class="item">
                         <div class="content">
                             <div class="header">
-                                <i class="icon camera"> Snapshot</i>
-                                <div class="strip"></div>
-                            </div>
+                                <i class="icon camera"> Snapshot</i></div><br/>
+                            <div class="strip"></div>
                         </div>
                     </div>
                 </div>
