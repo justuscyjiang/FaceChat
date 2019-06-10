@@ -399,7 +399,7 @@ function doo(stream2) {
     peer1.on('error', (err) => {
         swal({
             title: 'Peep Error',
-            text: err,
+            text: JSON.stringify(err),
             icon: 'error',
             buttons: [false, true],
             closeOnClickOutside: false,
@@ -412,7 +412,7 @@ function doo(stream2) {
     peer2.on('error', (err) => {
         swal({
             title: 'Peep Error',
-            text: err,
+            text: JSON.stringify(err),
             icon: 'error',
             buttons: [false, true],
             closeOnClickOutside: false,
