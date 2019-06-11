@@ -131,7 +131,7 @@ function doo(stream2) {
                      */
                     document.querySelector('.speeches').innerHTML = '' // remove messages
                     privateMessages = true // change messages to private messages
-                    socket.emit('history')
+                    socket.emit('historyP')
                     theOther = from
                 } else {
                     socket.emit('notice', from + '^' + "decline")
@@ -154,7 +154,7 @@ function doo(stream2) {
          */
         document.querySelector('.speeches').innerHTML = '' // remove messages
         privateMessages = true // change messages to private messages
-        socket.emit('history')
+        socket.emit('historyP')
         theOther = from
     })
 

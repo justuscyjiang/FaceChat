@@ -21,6 +21,7 @@ var ID = {}
 var online = {}
 var name = {}
 var L = 0
+var blockList = {}
 
 io.on('connection', async(socket) => {
     console.log('a user connected');
@@ -82,13 +83,12 @@ io.on('connection', async(socket) => {
         // io.to(socketid).emit('historyP', historyP); 
         async function asyncHistoryP() { // private history
             var historyP = await socketHander.getMessagesP();
-            io.to(socketid).emit('history', historyP);
+            io.to(socketid).emit('historyP', historyP);
         }
         asyncHistoryP()
     });
 
     socket.on('clients', (obj) => {
-        console.log('rec')
         io.emit("clients", {
             clients: L,
             user: obj,
@@ -171,6 +171,15 @@ io.on('connection', async(socket) => {
                     online[to] = 'free'
                     console.log(from + ' is replying to ' + to + ': decline.');
                 }
+                break
+            case 'block':
+                let obj = {
+                    name: from,
+                    msg: type,
+                    to: '^' + to,
+                };
+                socketHander.storeMessagesP(obj);
+                console.log(from + ' has block the call from ' + to + '.');
                 break
         }
         info()

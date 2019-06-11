@@ -317,3 +317,8 @@ html {
     width: 190px;
     height: 130px;
 }
+
+#help td {
+    font-family: 'Monaco';
+    font-size: 16px
+}
