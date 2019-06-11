@@ -128,10 +128,10 @@ function doo(stream2) {
                     /**
                      * private messages by socket.io
                      */
-                    // document.querySelector('.speeches').innerHTML = '' // remove messages
-                    // privateMessages = true // change messages to private messages
-                    // socket.emit('historyP')
-                    // theOther = from
+                    document.querySelector('.speeches').innerHTML = '' // remove messages
+                    privateMessages = true // change messages to private messages
+                    socket.emit('historyP')
+                    theOther = from
                 } else {
                     socket.emit('notice', from + '^' + "decline")
                     clearTimeout(callTimer)
@@ -151,10 +151,10 @@ function doo(stream2) {
         /**
          * private messages by socket.io
          */
-        // document.querySelector('.speeches').innerHTML = '' // remove messages
-        // privateMessages = true // change messages to private messages
-        // socket.emit('historyP')
-        // theOther = from
+        document.querySelector('.speeches').innerHTML = '' // remove messages
+        privateMessages = true // change messages to private messages
+        socket.emit('historyP')
+        theOther = from
     })
 
     document.getElementById('poke').addEventListener('click', function() {
