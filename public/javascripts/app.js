@@ -10,7 +10,7 @@ if (account) {
     // socket = io.connect('ws://localhost:3001');
     socket = io.connect();
 
-    socket.emit('clients', account);
+    // socket.emit('clients', account);
 
     // 歷史訊息
     socket.on('history', (obj) => {
