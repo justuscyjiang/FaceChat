@@ -466,5 +466,14 @@ if (account) {
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
-    }).then(doo, (err) => { console.log(err) });
+    }).then(doo, (err) => {
+        swal({
+            title: '',
+            text: '123',
+            icon: 'error',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        })
+    });
 }
