@@ -71,12 +71,16 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("history", () => {
-        var history
 
-        function test() { history = socketHander.getMessages(); }
+        async function test() {
+            var a = await socketHander.getMessages();
+            return a
+        }
+
         // history = socketHander.getMessages();
-        test().then(() => { io.to(socketid).emit('history', history); })
-            // io.to(socketid).emit('history', history); // messages
+
+        // io.to(socketid).emit('history', history); // messages
+        io.to(socketid).emit('history', test);
     });
 
     socket.on("historyP", () => {
