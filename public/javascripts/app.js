@@ -109,6 +109,7 @@ function sendData() {
         });
         config = true
         document.querySelector('.speeches').innerHTML = '<div style="font-size:16px, font-family:Monaco">></div>'
+        document.querySelector("input").addEventListener("keyup", key);
         socket.removeAllListeners('message')
         socket.removeAllListeners('messageP')
         return
