@@ -37,11 +37,12 @@ function erosion(src) {
 function processVideo() {
 
     try {
-        vc.read(src);; // 這裡有可能拋出錯誤
+        vc.read(src); // 這裡有可能拋出錯誤
     } catch (e) {
         swal('oops', 'cv', 'error'); // 如果我們得到錯誤，就處理他
     } finally {
         document.getElementById('large').setAttribute('style', 'display: inline; z-index: 100;') // 永遠會關閉這項資源
+        document.getElementById('canvasOutput').setAttribute('style', 'display: none;')
     }
 
     vc.read(src);
