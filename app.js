@@ -74,13 +74,14 @@ io.on('connection', async(socket) => {
 
         async function test() {
             var a = await socketHander.getMessages();
-            return a
+            io.to(socketid).emit('history', a);
         }
 
-        // history = socketHander.getMessages();
+        test()
+            // history = socketHander.getMessages();
 
         // io.to(socketid).emit('history', history); // messages
-        io.to(socketid).emit('history', test);
+
     });
 
     socket.on("historyP", () => {
