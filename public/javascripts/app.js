@@ -124,14 +124,8 @@ function sendData() {
         config = true
         document.querySelector('.speeches').innerHTML = ''
         document.querySelector('input').value = '';
-        socket.on('message', (obj) => {
-            swal('!', '~')
-        });
-
-        socket.on('messageP', (obj) => {
-            swal('!', '~')
-        });
-        return
+        socket.removeAllListeners('message')
+        socket.removeAllListeners('messageP')
     }
     if (!msg) {
         swal({
