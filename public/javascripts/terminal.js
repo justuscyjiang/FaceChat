@@ -25,11 +25,8 @@ function terminal(msg) {
         case 'help':
 
         default:
-            res.push(msg, `
-        block            TBD
-       \n end          Exit.
-       \n help         See all commands.
-       \n version         See the information about this website.`)
+            res.push(msg, ` block            TBD<br> end          Exit.<br>
+             help         See all commands.<br> version         See the information about this website.`)
             appendTerminal(res)
             break
     }
@@ -43,7 +40,7 @@ function appendTerminal(res) {
     // el.replaceChild(textnode, el.lastChild);
     let html = el.innerHTML;
     html +=
-        `
+        `<br>
     <div style="font-size:16px; font-family:Monaco">> ${res[0]}</div>
     <div style="font-size:16px; font-family:Monaco">${res[1]}</div>
     <div style="font-size:16px, font-family:Monaco">></div>
