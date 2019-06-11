@@ -88,6 +88,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on('clients', (obj) => {
+        console.log('rec')
         io.emit("clients", {
             clients: L,
             user: obj,
