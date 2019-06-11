@@ -7,7 +7,7 @@ function terminal(msg) {
             res.push(msg, 'FaceChat 2019-06-11 <br>Adelaide Hsu, Vivi Hsu, Justus Jiang')
             appendTerminal(res)
             break
-        case 'end':
+        case 'exit':
             config = false
             socket.on('message', (obj) => {
                 appendData([obj]);
@@ -26,8 +26,24 @@ function terminal(msg) {
         case 'help':
 
         default:
-            res.push(msg, `block            TBD<br>end          Exit.<br>
-            help         See all commands.<br>version         See the information about this website.`)
+            res.push(msg, `<table style="width:100%">
+            <tr>
+              <td>block</td>
+              <td>TBD.</td>
+            </tr>
+            <tr>
+              <td>exit</td>
+              <td>Return to chatroom.</td>
+            </tr>
+            <tr>
+              <td>help</td>
+              <td>See all commands.</td>
+            </tr>
+              <tr>
+              <td>version</td>
+              <td>See the information about this website.</td>
+            </tr>
+          </table>`)
             appendTerminal(res)
             break
     }
