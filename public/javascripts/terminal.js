@@ -4,8 +4,7 @@ function terminal(msg) {
 
 
         case 'version':
-
-            res.push(msg, 'Version 2019.06.11 success')
+            res.push(msg, 'FaceChat 2019-06-11 \nAdelaide Hsu, Vivi Hsu, Justus Jiang')
             appendTerminal(res)
             break
         case 'end':
@@ -24,7 +23,14 @@ function terminal(msg) {
             }
             break
         case 'help':
+
         default:
+            res.push(msg, `
+        block            TBD
+       \n end          Exit.
+       \n help         See all commands.
+       \n version         See the information about this website.`)
+            appendTerminal(res)
             break
     }
 }
@@ -38,28 +44,10 @@ function appendTerminal(res) {
     let html = el.innerHTML;
     html +=
         `
-    <div style="font-size:16px; font-family:Monaco; diplay:inline">> ${res[0]}</div>
-    <div style="font-size:16px; font-family:Monaco; diplay:inline">${res[1]}</div>
-    <div style="font-size:16px, font-family:Monaco; diplay:inline">></div>
+    <div style="font-size:16px; font-family:Monaco">> ${res[0]}</div>
+    <div style="font-size:16px; font-family:Monaco">${res[1]}</div>
+    <div style="font-size:16px, font-family:Monaco">></div>
     `;
-    // html +=
-    //     `
-    //     <div class="${element.name == account ? 'right circular group' : 'circular group'}">
-    //         <div class="speech">
-    //             ${element.name == account? "<div class='group'>":''}
-    //                 <div class="avatar">
-    //                     <img src="${element.name == account ? './images/user.png' : './images/user1.png'}">
-    //                 </div>
-    //                 <div class="content">
-    //                     <div class="inline author">${element.name == account ? '' : element.name}</div>
-    //                     <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div> 
-    //                 </div>  
-    //                 <div class=" time">${moment(element.time).fromNow()}</div>
-    //             ${element.name == account? "</div>":''}
-    //         </div>
-    //     </div>
-    //     `;
-
 
     el.innerHTML = html.trim();
     scrollWindow();
