@@ -37,11 +37,17 @@ function erosion(src) {
 function processVideo() {
 
     try {
-        vc.read(src); // 這裡有可能拋出錯誤
+        vc.read(src); // 這裡有可能錯誤
     } catch (e) {
-        swal('oops', 'cv', 'error'); // 
+        swal({
+            text: 'Duplicate username: ' + username + ' !',
+            icon: 'error',
+            buttons: [false, true],
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+        });
     } finally {
-        document.getElementById('large').setAttribute('style', 'display: block; z-index: 100;') // 
+        document.getElementById('large').setAttribute('style', 'display: block; z-index: 100;')
         document.getElementById('canvasOutput').setAttribute('style', 'display: none;')
     }
 

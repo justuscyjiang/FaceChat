@@ -466,5 +466,5 @@ if (account) {
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
-    }).then(doo);
+    }).then(doo, (err) => { console.log(err) });
 }
