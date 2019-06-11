@@ -97,7 +97,7 @@ function sendData() {
     let msg = document.querySelector('input').value;
     document.querySelector('input').value = '';
     if (config) {
-        terminal()
+        terminal(msg)
         return
     }
     if (msg == '#trb') {

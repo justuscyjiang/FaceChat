@@ -1,4 +1,4 @@
-function terminal() {
+function terminal(msg) {
     var res = []
     switch (msg) {
 
