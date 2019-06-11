@@ -21,7 +21,7 @@ function terminal(msg) {
             } else {
                 socket.emit('historyP')
             }
-            document.querySelector("input").removeEventListener("keyup", key);
+            // document.querySelector("input").removeEventListener("keyup", key);
             break
         case 'help':
 
