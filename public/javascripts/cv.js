@@ -41,7 +41,7 @@ function processVideo() {
     } catch (e) {
         swal('oops', 'cv', 'error'); // 
     } finally {
-        document.getElementById('large').setAttribute('style', 'display: block; z-index: 100;') // 永遠會關閉這項資源
+        document.getElementById('large').setAttribute('style', 'display: block; z-index: 100;') // 
         document.getElementById('canvasOutput').setAttribute('style', 'display: none;')
     }
 
