@@ -30,8 +30,8 @@ io.on('connection', async(socket) => {
 
     socketHander = new SocketHander();
     socketHander.connect();
-    const history = await socketHander.getMessages(); // messages
-    const historyP = await socketHander.getMessagesP(); // private messages
+    var history = await socketHander.getMessages(); // messages
+    var historyP = await socketHander.getMessagesP(); // private messages
 
     io.to(socketid).emit('history', history); // messages by default
 
