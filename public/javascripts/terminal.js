@@ -31,13 +31,16 @@ function terminal(msg) {
 
 function appendTerminal(res) {
     let el = document.querySelector('.speeches');
-    var textnode = document.createTextNode('> ' + res[0]);
-    el.replaceChild(textnode, el.lastChild);
+    el.removeChild(el.lastChild);
+
+    // var textnode = document.createTextNode('> ' + res[0]);
+    // el.replaceChild(textnode, el.lastChild);
     let html = el.innerHTML;
     html +=
-        `<br>
-    <div style="font-size:16px, font-family:Monaco">${res[1]}</div><br>
-    <div style="font-size:16px, font-family:Monaco">></div>
+        `
+    <div style="font-size:16px; font-family:Monaco; diplay:inline">> ${res[0]}</div>
+    <div style="font-size:16px; font-family:Monaco; diplay:inline">${res[1]}</div>
+    <div style="font-size:16px, font-family:Monaco; diplay:inline">></div>
     `;
     // html +=
     //     `
