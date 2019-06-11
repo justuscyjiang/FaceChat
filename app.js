@@ -71,21 +71,20 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("history", () => {
-
-        async function test() {
-            var a = await socketHander.getMessages();
-            io.to(socketid).emit('history', a);
+        async function asyncHistory() { // history
+            var history = await socketHander.getMessages();
+            io.to(socketid).emit('history', history);
         }
-
-        test()
-            // history = socketHander.getMessages();
-
-        // io.to(socketid).emit('history', history); // messages
-
+        asyncHistory()
     });
 
     socket.on("historyP", () => {
-        io.to(socketid).emit('historyP', historyP); // private messages
+        // io.to(socketid).emit('historyP', historyP); 
+        async function asyncHistoryP() { // private history
+            var historyP = await socketHander.getMessagesP();
+            io.to(socketid).emit('history', historyP);
+        }
+        asyncHistoryP()
     });
 
     socket.on('clients', (obj) => {

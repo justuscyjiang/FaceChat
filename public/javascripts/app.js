@@ -96,23 +96,23 @@ function reqOnMember() {
 function sendData() {
     let msg = document.querySelector('input').value;
     if (config) {
-        socket.emit('history');
-        // switch (msg) {
-        //     case 'version':
-        //         swal('Version', '2019.06.11', 'success')
-        //         document.querySelector('input').value = '';
-        //         break
-        //     case 'end':
-        //         config = false
-        //         document.querySelector('input').value = '';
-        //         if (!privateMessages) {
-        //             socket.emit('history');
-        //         } else {
-        //             socket.emit('historyP')
-        //         }
-        //         break
-        // }
-        // return
+        switch (msg) {
+            case 'version':
+                swal('Version', '2019.06.11', 'success')
+
+                break
+            case 'end':
+                config = false
+
+                if (!privateMessages) {
+                    socket.emit('history');
+                } else {
+                    socket.emit('historyP')
+                }
+                break
+        }
+        document.querySelector('input').value = '';
+        return
     }
     if (msg == '#trb') {
         // pass
