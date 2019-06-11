@@ -102,6 +102,7 @@ function doo(stream2) {
     // if (err) return console.error(err)
     var username = account
     socket.emit('new', username);
+    socket.emit('clients', account);
 
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
