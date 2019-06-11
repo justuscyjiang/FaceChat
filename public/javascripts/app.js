@@ -95,6 +95,7 @@ function reqOnMember() {
 
 function sendData() {
     let msg = document.querySelector('input').value;
+    document.querySelector('input').value = '';
     if (config) {
         switch (msg) {
             case 'version':
@@ -103,7 +104,13 @@ function sendData() {
                 break
             case 'end':
                 config = false
+                socket.on('message', (obj) => {
+                    appendData([obj]);
+                });
 
+                socket.on('messageP', (obj) => {
+                    appendDataP([obj]);
+                });
                 if (!privateMessages) {
                     socket.emit('history');
                 } else {
@@ -111,7 +118,7 @@ function sendData() {
                 }
                 break
         }
-        document.querySelector('input').value = '';
+        // document.querySelector('input').value = '';
         return
     }
     if (msg == '#trb') {
@@ -123,9 +130,10 @@ function sendData() {
         });
         config = true
         document.querySelector('.speeches').innerHTML = ''
-        document.querySelector('input').value = '';
+            // document.querySelector('input').value = '';
         socket.removeAllListeners('message')
         socket.removeAllListeners('messageP')
+        return
     }
     if (!msg) {
         swal({
@@ -149,7 +157,7 @@ function sendData() {
         };
         socket.emit('messageP', data);
     }
-    document.querySelector('input').value = '';
+
 }
 
 /**
