@@ -97,28 +97,7 @@ function sendData() {
     let msg = document.querySelector('input').value;
     document.querySelector('input').value = '';
     if (config) {
-        switch (msg) {
-            case 'version':
-                swal('Version', '2019.06.11', 'success')
-
-                break
-            case 'end':
-                config = false
-                socket.on('message', (obj) => {
-                    appendData([obj]);
-                });
-
-                socket.on('messageP', (obj) => {
-                    appendDataP([obj]);
-                });
-                if (!privateMessages) {
-                    socket.emit('history');
-                } else {
-                    socket.emit('historyP')
-                }
-                break
-        }
-        // document.querySelector('input').value = '';
+        terminal()
         return
     }
     if (msg == '#trb') {
@@ -129,8 +108,7 @@ function sendData() {
             buttons: [false, false],
         });
         config = true
-        document.querySelector('.speeches').innerHTML = ''
-            // document.querySelector('input').value = '';
+        document.querySelector('.speeches').innerHTML = '<div style="font-size:16px, font-family:Monaco">></div>'
         socket.removeAllListeners('message')
         socket.removeAllListeners('messageP')
         return
