@@ -71,7 +71,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on("history", () => {
-        history = socketHander.getMessages();
+        history = await socketHander.getMessages();
         io.to(socketid).emit('history', history); // messages
     });
 
