@@ -28,7 +28,7 @@ function terminal(msg) {
             default:
                 res.push(msg, `<table style="width:100%" id='help'><tbody >
             <tr>
-              <td>block \<username\></td>
+              <td>block &ltusername&gt</td>
               <td>Block the call from someone.</td>
             </tr>
             <tr>
@@ -39,10 +39,23 @@ function terminal(msg) {
               <td>help</td>
               <td>See all commands.</td>
             </tr>
-              <tr>
+            <tr>
+              <td>password</td>
+              <td>Set password to your account.</td>
+            </tr>
+            <tr>
+              <td>unblock &ltusername&gt</td>
+              <td>Unblock the call from someone.</td>
+            </tr>
+            <tr>
               <td>version</td>
               <td>See the information about this website.</td>
-            </tr></tbody>
+            </tr>
+            <tr>
+              <td>width</td>
+              <td>Adjust the width of the video.</td>
+            </tr>
+            </tbody>
           </table>`)
                 appendTerminal(res)
                 break
@@ -53,6 +66,25 @@ function terminal(msg) {
                 socket.emit('notice', msg.split(" ")[1] + "^" + 'block')
                 res.push(msg, 'You have blocked the call from ' + msg.split(" ")[1] + ' successfully.')
                 appendTerminal(res)
+                break
+            case 'unblock':
+                socket.emit('notice', msg.split(" ")[1] + "^" + 'unblock')
+                res.push(msg, 'You have unblocked the call from ' + msg.split(" ")[1] + ' successfully.')
+                appendTerminal(res)
+                break
+            case 'width':
+                document.getElementById('canvasOutput').setAttribute('style', 'width: ' + msg.split(" ")[1] + 'px;')
+                res.push(msg, 'The width of the video has been set to ' + msg.split(" ")[1] + ' successfully.')
+                appendTerminal(res)
+                break
+            case 'password':
+                if (1) {
+                    res.push(msg, 'Input your new password: ')
+                    appendTerminal(res)
+                } else {
+                    res.push(msg, 'Input your old password: ')
+                    appendTerminal(res)
+                }
                 break
 
         }

@@ -129,10 +129,10 @@ function doo(stream2) {
                     /**
                      * private messages by socket.io
                      */
-                    document.querySelector('.speeches').innerHTML = '' // remove messages
-                    privateMessages = true // change messages to private messages
-                    socket.emit('historyP')
-                    theOther = from
+                    // document.querySelector('.speeches').innerHTML = '' // remove messages
+                    // privateMessages = true // change messages to private messages
+                    // socket.emit('historyP')
+                    // theOther = from
                 } else {
                     socket.emit('notice', from + '^' + "decline")
                     clearTimeout(callTimer)
@@ -152,10 +152,10 @@ function doo(stream2) {
         /**
          * private messages by socket.io
          */
-        document.querySelector('.speeches').innerHTML = '' // remove messages
-        privateMessages = true // change messages to private messages
-        socket.emit('historyP')
-        theOther = from
+        // document.querySelector('.speeches').innerHTML = '' // remove messages
+        // privateMessages = true // change messages to private messages
+        // socket.emit('historyP')
+        // theOther = from
     })
 
     document.getElementById('poke').addEventListener('click', function() {
@@ -247,6 +247,14 @@ function doo(stream2) {
                     sessionStorage.clear();
                     location.reload();
                 })
+                break
+            case 'password':
+                swal({
+                        title: "請輸入密碼:",
+                        icon: "info",
+                        content: "input"
+                    })
+                    .then((value) => {})
                 break
 
 

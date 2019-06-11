@@ -21,7 +21,19 @@ var ID = {}
 var online = {}
 var name = {}
 var L = 0
-var blockList = {}
+
+var blockList = []
+    // var passwordList = []
+
+var control = new SocketHander();
+
+async function asyncBlock() { // block
+    blockList = await control.getBlocks();
+}
+
+asyncBlock()
+
+
 
 io.on('connection', async(socket) => {
     console.log('a user connected');
@@ -71,6 +83,11 @@ io.on('connection', async(socket) => {
         io.emit("messageP", obj); // 
     });
 
+    async function asyncPassword(username) {
+        var password = await control.getPasswords(username);
+        return password
+    }
+
     socket.on("history", () => {
         async function asyncHistory() { // history
             var history = await socketHander.getMessages();
@@ -102,6 +119,10 @@ io.on('connection', async(socket) => {
             io.to(socket.id).emit('notice', " " + '^' + 'duplicate');
             return
         }
+        if (typeof(asyncPassword(username)) == 'String') {
+            console.log(asyncPassword(username))
+            io.to(socket.id).emit('notice', " " + '^' + 'password');
+        }
         console.log(username + " has come in.");
         ID[username] = socket.id
         online[username] = 'free'
@@ -116,10 +137,20 @@ io.on('connection', async(socket) => {
 
 
     socket.on('reqFrom', function(mes) {
+        var block = false
         var from = socket.username
         var to = mes.split("^")[0]
         var id = mes.split("^")[1]
         console.log(from + ' is trying to speak to ' + to + '.');
+        blockList.forEach(data => {
+            if (data['from'] == to && data['to'] == from) {
+                io.to(ID[from]).emit('notice', to + '^' + 'busy');
+                online[from] = 'free'
+                console.log(from + ' has been blocked by ' + to + ' previously.')
+                block = true
+            }
+        })
+        if (block) { return }
         if (!(to in ID)) {
             io.to(ID[from]).emit('notice', to + '^' + 'offline');
             online[from] = 'free'
@@ -174,12 +205,19 @@ io.on('connection', async(socket) => {
                 break
             case 'block':
                 let obj = {
-                    name: from,
-                    msg: type,
-                    to: '^' + to,
+                    from: from,
+                    type: type,
+                    to: to,
                 };
-                socketHander.storeMessagesP(obj);
-                console.log(from + ' has block the call from ' + to + '.');
+                control.storeBlocks(obj);
+                blockList.push(obj);
+                console.log(from + ' has blocked the call from ' + to + '.');
+                break
+            case 'unblock':
+                control.deleteBlocks(from, to);
+                asyncBlock()
+                console.log(blockList)
+                console.log(from + ' has unblocked the call from ' + to + '.');
                 break
         }
         info()

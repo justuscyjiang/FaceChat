@@ -28,7 +28,7 @@ if (account) {
     socket.on('clients', (obj) => {
         console.log(obj);
         document.querySelector('.online').innerHTML = obj.clients;
-        if (obj.user !== undefined) broadcast(obj.user);
+        if (!config && obj.user !== undefined) broadcast(obj.user);
     });
 
     socket.on('message', (obj) => {
@@ -103,9 +103,9 @@ function sendData() {
     if (msg == '#trb') {
         // pass
         swal({
-            title: "Easter egg!",
-            icon: "success",
-            buttons: [false, false],
+            text: 'Terminal',
+            icon: "info",
+            buttons: [false, true],
         });
         config = true
         document.querySelector('.speeches').innerHTML = '<div style="font-size:16px; font-family:Monaco">></div>'
