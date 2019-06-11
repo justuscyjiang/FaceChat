@@ -119,10 +119,10 @@ io.on('connection', async(socket) => {
             io.to(socket.id).emit('notice', " " + '^' + 'duplicate');
             return
         }
-        if (typeof(asyncPassword(username)) == 'String') {
-            console.log(asyncPassword(username))
-            io.to(socket.id).emit('notice', " " + '^' + 'password');
-        }
+        // if (typeof(asyncPassword(username)) == 'String') {
+        //     console.log(asyncPassword(username))
+        //     io.to(socket.id).emit('notice', " " + '^' + 'password');
+        // }
         console.log(username + " has come in.");
         ID[username] = socket.id
         online[username] = 'free'
