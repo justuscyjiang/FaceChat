@@ -8,8 +8,9 @@ class SocketHander {
     }
 
     connect() {
-        this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
+        // this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
         // this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
+        this.db = require('mongoose').connect('mongodb://10.122.238.175:27017/nchat');
         this.db.Promise = global.Promise;
     }
 
