@@ -29,6 +29,7 @@ var control = new SocketHander();
 
 async function asyncBlock() { // block
     blockList = await control.getBlocks();
+    console.log(blockList)
 }
 
 asyncBlock()
