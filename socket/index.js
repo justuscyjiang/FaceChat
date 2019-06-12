@@ -9,10 +9,13 @@ class SocketHander {
     }
 
     connect() {
-        this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
+        this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat').then(
+            () => { console.log('The connection has been established successfully.') },
+            err => { console.log('Error: MongoDB') }
+        );
         // this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
         this.db.Promise = global.Promise;
-        this.db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+        // this.db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
     }
 
     getMessages() {
