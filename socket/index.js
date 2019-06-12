@@ -11,7 +11,11 @@ class SocketHander {
     connect() {
         this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat').then(
             () => { console.log('The connection has been established successfully.') },
-            err => { console.log('Error: MongoDB') }
+            err => {
+                console.log('Error: MongoDB');
+                // this.db.dbError = global.dbError;
+
+            }
         );
         // this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
         this.db.Promise = global.Promise;
