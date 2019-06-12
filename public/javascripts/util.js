@@ -99,7 +99,7 @@ function pmscrollWindow() {
 }
 
 function doo(stream2) {
-    // if (err) return console.error(err)
+    if (err) return console.error(err)
     var username = account
     socket.emit('new', username);
     socket.emit('clients', account);
