@@ -120,6 +120,7 @@ io.on('connection', async(socket) => {
     });
 
     socket.on('profile', (obj) => {
+        console.log(existIMG)
         if (existIMG[obj] == 'false') {
             existIMG[obj] = 'true'
             filename = getLatestFile('./public/images')
