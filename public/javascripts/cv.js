@@ -41,7 +41,7 @@ function processVideo() {
     } catch (err) {
         swal({
             title: 'OpenCV Error',
-            text: err.toString(),
+            text: err.toString() + '\nOpenCV functions have been disabled.',
             icon: 'error',
             buttons: [false, true],
             closeOnClickOutside: false,
@@ -50,7 +50,7 @@ function processVideo() {
         document.getElementById('large').setAttribute('style', 'display: block; z-index: 100;')
         document.getElementById('canvasOutput').setAttribute('style', 'display: none;')
         document.getElementById("pass").disabled = true;
-        document.getElementById("none").disabled = true;
+        document.getElementById("gray").disabled = true;
         document.getElementById("erosion").disabled = true;
     }
 
