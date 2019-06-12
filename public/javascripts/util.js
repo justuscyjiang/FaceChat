@@ -257,6 +257,12 @@ function doo(stream2) {
                     })
                     .then((value) => {})
                 break
+            case "dbError":
+                swal({
+                    title: "DB",
+                    icon: "info"
+                })
+                break
 
 
         }
