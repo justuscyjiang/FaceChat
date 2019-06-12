@@ -468,8 +468,8 @@ if (account) {
         audio: true
     }).then(doo, (err) => {
         swal({
-            title: '',
-            text: '123',
+            title: 'Camera Access Denied',
+            text: 'Check your permission setting, or use Firefox.',
             icon: 'error',
             buttons: [false, true],
             closeOnClickOutside: false,

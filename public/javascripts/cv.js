@@ -40,6 +40,7 @@ function processVideo() {
         vc.read(src); // 這裡有可能錯誤
     } catch (err) {
         swal({
+            title: 'OpenCV Error',
             text: err.toString(),
             icon: 'error',
             buttons: [false, true],
