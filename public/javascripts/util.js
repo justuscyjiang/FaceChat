@@ -33,6 +33,8 @@ var callTimer
 
 var theOther
 
+var peerError = false
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
@@ -405,57 +407,69 @@ function doo(stream2) {
     peer2.on('stream', transStream)
 
     peer1.on('error', (err) => {
+        peerError = true
         swal({
             title: 'Peep Error',
             text: err.toString(),
             icon: 'error',
-            buttons: [false, true],
+            buttons: ['Cancel', 'Restart'],
             closeOnClickOutside: false,
             closeOnEsc: false,
-        }).then(() => {
-            sessionStorage.clear();
-            location.reload();
+        }).then((ans) => {
+            if (ans) {
+                sessionStorage.clear();
+                location.reload();
+            }
         })
     })
     peer2.on('error', (err) => {
+        peerError = true
         swal({
             title: 'Peep Error',
             text: err.toString(),
             icon: 'error',
-            buttons: [false, true],
+            buttons: ['Cancel', 'Restart'],
             closeOnClickOutside: false,
             closeOnEsc: false,
-        }).then(() => {
-            sessionStorage.clear();
-            location.reload();
+        }).then((ans) => {
+            if (ans) {
+                sessionStorage.clear();
+                location.reload();
+            }
         })
     })
 
     peer1.on('close', () => {
+        if (peerError) { return }
         swal({
             title: '',
             text: 'The connection has closed!',
             icon: 'warning',
-            buttons: [false, true],
+            buttons: ['Cancel', 'Restart'],
             closeOnClickOutside: false,
             closeOnEsc: false,
-        }).then(() => {
-            sessionStorage.clear();
-            location.reload();
+        }).then((ans) => {
+            if (ans) {
+                sessionStorage.clear();
+                location.reload();
+            }
         })
     })
 
     peer2.on('close', () => {
+        if (peerError) { return }
         swal({
             title: '',
             text: 'The connection has closed!',
             icon: 'warning',
-            buttons: [false, true],
+            buttons: ['Cancel', 'Restart'],
             closeOnClickOutside: false,
             closeOnEsc: false,
-        }).then(() => {
-            sessionStorage.clear();
-            location.reload();
+        }).then((ans) => {
+            if (ans) {
+                sessionStorage.clear();
+                location.reload();
+            }
         })
     })
 
