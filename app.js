@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+const fs = require('fs');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -20,6 +21,8 @@ const io = require('socket.io')(server);
 var ID = {}
 var online = {}
 var name = {}
+var existIMG = {}
+var profileLookup = {}
 var L = 0
 
 var blockList = []
@@ -43,12 +46,9 @@ io.on('connection', async(socket) => {
     const socketid = socket.id;
 
     socketHander = new SocketHander();
-    var dbStatus = socketHander.connect();
-    if (dbStatus) {
-        socket.emit('notice', "_^dbError")
-    } else {
-        socket.emit('notice', "_^test")
-    }
+
+    socketHander.connect();
+
 
     var history = await socketHander.getMessages(); // messages
     var historyP = await socketHander.getMessagesP(); // private messages
@@ -119,6 +119,20 @@ io.on('connection', async(socket) => {
         });
     });
 
+    socket.on('profile', (obj) => {
+        if (existIMG[obj] == 'false') {
+            existIMG[obj] = 'true'
+            filename = getLatestFile('./public/images')
+            console.log(obj + '_profile: ' + filename)
+            profileLookup[obj] = filename
+            io.emit('profile', {
+                user: obj,
+                userImg: filename,
+                table: profileLookup
+            });
+        }
+    });
+
     socket.on('new', function(username) {
         socket.username = username;
         if (username in ID) {
@@ -130,10 +144,14 @@ io.on('connection', async(socket) => {
         //     console.log(asyncPassword(username))
         //     io.to(socket.id).emit('notice', " " + '^' + 'password');
         // }
+
+        if (username == 'spy') { io.to(socket.id).emit('notice', " " + '^' + 'password'); }
+        // ...............tmp ↑
         console.log(username + " has come in.");
         ID[username] = socket.id
         online[username] = 'free'
         name[username] = username
+        existIMG[username] = 'false'
         countUser()
         io.emit("clients", {
             clients: L,
@@ -249,7 +267,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -263,6 +281,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.use('/', index);
+app.use('/upload', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -308,3 +327,33 @@ function info() {
 
 
 module.exports = app;
+
+
+function getLatestFile(dirpath) {
+
+    // Check if dirpath exist or not right here
+
+    let latest;
+
+    const files = fs.readdirSync(dirpath);
+    files.forEach(filename => {
+        // Get the stat
+        const stat = fs.lstatSync(path.join(dirpath, filename));
+        // Pass if it is a directory
+        if (stat.isDirectory())
+            return;
+
+        // latest default to first file
+        if (!latest) {
+            latest = { filename, mtime: stat.mtime };
+            return;
+        }
+        // update latest if mtime is greater than the current latest
+        if (stat.mtime > latest.mtime) {
+            latest.filename = filename;
+            latest.mtime = stat.mtime;
+        }
+    });
+
+    return latest.filename;
+}

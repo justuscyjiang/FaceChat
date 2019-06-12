@@ -9,23 +9,16 @@ class SocketHander {
     }
 
     connect() {
-        var dbError = false
-        this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat').then(
-            () => {},
-            err => {
-                console.log('Error: MongoDB');
-                dbError = true
-            }
-        );
-        // this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
+        this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat')
+            .then((res) => {})
+            .catch((err) => console.log(err))
+            // this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
         this.db.Promise = global.Promise;
-        return dbError
     }
 
     getMessages() {
         var onedayago = moment().add(-1, 'day');
         return Messages.find({ time: { $gte: onedayago } });
-
     }
 
     getMessagesP() {

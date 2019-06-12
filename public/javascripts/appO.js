@@ -6,8 +6,8 @@ if (account) {
     // 新增使用者    
 
     console.log('account:' + account);
-    var userIMG_MAP = {}
-        // socket = io.connect('ws://localhost:3001');
+
+    // socket = io.connect('ws://localhost:3001');
     socket = io.connect();
 
     // socket.emit('clients', account);
@@ -15,13 +15,13 @@ if (account) {
     // 歷史訊息
     socket.on('history', (obj) => {
         if (obj.length > 0) {
-            appendData(obj, userIMG_MAP);
+            appendData(obj);
         }
     });
 
     socket.on('historyP', (obj) => {
         if (obj.length > 0) {
-            appendDataP(obj, userIMG_MAP);
+            appendDataP(obj);
         }
     });
 
@@ -32,27 +32,15 @@ if (account) {
     });
 
     socket.on('message', (obj) => {
-        appendData([obj], userIMG_MAP);
+        appendData([obj]);
     });
 
     socket.on('messageP', (obj) => {
-        appendDataP([obj], userIMG_MAP);
+        appendDataP([obj]);
     });
 
     socket.on('member', () => {
         ShowOnlineMember()
-    });
-
-    socket.on('profile', (obj) => {
-        userIMG_MAP = obj.table
-        if (obj.user == account) {
-            swal({
-                title: "太棒了!",
-                text: "您的頭貼已更新完成.",
-                icon: "success"
-            });
-        }
-        //userIMG_MAP[obj.user] = obj.userImg
     });
 
     // 修改線上名單
@@ -66,18 +54,18 @@ if (account) {
 
             html +=
                 `
-            <div class="item">
-                <div class="ts mini image">
-                    <img src='./images/user.png'>
-                </div>
-                <div class="content">
-                    <div class="header">${element.name}</div>
-                    <div class="meta">
-                        <div>${element.status}</div>
+                <div class="item">
+                    <div class="ts mini image">
+                        <img src='./images/user.png'>
+                    </div>
+                    <div class="content">
+                        <div class="header">${element.name}</div>
+                        <div class="meta">
+                            <div>${element.status}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
         });
 
         el.innerHTML = html.trim();
@@ -86,10 +74,8 @@ if (account) {
 }
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {
-    reqchangeProfile();
     sendData();
 });
-
 document.querySelector('input').addEventListener('keypress', (e) => {
     if (e.code == 'Enter' || e.code == 'NumpadEnter') {
         sendData();
@@ -105,10 +91,6 @@ document.querySelector('#btnReqOnMember').addEventListener('click', () => {
  */
 function reqOnMember() {
     socket.emit('member')
-}
-
-function reqchangeProfile() {
-    socket.emit('profile', account)
 }
 
 function sendData() {
@@ -169,7 +151,7 @@ function scrollWindow() {
  * 聊天紀錄
  * @param {聊天訊息} obj 
  */
-function appendData(obj, lookup) {
+function appendData(obj) {
 
     let el = document.querySelector('.speeches');
     let html = el.innerHTML;
@@ -182,12 +164,12 @@ function appendData(obj, lookup) {
                 <div class="speech">
                     ${element.name == account? "<div class='group'>":''}
                         <div class="avatar">
-                            <img src="${element.name in lookup? './images/'+lookup[element.name] : './images/user.png'}">
+                            <img src="${element.name == account ? './images/user.png' : './images/user1.png'}">
                         </div>
                         <div class="content">
                             <div class="inline author">${element.name == account ? '' : element.name}</div>
-                            <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div>
-                        </div>
+                            <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div> 
+                        </div>  
                         <div class=" time">${moment(element.time).fromNow()}</div>
                     ${element.name == account? "</div>":''}
                 </div>
@@ -217,12 +199,12 @@ function appendDataP(obj) {
                 <div class="speech">
                     ${element.name == account? "<div class='group'>":''}
                         <div class="avatar">
-                            <img src="${element.name in lookup? './images/'+lookup[element.name] : './images/user.png'}">
+                            <img src="${element.name == account ? './images/user.png' : './images/user1.png'}">
                         </div>
                         <div class="content">
                             <div class="inline author">${element.name == account ? '' : element.name}</div>
-                            <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div>
-                        </div>
+                            <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div> 
+                        </div>  
                         <div class=" time">${moment(element.time).fromNow()}</div>
                     ${element.name == account? "</div>":''}
                 </div>

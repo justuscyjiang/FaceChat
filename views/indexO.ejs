@@ -9,12 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.1.2/simplepeer.min.js"></script>
     <script src="https://huningxin.github.io/opencv.js/build/asm.js/opencv.js "></script>
     <!-- added by 江 ↑ -->
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/zh-tw.js'></script>
 
@@ -32,13 +32,13 @@
             </div>
         </div>
 
-        <!-- 線上成員 -->
+        <!-- 右側欄位 -->
         <div class="four wide column">
             <div id="OnlineMemberList" class="ts tiny segmented single line items">
                 <!-- appendMembers from app.js -->
             </div>
         </div>
-        <!-- / 線上成員 -->
+        <!-- / 右側欄位 -->
     </div>
 
     <div class=" squeezable pusher">
@@ -51,7 +51,6 @@
             </div>
         </div>
         <!-- / 頂部導航選單 -->
-
 
 
         <!-- 主要容器網格系統 -->
@@ -92,8 +91,8 @@
                                 <div class="aemo emo_item"><button id="heart" class="emoji ts button info bwidth">Heart</button></div><br>
                                 <div class="aemo emo_item"><button id="star" class="emoji ts button info bwidth">Stars</button></div><br>
                                 <div class="aemo emo_item"><button id="circle" class="emoji ts button info bwidth">Circles</button></div><br>
-
-                                <div class="aemo emo_item"><button id="b_trb" class="emoji ts button info bwidth">Trb.</button></div><br>
+                                <!---承昱,放長號天鈞會不會囧XDDD-->
+                                <div class="aemo emo_item"><button id="b_trb" class="set_fg ts button info bwidth">Trb.</button></div><br>
                                 <div class="aemo emo_item"><button id="pass" class="filter ts button info bwidth">None</button></div><br>
                                 <div class="aemo emo_item"><button id="gray" class="filter ts button info bwidth">Gray</button></div><br>
                                 <div class="aemo emo_item"><button id="erosion" class="filter ts button info bwidth">Erosion</button></div><br>
@@ -144,26 +143,7 @@
             <!-- 右側欄位 -->
             <div class="four wide column">
                 <br>
-                <!---Profile -->
-                <div class="ts tiny segmented single line items pokebox">
-                    <div class="item">
-                        <div class="content">
-                            <div class="header">來上傳自己的頭像吧(´,,•ω•,,)♡</div><br/><br/>
-                            <div class="header">
-                                <center>
-                                    <form method="post" action="upload/post" enctype="multipart/form-data">
-                                        <input type="file" name="image" /><br /><br />
-                                        <div class="ts buttons">
-                                            <button class="ts primary button bwidth" type="submit" name="upload">Upload</button>
-                                        </div>
-                                    </form>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!---Poke hwh-->
+                <!---Poke hwh + Req Online Member-->
                 <div class="ts tiny segmented single line items pokebox">
                     <div class="item">
                         <div class="content">
@@ -204,8 +184,7 @@
                     </div>
                     <!---item-->
                 </div>
-
-                <!---Req Online Member-->
+                <!---Poke hwh + Req Online Member-->
                 <div class="ts tiny segmented single line items pokebox">
                     <div class="item">
                         <div class="content">
@@ -220,7 +199,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!---private hwh-->
                 <!---Snapshot hwh-->
                 <div class="ts tiny segmented single line items">
@@ -235,7 +213,6 @@
                 <!---Snapshot hwh-->
             </div>
             <!-- / 右側欄位 -->
-
         </div>
         <!-- / 主要容器網格系統 -->
         <div class="hideid">

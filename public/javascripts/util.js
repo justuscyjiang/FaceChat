@@ -251,23 +251,11 @@ function doo(stream2) {
                 break
             case 'password':
                 swal({
-                        title: "請輸入密碼:",
+                        title: "請輸入密碼: ",
                         icon: "info",
                         content: "input"
                     })
                     .then((value) => {})
-                break
-            case "dbError":
-                swal({
-                    title: "DB",
-                    icon: "info"
-                })
-                break
-            case "test":
-                swal({
-                    title: "test",
-                    icon: "info"
-                })
                 break
 
 
