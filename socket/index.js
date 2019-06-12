@@ -12,6 +12,7 @@ class SocketHander {
         this.db = require('mongoose').connect('mongodb://140.112.214.144:27017/nchat');
         // this.db = require('mongoose').connect('mongodb://localhost:27017/nchat');
         this.db.Promise = global.Promise;
+        this.db.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
     }
 
     getMessages() {
