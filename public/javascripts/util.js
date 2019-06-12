@@ -263,6 +263,12 @@ function doo(stream2) {
                     icon: "info"
                 })
                 break
+            case "test":
+                swal({
+                    title: "test",
+                    icon: "info"
+                })
+                break
 
 
         }

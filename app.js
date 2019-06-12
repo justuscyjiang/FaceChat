@@ -46,6 +46,8 @@ io.on('connection', async(socket) => {
     var dbStatus = socketHander.connect();
     if (dbStatus) {
         socket.emit('notice', "_^dbError")
+    } else {
+        socket.emit('notice', "_^test")
     }
 
     var history = await socketHander.getMessages(); // messages
