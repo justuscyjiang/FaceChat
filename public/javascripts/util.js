@@ -98,8 +98,7 @@ function pmscrollWindow() {
     h.scrollTo(0, h.scrollHeight);
 }
 
-function doo(stream2, err) {
-    if (err) return console.error(err)
+function doo(stream2) {
     var username = account
     socket.emit('new', username);
     socket.emit('clients', account);
