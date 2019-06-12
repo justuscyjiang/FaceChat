@@ -43,7 +43,11 @@ io.on('connection', async(socket) => {
     const socketid = socket.id;
 
     socketHander = new SocketHander();
-    socketHander.connect();
+    var dbStatus = socketHander.connect();
+    if (dbStatus) {
+        socket.emit('notice', "_^dbError")
+    }
+
     var history = await socketHander.getMessages(); // messages
     var historyP = await socketHander.getMessagesP(); // private messages
 
