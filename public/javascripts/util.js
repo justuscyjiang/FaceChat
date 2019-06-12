@@ -409,7 +409,7 @@ function doo(stream2) {
     peer1.on('error', (err) => {
         peerError = true
         swal({
-            title: 'Peep Error',
+            title: 'Peer Error',
             text: err.toString(),
             icon: 'error',
             buttons: ['Cancel', 'Restart'],
@@ -425,7 +425,7 @@ function doo(stream2) {
     peer2.on('error', (err) => {
         peerError = true
         swal({
-            title: 'Peep Error',
+            title: 'Peer Error',
             text: err.toString(),
             icon: 'error',
             buttons: ['Cancel', 'Restart'],
