@@ -38,7 +38,7 @@ function processVideo() {
 
     try {
         vc.read(src); // 這裡有可能錯誤
-    } catch (e) {
+    } catch (err) {
         swal({
             text: err.toString(),
             icon: 'error',
