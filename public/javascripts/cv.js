@@ -40,15 +40,15 @@ function processVideo() {
         vc.read(src); // 這裡有可能錯誤
     } catch (e) {
         swal({
-            text: 'Duplicate username: ' + username + ' !',
+            text: err.toString(),
             icon: 'error',
             buttons: [false, true],
             closeOnClickOutside: false,
             closeOnEsc: false,
         });
-    } finally {
         document.getElementById('large').setAttribute('style', 'display: block; z-index: 100;')
         document.getElementById('canvasOutput').setAttribute('style', 'display: none;')
+
     }
 
     vc.read(src);

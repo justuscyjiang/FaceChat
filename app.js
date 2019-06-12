@@ -144,7 +144,7 @@ io.on('connection', async(socket) => {
         console.log(from + ' is trying to speak to ' + to + '.');
         blockList.forEach(data => {
             if (data['from'] == to && data['to'] == from) {
-                io.to(ID[from]).emit('notice', to + '^' + 'busy');
+                io.to(ID[from]).emit('notice', to + '^' + 'timeout');
                 online[from] = 'free'
                 console.log(from + ' has been blocked by ' + to + ' previously.')
                 block = true
