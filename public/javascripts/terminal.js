@@ -34,7 +34,7 @@ function terminal(msg) {
     if (msg.split(" ").length == 1) {
         switch (msg) {
             case 'version':
-                res.push(msg, 'FaceChat 2019-06-11 <br>Adelaide Hsu, Vivi Hsu, Justus Jiang')
+                res.push(msg, 'FaceChat 2019-06-14 <br>Adelaide Hsu, Vivi Hsu, Justus Jiang')
                 appendTerminal(res)
                 break
             case 'concert':
