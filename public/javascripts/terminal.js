@@ -40,7 +40,7 @@ function terminal(msg) {
             case 'concert':
                 res.push(msg,
                     `<a target=\'_blank\' href=\'https://www.facebook.com/KSWBAB/\'>
-                <img ref style=\'position: relative; width:750px;\' src="./images/kswb.png"></a>`
+                <img ref style=\'position: relative; \' src="./images/kswb.png" width="750";></a>`
                 )
                 swal({ title: '', text: '~~~雄中管樂團暨雄中校友管樂團 年度音樂會~~~\n2019-07-26 @高雄衛武營', icon: 'info', buttons: [false, false] })
                 appendTerminal(res)
