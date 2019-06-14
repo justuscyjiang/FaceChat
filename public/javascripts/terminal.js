@@ -49,11 +49,11 @@ function terminal(msg) {
                 config = false
                 document.querySelector('.speeches').innerHTML = '';
                 socket.on('message', (obj) => {
-                    appendData([obj]);
+                    appendData([obj], userIMG_MAP);
                 });
 
                 socket.on('messageP', (obj) => {
-                    appendDataP([obj]);
+                    appendDataP([obj], userIMG_MAP);
                 });
                 if (!privateMessages) {
                     socket.emit('history');
