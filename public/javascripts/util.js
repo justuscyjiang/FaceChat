@@ -35,6 +35,10 @@ var theOther
 
 var peerError = false
 
+var CWB
+
+var password
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
@@ -253,10 +257,31 @@ function doo(stream2) {
                 swal({
                         title: "請輸入密碼: ",
                         icon: "info",
-                        content: "input"
+                        content: "input",
+                        closeOnClickOutside: false,
+                        closeOnEsc: false,
                     })
-                    .then((value) => {})
+                    .then((value) => {
+                        password = mes.split('^')[2]
+                        if (value != mes.split('^')[2]) {
+                            swal({
+                                    text: 'Your password is incorrect!',
+                                    icon: 'error',
+                                    buttons: [false, 'Restart'],
+                                    closeOnClickOutside: false,
+                                    closeOnEsc: false,
+                                })
+                                .then(() => {
+                                    sessionStorage.clear();
+                                    location.reload();
+                                })
+                        }
+                    })
                 break
+            case "CWB":
+                CWB = mes.split('^')[2]
+                break
+
 
 
         }
@@ -299,10 +324,6 @@ function doo(stream2) {
                 break;
             case '#star':
                 explode('star')
-                break;
-            case '#?':
-                explode('?')
-                console.log('rec ?')
                 break;
             case '#pause':
                 document.getElementById('large').pause()

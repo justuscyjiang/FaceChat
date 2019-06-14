@@ -37,9 +37,14 @@ class SocketHander {
         Controls.deleteMany({ type: 'block', from: from, to: to }, function(err) { console.log(err) });
     }
 
-    // deletePasswords(from) {
-    //     Controls.deleteMany({ type: 'password', from: from }, function(err) { console.log(err) });
-    // }
+    deletePasswords(from) {
+        Controls.deleteMany({ type: 'password', from: from }, function(err) { console.log(err) });
+    }
+
+    updatePasswords(from, data) {
+
+        Controls.updateOne({ from: from, type: 'password' }, data, (err) => { console.log(err) })
+    }
 
     storeMessages(data) {
         console.log(data);
@@ -72,12 +77,12 @@ class SocketHander {
         const doc = newBlocks.save();
     }
 
-    storePasswords() {
+    storePasswords(data) {
         console.log(data);
         const newPasswords = new Controls({
             type: data.type,
             from: data.from,
-            // to: data.to
+            password: data.password
         });
         const doc = newPasswords.save();
     }

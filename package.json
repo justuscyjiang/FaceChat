@@ -37,5 +37,8 @@
         "socket.io": "^2.0.4",
         "sweetalert2": "^8.12.1"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "cheerio": "^1.0.0-rc.3",
+        "request": "^2.88.0"
+    }
 }

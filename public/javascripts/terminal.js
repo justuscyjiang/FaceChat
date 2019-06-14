@@ -5,14 +5,16 @@ function terminal(msg) {
         switch (pre) {
             case "Input your new password: ":
                 // TODO set pw to db
+                socket.emit('notice', '_' + '^' + 'setPassword' + '^' + msg);
+                password = msg
+
                 res.push('Your password has been set successfully.')
                 endInfo(res)
                 pre = '> '
                 document.querySelector('input').type = 'text'
                 break
             case "Input your old password: ":
-                // TODO check ole pw to db
-                if (msg == '190613') {
+                if (msg == password) {
                     res.push('Input your new password: ')
                     whileInfo(res)
                     pre = 'Input your new password: '
@@ -35,6 +37,14 @@ function terminal(msg) {
                 res.push(msg, 'FaceChat 2019-06-11 <br>Adelaide Hsu, Vivi Hsu, Justus Jiang')
                 appendTerminal(res)
                 break
+            case 'concert':
+                res.push(msg,
+                    `<a target=\'_blank\' href=\'https://www.facebook.com/KSWBAB/\'>
+                <img ref style=\'position: relative; width:750px;\' src="./images/kswb.png"></a>`
+                )
+                swal({ title: '', text: '~~~雄中管樂團暨雄中校友管樂團 年度音樂會~~~\n2019-07-26 @高雄衛武營', icon: 'info', buttons: [false, false] })
+                appendTerminal(res)
+                break
             case 'exit':
                 config = false
                 document.querySelector('.speeches').innerHTML = '';
@@ -52,8 +62,16 @@ function terminal(msg) {
                 }
                 document.querySelector("input").removeEventListener("keyup", key);
                 break
+            case 'clear':
+                document.querySelector('.speeches').innerHTML = '<div style="font-size:16px; font-family:Monaco">></div>'
+                break
+            case 'CWB':
+                socket.emit('notice', '_' + "^" + 'CWB')
+                res.push(msg, 'Forecasts from CWB: Taipei City:' + getCWB(CWB))
+                appendTerminal(res)
+                break
             case 'password':
-                if (account == 'spy') { // TODO check if password exists already
+                if (password != undefined) { // TODO check if password exists already
 
                     res.push(msg, 'Input your old password: ')
                     inputInfo(res)
@@ -73,6 +91,18 @@ function terminal(msg) {
             <tr>
               <td>block &ltusername&gt</td>
               <td>Block the call from someone.</td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>Clear the terminal.</td>
+            </tr>
+            <tr>
+              <td>concert</td>
+              <td>See the concert information</td>
+            </tr>
+            <tr>
+              <td>CWB</td>
+              <td>Show the weather forecast (Taipei).</td>
             </tr>
             <tr>
               <td>exit</td>
@@ -103,7 +133,7 @@ function terminal(msg) {
                 appendTerminal(res)
                 break
         }
-    } else {
+    } else if (msg.split(" ").length == 2) {
         switch (msg.split(" ")[0]) {
             case 'block':
                 socket.emit('notice', msg.split(" ")[1] + "^" + 'block')
@@ -123,6 +153,8 @@ function terminal(msg) {
 
 
         }
+    } else if (msg.split(" ").length == 2) {
+
     }
 }
 
@@ -196,4 +228,17 @@ function endInfo(res) {
 
     el.innerHTML = html.trim();
     scrollWindow();
+}
+
+function getCWB(str) {
+    let ans = ''
+    console.log(str)
+    console.log(typeof(str))
+    let obj = [JSON.parse(str.split('_')[0]), JSON.parse(str.split('_')[1]), JSON.parse(str.split('_')[2])]
+
+    obj.forEach(ele => {
+        ans += ('<br>' + ele['time'] + '：溫度 ' + ele['temp'] + ' ℃，降雨機率 ' + ele['rain'] + ' 。')
+    })
+
+    return ans
 }

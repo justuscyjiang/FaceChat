@@ -27,6 +27,7 @@ var L = 0
 
 var blockList = []
     // var passwordList = []
+var password
 
 var control = new SocketHander();
 
@@ -91,8 +92,26 @@ io.on('connection', async(socket) => {
     });
 
     async function asyncPassword(username) {
-        var password = await control.getPasswords(username);
-        return password
+        password = await control.getPasswords(username);
+        if (JSON.stringify(password).length > 4) {
+            io.to(socket.id).emit('notice', " " + '^' + 'password' + '^' + password[0]['password']);
+        }
+    }
+
+    async function asyncDeletePassword(username) {
+        password = await control.getPasswords(username);
+        if (JSON.stringify(password).length > 4) {
+            control.deletePasswords(username)
+        }
+    }
+
+    async function asyncUpdatePassword(username, data) {
+        password = await control.getPasswords(username);
+        if (JSON.stringify(password).length > 4) {
+            control.updatePasswords(username, data)
+        } else {
+            control.storePasswords(data)
+        }
     }
 
     socket.on("history", () => {
@@ -141,13 +160,12 @@ io.on('connection', async(socket) => {
             io.to(socket.id).emit('notice', " " + '^' + 'duplicate');
             return
         }
-        // if (typeof(asyncPassword(username)) == 'String') {
-        //     console.log(asyncPassword(username))
-        //     io.to(socket.id).emit('notice', " " + '^' + 'password');
-        // }
+        asyncPassword(username)
 
-        if (username == 'spy') { io.to(socket.id).emit('notice', " " + '^' + 'password'); }
-        // ...............tmp ↑
+
+        // if (username == 'spy') { io.to(socket.id).emit('notice', " " + '^' + 'password'); }
+        io.to(socket.id).emit('notice', "_" + '^' + 'CWB' + '^' + JSON.stringify(weathers[0]) + '_' + JSON.stringify(weathers[1]) + '_' + JSON.stringify(weathers[2]))
+            // ...............tmp ↑
         console.log(username + " has come in.");
         ID[username] = socket.id
         online[username] = 'free'
@@ -244,6 +262,16 @@ io.on('connection', async(socket) => {
                 asyncBlock()
                 console.log(blockList)
                 console.log(from + ' has unblocked the call from ' + to + '.');
+                break
+            case "CWB":
+                io.to(ID[from]).emit('notice', "_" + '^' + 'CWB' + '^' + JSON.stringify(weathers[0]) + '_' + JSON.stringify(weathers[1]) + '_' + JSON.stringify(weathers[2]))
+
+                break
+            case 'setPassword':
+                let data = { from: from, type: 'password', password: mes.split('^')[2] }
+                asyncUpdatePassword(from, data)
+
+                console.log('The password of ' + from + ' has been set successfully.');
                 break
         }
         info()
@@ -358,3 +386,29 @@ function getLatestFile(dirpath) {
 
     return latest.filename;
 }
+
+
+
+
+const request = require('request')
+const cheerio = require('cheerio')
+const url = 'http://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm'
+let weathers = []
+request(url, (err, res, body) => {
+
+    const $ = cheerio.load(body)
+    $('#box8 .FcstBoxTable01 tbody tr').each(function(i, elem) {
+        weathers.push(
+            $(this)
+            .text()
+            .split('\n')
+        )
+    })
+
+    weathers = weathers.map(weather => ({
+        time: weather[1].substring(2).split(' ')[0],
+        temp: weather[2].substring(2),
+        rain: weather[6].substring(2),
+    }))
+
+})
