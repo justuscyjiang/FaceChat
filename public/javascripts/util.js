@@ -117,6 +117,7 @@ function doo(stream2) {
 
 
     document.getElementById('play').addEventListener('click', setCamera)
+    document.getElementById('star').addEventListener('click', defaultCamera)
 
     async function setCamera() {
         const track = stream2.getVideoTracks()[0];
@@ -126,7 +127,16 @@ function doo(stream2) {
             stream2.getVideoTracks()[0].getSettings().height,
             stream2.getVideoTracks()[0].getSettings().width,
         ]
+    }
 
+    async function defaultCamera() {
+        const track = stream2.getVideoTracks()[0];
+        await track.applyConstraints(defaultConstraints)
+        myCameraInfo = [
+            stream2.getVideoTracks()[0].getSettings().frameRate,
+            stream2.getVideoTracks()[0].getSettings().height,
+            stream2.getVideoTracks()[0].getSettings().width,
+        ]
     }
 
     var username = account
@@ -364,6 +374,7 @@ function doo(stream2) {
                 explode('heart')
                 break;
             case '#star':
+                defaultCamera()
                 explode('star')
                 break;
             case '#pause':
