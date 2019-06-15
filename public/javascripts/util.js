@@ -106,24 +106,48 @@ function pmscrollWindow() {
     h.scrollTo(0, h.scrollHeight);
 }
 
-var constraints = {
-    width: 160,
-    height: 120
-}
+// var constraints = {
+//     width: 160,
+//     height: 120
+// }
+
+var myCameraInfo
 
 function doo(stream2) {
 
 
-    document.getElementById('play').addEventListener('click', function() {
+    document.getElementById('play').addEventListener('click', setCamera)
+
+    async function setCamera() {
         const track = stream2.getVideoTracks()[0];
-        track.applyConstraints(constraints)
-        console.log('shrink')
-    })
+        await track.applyConstraints(constraints)
+        myCameraInfo = [
+            stream2.getVideoTracks()[0].getSettings().frameRate,
+            stream2.getVideoTracks()[0].getSettings().height,
+            stream2.getVideoTracks()[0].getSettings().width,
+        ]
+    }
+
     var username = account
     var init = false
     var t1
     socket.emit('new', username);
     socket.emit('clients', account);
+
+    myCameraInfo = [
+        stream2.getVideoTracks()[0].getSettings().frameRate,
+        stream2.getVideoTracks()[0].getSettings().height,
+        stream2.getVideoTracks()[0].getSettings().width,
+    ]
+    var defaultConstraints = {
+        width: stream2.getVideoTracks()[0].getSettings().width,
+        height: stream2.getVideoTracks()[0].getSettings().height,
+
+    }
+    var constraints = {
+        width: 0.25 * defaultConstraints[width],
+        height: 0.25 * defaultConstraints[height]
+    }
 
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
@@ -347,9 +371,7 @@ function doo(stream2) {
                 break;
             case '#play':
                 document.getElementById('large').play()
-                const track = stream2.getVideoTracks()[0];
-                track.applyConstraints(constraints)
-                console.log('shrink')
+                setCamera()
                 break;
             case '#time':
                 peer.send('#time2')

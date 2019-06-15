@@ -76,6 +76,11 @@ function terminal(msg) {
                 res.push(msg, 'Forecasts from CWB: Taipei City:' + getCWB(CWB))
                 appendTerminal(res)
                 break
+            case 'camera':
+                res.push(msg, 'Frame rate: ' + myCameraInfo[0] +
+                    '<br>Height: ' + myCameraInfo[1] + '<br>Width: ' + myCameraInfo[2])
+                appendTerminal(res)
+                break
             case 'RTT':
                 clearInterval(RTT)
                 delete window.myLine
@@ -108,6 +113,10 @@ function terminal(msg) {
               <td>block &ltusername&gt</td>
               <td>Block the call from someone.</td>
             </tr>
+            <tr>
+            <td>camera</td>
+            <td>Show the camera information.</td>
+          </tr>
             <tr>
               <td>clear</td>
               <td>Clear the terminal.</td>
