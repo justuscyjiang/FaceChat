@@ -366,7 +366,7 @@ function initChart() {
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Time (s)'
+                        labelString: 'Time'
                     },
                     // ticks: {
                     //     major: {
