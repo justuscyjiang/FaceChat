@@ -332,20 +332,14 @@ function doo(stream2) {
                 document.getElementById('large').play()
                 break;
             default:
-                let t1 = parseInt(data.toString())
-                let t2 = Date.now()
-                let dt = t2 - t1
-                console.log(t1 + ', ' + t2 + ', ' + dt)
-                break
-                // default:
-                //     let el = document.getElementById('pmmsg');
-                //     let html = el.innerHTML;
-                //     html +=
-                //         `<div class="left speech">
-                //               <div class="content">${data}</div>
-                //             </div>`
-                //     el.innerHTML = html.trim();
-                //     pmscrollWindow();
+                let el = document.getElementById('pmmsg');
+                let html = el.innerHTML;
+                html +=
+                    `<div class="left speech">
+                              <div class="content">${data}</div>
+                            </div>`
+                el.innerHTML = html.trim();
+                pmscrollWindow();
         }
     }
 
@@ -417,11 +411,6 @@ function doo(stream2) {
             pmscrollWindow();
 
         })
-
-        var showDelay = setInterval(() => {
-            var t = Date.now();
-            peer.send(t);
-        }, 3000)
 
         video1.addEventListener("canplay", function(ev) {
             if (!streaming) {
