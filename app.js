@@ -161,9 +161,6 @@ io.on('connection', async(socket) => {
             return
         }
         asyncPassword(username)
-
-
-        // if (username == 'spy') { io.to(socket.id).emit('notice', " " + '^' + 'password'); }
         io.to(socket.id).emit('notice', "_" + '^' + 'CWB' + '^' + JSON.stringify(weathers[0]) + '_' + JSON.stringify(weathers[1]) + '_' + JSON.stringify(weathers[2]))
             // ...............tmp ↑
         console.log(username + " has come in.");
