@@ -39,7 +39,7 @@ var CWB
 
 var password
 
-var dt = 3
+var dt = 0
 
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
