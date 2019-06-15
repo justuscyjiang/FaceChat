@@ -41,6 +41,7 @@ var password
 
 var dt = 0
 
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
@@ -151,13 +152,16 @@ function doo(stream2) {
         stream2.getVideoTracks()[0].getSettings().width,
     ]
     var defaultConstraints = {
-        width: stream2.getVideoTracks()[0].getSettings().width,
-        height: stream2.getVideoTracks()[0].getSettings().height,
-    }
-    var constraints = {
-        width: parseInt(0.1 * defaultConstraints['width']),
-        height: parseInt(0.1 * defaultConstraints['height'])
-    }
+            width: stream2.getVideoTracks()[0].getSettings().width,
+            height: stream2.getVideoTracks()[0].getSettings().height,
+        }
+        // var constraints = {
+        //     width: parseInt(0.1 * defaultConstraints['width']),
+        //     height: parseInt(0.1 * defaultConstraints['height']),
+        //     frameRate: 10
+        // }
+
+    var constraints = { frameRate: { ideal: 15, max: 25 } }
 
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]

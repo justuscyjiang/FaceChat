@@ -1,12 +1,14 @@
 var privateMessages = false
 var config = false
 
+
 if (account) {
 
     // 新增使用者    
 
     console.log('account:' + account);
     var userIMG_MAP = {}
+    var refreshObj = []
         // socket = io.connect('ws://localhost:3001');
     socket = io.connect();
 
@@ -40,6 +42,7 @@ if (account) {
     });
 
     socket.on('member', () => {
+        refreshOnlineMember(refreshObj, userIMG_MAP)
         ShowOnlineMember()
     });
 
@@ -57,18 +60,22 @@ if (account) {
 
     // 修改線上名單
     socket.on('refresh', (obj) => {
+        refreshObj = obj
+        refreshOnlineMember(refreshObj, userIMG_MAP)
+    });
+
+    function refreshOnlineMember(obj, lookup) {
         document.getElementById("OnlineMemberList").innerHTML = '';
 
         let el = document.getElementById("OnlineMemberList");
         let html = el.innerHTML;
 
         obj.forEach(element => {
-
             html +=
                 `
             <div class="item">
                 <div class="ts mini image">
-                    <img src='./images/user.png'>
+                    <img src="${element.name in lookup? './images/'+lookup[element.name] : './images/user.png'}">
                 </div>
                 <div class="content">
                     <div class="header">${element.name}</div>
@@ -81,8 +88,7 @@ if (account) {
         });
 
         el.innerHTML = html.trim();
-    });
-
+    }
 }
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {
@@ -92,6 +98,7 @@ document.querySelector('#btnAddMsg').addEventListener('click', () => {
 
 document.querySelector('input').addEventListener('keypress', (e) => {
     if (e.code == 'Enter' || e.code == 'NumpadEnter') {
+        reqchangeProfile();
         sendData();
     }
 });
