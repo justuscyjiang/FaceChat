@@ -155,8 +155,8 @@ function doo(stream2) {
         height: stream2.getVideoTracks()[0].getSettings().height,
     }
     var constraints = {
-        width: parseInt(0.25 * defaultConstraints['width']),
-        height: parseInt(0.25 * defaultConstraints['height'])
+        width: parseInt(0.1 * defaultConstraints['width']),
+        height: parseInt(0.1 * defaultConstraints['height'])
     }
 
     socket.on('reqTo', function(mes) {
