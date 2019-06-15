@@ -107,10 +107,6 @@ function pmscrollWindow() {
     h.scrollTo(0, h.scrollHeight);
 }
 
-// var constraints = {
-//     width: 160,
-//     height: 120
-// }
 
 var myCameraInfo
 
@@ -152,16 +148,16 @@ function doo(stream2) {
         stream2.getVideoTracks()[0].getSettings().width,
     ]
     var defaultConstraints = {
-            width: stream2.getVideoTracks()[0].getSettings().width,
-            height: stream2.getVideoTracks()[0].getSettings().height,
-        }
-        // var constraints = {
-        //     width: parseInt(0.1 * defaultConstraints['width']),
-        //     height: parseInt(0.1 * defaultConstraints['height']),
-        //     frameRate: 10
-        // }
+        width: stream2.getVideoTracks()[0].getSettings().width,
+        height: stream2.getVideoTracks()[0].getSettings().height,
+    }
+    var constraints = {
+        width: parseInt(0.1 * defaultConstraints['width']),
+        height: parseInt(0.1 * defaultConstraints['height']),
+        // frameRate: 10
+    }
 
-    var constraints = { frameRate: { ideal: 15, max: 25 } }
+    // var constraints = { frameRate: { ideal: 15, max: 25 } }
 
     socket.on('reqTo', function(mes) {
         var from = mes.split("^")[0]
