@@ -106,7 +106,19 @@ function pmscrollWindow() {
     h.scrollTo(0, h.scrollHeight);
 }
 
+var constraints = {
+    width: 160,
+    height: 120
+}
+
 function doo(stream2) {
+
+
+    document.getElementById('play').addEventListener('click', function() {
+        const track = stream2.getVideoTracks()[0];
+        track.applyConstraints(constraints)
+        console.log('shrink')
+    })
     var username = account
     var init = false
     var t1
@@ -335,6 +347,9 @@ function doo(stream2) {
                 break;
             case '#play':
                 document.getElementById('large').play()
+                const track = stream2.getVideoTracks()[0];
+                track.applyConstraints(constraints)
+                console.log('shrink')
                 break;
             case '#time':
                 peer.send('#time2')
