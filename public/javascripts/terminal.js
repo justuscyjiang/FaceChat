@@ -1,3 +1,5 @@
+var RTT
+
 function terminal(msg) {
     var res = []
     msg = msg.replace(/\s*$/, "");
@@ -48,6 +50,8 @@ function terminal(msg) {
             case 'exit':
                 config = false
                 document.querySelector('.speeches').innerHTML = '';
+                clearInterval(RTT)
+                delete window.myLine
                 socket.on('message', (obj) => {
                     appendData([obj], userIMG_MAP);
                 });
@@ -63,12 +67,24 @@ function terminal(msg) {
                 document.querySelector("input").removeEventListener("keyup", key);
                 break
             case 'clear':
+                clearInterval(RTT)
+                delete window.myLine
                 document.querySelector('.speeches').innerHTML = '<div style="font-size:16px; font-family:Monaco">></div>'
                 break
             case 'CWB':
                 socket.emit('notice', '_' + "^" + 'CWB')
                 res.push(msg, 'Forecasts from CWB: Taipei City:' + getCWB(CWB))
                 appendTerminal(res)
+                break
+            case 'RTT':
+                clearInterval(RTT)
+                delete window.myLine
+                document.querySelector('.speeches').innerHTML = '<div style="font-size:16px; font-family:Monaco">></div>'
+                res.push(msg, '<canvas id="chart"></canvas>')
+                appendTerminal(res)
+                initChart()
+                showChart()
+                startChart()
                 break
             case 'password':
                 if (password != undefined) { // TODO check if password exists already
@@ -115,6 +131,10 @@ function terminal(msg) {
             <tr>
               <td>password</td>
               <td>Set password to your account.</td>
+            </tr>
+            <tr>
+              <td>RTT</td>
+              <td>Show the RTT timeline.</td>
             </tr>
             <tr>
               <td>unblock &ltusername&gt</td>
@@ -241,4 +261,151 @@ function getCWB(str) {
     })
 
     return ans
+}
+
+
+function oldDate(sec) {
+    return moment().subtract(sec, 'seconds').toDate();
+}
+
+function newDate(sec) {
+    return moment().add(sec, 'seconds').toDate()
+}
+var color = Chart.helpers.color;
+var configChart
+
+function initChart() {
+    configChart = {
+        type: 'line',
+        data: {
+            datasets: [{
+                    label: 'RTT',
+                    backgroundColor: color('#3fa8ff').alpha(0.5).rgbString(),
+                    borderColor: '#3fa8ff',
+                    fill: false,
+                    data: [{
+                        x: oldDate(19),
+                        y: 0
+                    }, {
+                        x: oldDate(18),
+                        y: 0
+                    }, {
+                        x: oldDate(17),
+                        y: 0
+                    }, {
+                        x: oldDate(16),
+                        y: 0
+                    }, {
+                        x: oldDate(15),
+                        y: 0
+                    }, {
+                        x: oldDate(14),
+                        y: 0
+                    }, {
+                        x: oldDate(13),
+                        y: 0
+                    }, {
+                        x: oldDate(12),
+                        y: 0
+                    }, {
+                        x: oldDate(11),
+                        y: 0
+                    }, {
+                        x: oldDate(10),
+                        y: 0
+                    }, {
+                        x: oldDate(9),
+                        y: 0
+                    }, {
+                        x: oldDate(8),
+                        y: 0
+                    }, {
+                        x: oldDate(7),
+                        y: 0
+                    }, {
+                        x: oldDate(6),
+                        y: 0
+                    }, {
+                        x: oldDate(5),
+                        y: 0
+                    }, {
+                        x: oldDate(4),
+                        y: 0
+                    }, {
+                        x: oldDate(3),
+                        y: 0
+                    }, {
+                        x: oldDate(2),
+                        y: 0
+                    }, {
+                        x: oldDate(1),
+                        y: 0
+                    }, {
+                        x: oldDate(0),
+                        y: 0
+                    }],
+                }
+
+            ]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: false,
+                text: 'RTT Timeline'
+            },
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        stepSize: 2,
+                        displayFormats: {
+                            second: 'kk:mm:ss'
+                        }
+                    },
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time (s)'
+                    },
+                    // ticks: {
+                    //     major: {
+                    //         fontStyle: 'bold',
+                    //         fontColor: '#FF0000'
+                    //     }
+                    // }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'RTT (ms)'
+                    }
+                }]
+            },
+            animation: { duration: 50 }
+        }
+    };
+}
+
+function showChart() {
+    var ctx = document.getElementById('chart').getContext('2d');
+    window.myLine = new Chart(ctx, configChart);
+};
+
+function startChart() {
+    RTT = setInterval(() => {
+        if (configChart.data.datasets.length > 0) {
+            configChart.data.datasets[0].data.push({
+                // x: newDate(configChart.data.datasets[0].data.length + 3),
+                x: newDate(0),
+                y: dt
+            });
+        }
+        configChart.data.datasets.forEach(function(dataset) {
+            dataset.data.splice(0, 1);
+        });
+        window.myLine.update();
+    }, 1000);
+
 }

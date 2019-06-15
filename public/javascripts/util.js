@@ -39,6 +39,8 @@ var CWB
 
 var password
 
+var dt = 3
+
 Array.prototype.forEach.call(anchors, function(anchor) {
     anchor.addEventListener('click', function() {
         peer.send("#" + anchor.id)
@@ -395,7 +397,7 @@ function doo(stream2) {
                 t1 = Date.now()
                 peer2.send('#time')
             }
-        }, 3000);
+        }, 1000);
 
 
 
