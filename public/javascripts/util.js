@@ -117,8 +117,8 @@ var myCameraInfo
 function doo(stream2) {
 
 
-    document.getElementById('play').addEventListener('click', setCamera)
-    document.getElementById('star').addEventListener('click', defaultCamera)
+    // document.getElementById('play').addEventListener('click', setCamera)
+    // document.getElementById('star').addEventListener('click', defaultCamera)
 
     async function setCamera() {
         const track = stream2.getVideoTracks()[0];
