@@ -106,6 +106,8 @@ function pmscrollWindow() {
 
 function doo(stream2) {
     var username = account
+    var init = false
+    var t1
     socket.emit('new', username);
     socket.emit('clients', account);
 
@@ -152,6 +154,7 @@ function doo(stream2) {
         var id = mes.split("^")[1]
         document.getElementById('p1id2').value = id
         peer1.signal(JSON.parse(id))
+        init = true
         swal.close()
 
         /**
@@ -331,6 +334,22 @@ function doo(stream2) {
             case '#play':
                 document.getElementById('large').play()
                 break;
+            case '#time':
+                peer.send('#time2')
+                break
+            case '#timeInit':
+                peer.send('#timeInit2')
+                break
+            case '#time2':
+                t2 = Date.now()
+                dt = t2 - t1
+                console.log(dt)
+                break
+            case '#timeInit2':
+                t2 = Date.now()
+                dt = t2 - t1
+                console.log(dt)
+                break
             default:
                 let el = document.getElementById('pmmsg');
                 let html = el.innerHTML;
@@ -342,6 +361,7 @@ function doo(stream2) {
                 pmscrollWindow();
         }
     }
+
 
 
     peer1.on('data', transData)
@@ -365,6 +385,18 @@ function doo(stream2) {
 
         video2.play()
         video1.play()
+
+
+        var timeDelay = setInterval(() => {
+            if (init) {
+                t1 = Date.now()
+                peer1.send('#timeInit')
+            } else {
+                t1 = Date.now()
+                peer2.send('#time')
+            }
+        }, 3000);
+
 
 
         document.getElementById('pause').addEventListener('click', function() {
@@ -409,8 +441,8 @@ function doo(stream2) {
               `
             el.innerHTML = html.trim();
             pmscrollWindow();
-
         })
+
 
         video1.addEventListener("canplay", function(ev) {
             if (!streaming) {
