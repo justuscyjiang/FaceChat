@@ -126,6 +126,7 @@ function doo(stream2) {
             stream2.getVideoTracks()[0].getSettings().height,
             stream2.getVideoTracks()[0].getSettings().width,
         ]
+
     }
 
     var username = account
@@ -142,11 +143,10 @@ function doo(stream2) {
     var defaultConstraints = {
         width: stream2.getVideoTracks()[0].getSettings().width,
         height: stream2.getVideoTracks()[0].getSettings().height,
-
     }
     var constraints = {
-        width: 0.25 * defaultConstraints[width],
-        height: 0.25 * defaultConstraints[height]
+        width: parseInt(0.25 * defaultConstraints['width']),
+        height: parseInt(0.25 * defaultConstraints['height'])
     }
 
     socket.on('reqTo', function(mes) {
