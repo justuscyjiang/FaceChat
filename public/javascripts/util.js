@@ -334,9 +334,6 @@ function doo(stream2) {
             case "CWB":
                 CWB = mes.split('^')[2]
                 break
-
-
-
         }
     })
 
