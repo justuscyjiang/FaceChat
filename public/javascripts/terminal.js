@@ -143,7 +143,7 @@ function terminal(msg) {
             </tr>
             <tr>
               <td>resolution &ltoption&gt</td>
-              <td>Set the video resolution. There are two available options, \'normal\' or \'low\' . Use only while video is playing.</td>
+              <td>Set the video resolution.<br> There are two available options, \'normal\' or \'low\' .<br> Use only while video is playing.</td>
             </tr>
             <tr>
               <td>RTT</td>
