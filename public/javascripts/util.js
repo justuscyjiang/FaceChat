@@ -113,9 +113,6 @@ var myCameraInfo
 function doo(stream2) {
 
 
-    // document.getElementById('play').addEventListener('click', setCamera)
-    // document.getElementById('star').addEventListener('click', defaultCamera)
-
     async function setCamera() {
         const track = stream2.getVideoTracks()[0];
         await track.applyConstraints(constraints)
@@ -126,6 +123,8 @@ function doo(stream2) {
         ]
     }
 
+    window.setCamera = function() { peer.send('#resLow') }
+
     async function defaultCamera() {
         const track = stream2.getVideoTracks()[0];
         await track.applyConstraints(defaultConstraints)
@@ -134,7 +133,10 @@ function doo(stream2) {
             stream2.getVideoTracks()[0].getSettings().height,
             stream2.getVideoTracks()[0].getSettings().width,
         ]
+
     }
+
+    window.defaultCamera = function() { peer.send('#resNor') }
 
     var username = account
     var init = false
@@ -152,8 +154,8 @@ function doo(stream2) {
         height: stream2.getVideoTracks()[0].getSettings().height,
     }
     var constraints = {
-        width: parseInt(0.1 * defaultConstraints['width']),
-        height: parseInt(0.1 * defaultConstraints['height']),
+        width: parseInt(0.5 * defaultConstraints['width']),
+        height: parseInt(0.5 * defaultConstraints['height']),
         // frameRate: 10
     }
 
@@ -197,7 +199,7 @@ function doo(stream2) {
 
 
     socket.on('backTo', function(mes) {
-        clearTimeout(callTimer)
+        clearTimeout(callTimer) // no need???????
         var from = mes.split("^")[0]
         var id = mes.split("^")[1]
         document.getElementById('p1id2').value = id
@@ -374,7 +376,6 @@ function doo(stream2) {
                 explode('heart')
                 break;
             case '#star':
-                defaultCamera()
                 explode('star')
                 break;
             case '#pause':
@@ -382,7 +383,6 @@ function doo(stream2) {
                 break;
             case '#play':
                 document.getElementById('large').play()
-                setCamera()
                 break;
             case '#time':
                 peer.send('#time2')
@@ -399,6 +399,12 @@ function doo(stream2) {
                 t2 = Date.now()
                 dt = t2 - t1
                 console.log(dt)
+                break
+            case '#resNor':
+                defaultCamera()
+                break
+            case '#resLow':
+                setCamera()
                 break
             default:
                 let el = document.getElementById('pmmsg');

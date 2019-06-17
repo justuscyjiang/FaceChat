@@ -169,6 +169,18 @@ function terminal(msg) {
                 res.push(msg, 'You have blocked the call from ' + msg.split(" ")[1] + ' successfully.')
                 appendTerminal(res)
                 break
+            case 'resolution':
+                if (msg.split(" ")[1] == 'normal') {
+                    window.defaultCamera()
+                    res.push(msg, 'You have set the video resolution to \'normal\' successfully.')
+                } else if (msg.split(" ")[1] == 'low') {
+                    window.setCamera()
+                    res.push(msg, 'You have set the video resolution to \'low\' successfully.')
+                } else {
+                    res.push(msg, 'Please input the proper argument, \'normal\' or \'low\' .')
+                }
+                appendTerminal(res)
+                break
             case 'unblock':
                 socket.emit('notice', msg.split(" ")[1] + "^" + 'unblock')
                 res.push(msg, 'You have unblocked the call from ' + msg.split(" ")[1] + ' successfully.')
