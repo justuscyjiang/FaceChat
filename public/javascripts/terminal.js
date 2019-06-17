@@ -142,8 +142,8 @@ function terminal(msg) {
               <td>Set password to your account.</td>
             </tr>
             <tr>
-              <td>resolution &lt\'normal\' or \'low\'&gt</td>
-              <td>Set the video resolution. Use only while video is playing.</td>
+              <td>resolution &ltoption&gt</td>
+              <td>Set the video resolution. There are two available options, \'normal\' or \'low\' . Use only while video is playing.</td>
             </tr>
             <tr>
               <td>RTT</td>
