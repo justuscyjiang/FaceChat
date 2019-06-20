@@ -16,9 +16,8 @@ router.post('/post', upload.single('image'), async function(req, res) {
     if (!req.file) {
         res.status(401).json({ error: 'Please provide an image' });
     }
-    console.log(req.file)
     const filename = req.file.originalname;
-    return res.status(200).json({ status: 'OK!', name: filename });
+    return res.status(200).send('You have sucsessfully upload your profile: ' + filename + ' .\nPlease return to the last page.');
 });
 
 // router.get('/ws', function (req, res, next) {

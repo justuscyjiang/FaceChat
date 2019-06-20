@@ -21,25 +21,31 @@ if (account) {
         }
     });
 
-    socket.on('historyP', (obj) => {
-        if (obj.length > 0) {
-            appendDataP(obj, userIMG_MAP);
-        }
-    });
+    /**
+     * 私人歷史記錄(暫時不用)
+     */
+    // socket.on('historyP', (obj) => {
+    //     if (obj.length > 0) {
+    //         appendDataP(obj, userIMG_MAP);
+    //     }
+    // });
 
     socket.on('clients', (obj) => {
         console.log(obj);
         document.querySelector('.online').innerHTML = obj.clients;
-        if (!config && obj.user !== undefined) broadcast(obj.user);
+        if (!config && obj.user !== undefined) broadcast(obj.user); // 使用terminal時不顯示別人進來
     });
 
     socket.on('message', (obj) => {
         appendData([obj], userIMG_MAP);
     });
 
-    socket.on('messageP', (obj) => {
-        appendDataP([obj], userIMG_MAP);
-    });
+    /**
+     * 私人聊天訊息(暫時不用)
+     */
+    // socket.on('messageP', (obj) => {
+    //     appendDataP([obj], userIMG_MAP);
+    // });
 
     socket.on('member', () => {
         refreshOnlineMember(refreshObj, userIMG_MAP)
@@ -92,19 +98,21 @@ if (account) {
 }
 
 document.querySelector('#btnAddMsg').addEventListener('click', () => {
-    reqchangeProfile();
     sendData();
 });
 
 document.querySelector('input').addEventListener('keypress', (e) => {
     if (e.code == 'Enter' || e.code == 'NumpadEnter') {
-        reqchangeProfile();
         sendData();
     }
 });
 
 document.querySelector('#btnReqOnMember').addEventListener('click', () => {
     reqOnMember();
+});
+
+document.querySelector('#btnAddProfile').addEventListener('click', () => {
+    reqchangeProfile();
 });
 
 /**
@@ -208,40 +216,39 @@ function appendData(obj, lookup) {
 }
 
 /**
- * 私人聊天紀錄
+ * 私人聊天紀錄(暫時不用)
  * @param {聊天訊息} obj 
  */
-function appendDataP(obj) {
+// function appendDataP(obj, lookup) {
 
-    let el = document.querySelector('.speeches');
-    let html = el.innerHTML;
+//     let el = document.querySelector('.speeches');
+//     let html = el.innerHTML;
 
-    obj.forEach(element => {
-        if ((element.name == account && element.to == theOther) || (element.name == theOther && element.to == account)) {
-            html +=
-                `
-            <div class="${element.name == account ? 'right circular group' : 'circular group'}">
-                <div class="speech">
-                    ${element.name == account? "<div class='group'>":''}
-                        <div class="avatar">
-                            <img src="${element.name in lookup? './images/'+lookup[element.name] : './images/user.png'}">
-                        </div>
-                        <div class="content">
-                            <div class="inline author">${element.name == account ? '' : element.name}</div>
-                            <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div>
-                        </div>
-                        <div class=" time">${moment(element.time).fromNow()}</div>
-                    ${element.name == account? "</div>":''}
-                </div>
-            </div>
-            `;
-        }
-    });
+//     obj.forEach(element => {
+//         if ((element.name == account && element.to == theOther) || (element.name == theOther && element.to == account)) {
+//             html +=
+//                 `
+//             <div class="${element.name == account ? 'right circular group' : 'circular group'}">
+//                 <div class="speech">
+//                     ${element.name == account? "<div class='group'>":''}
+//                         <div class="avatar">
+//                             <img src="${element.name in lookup? './images/'+lookup[element.name] : './images/user.png'}">
+//                         </div>
+//                         <div class="content">
+//                             <div class="inline author">${element.name == account ? '' : element.name}</div>
+//                             <div class="text">${element.name == account ? element.msg : '：' + element.msg}</div>
+//                         </div>
+//                         <div class=" time">${moment(element.time).fromNow()}</div>
+//                     ${element.name == account? "</div>":''}
+//                 </div>
+//             </div>
+//             `;
+//         }
+//     });
 
-    el.innerHTML = html.trim();
-    scrollWindow();
-
-}
+//     el.innerHTML = html.trim();
+//     scrollWindow();
+// }
 
 /**
  * 廣播有人進來
@@ -292,6 +299,6 @@ function ShowOnlineMember() {
     // show sidebar
     ts('.left.sidebar:not(.inverted)').sidebar({
         scrollLock: true,
-        closable: false
+        closable: true
     }).sidebar('toggle');
 }
